@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Terminal as TerminalIcon } from "lucide-react";
+import Navigation from "@/components/Navigation";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
@@ -12,14 +13,29 @@ import Contact from "@/components/Contact";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Navigation />
       <AnnouncementBar />
-      <Hero />
-      <Projects />
-      <Skills />
-      <Experience />
-      <Education />
-      <WriteUps />
-      <Contact />
+      <section id="whoami">
+        <Hero />
+      </section>
+      <section id="projects">
+        <Projects />
+      </section>
+      <section id="skills">
+        <Skills />
+      </section>
+      <section id="experience">
+        <Experience />
+      </section>
+      <section id="education">
+        <Education />
+      </section>
+      <section id="writeups">
+        <WriteUps />
+      </section>
+      <section id="contact">
+        <Contact />
+      </section>
       
       <a
         href="/terminal"
