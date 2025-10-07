@@ -38,6 +38,17 @@ const Hero = () => {
       
       <div className="container relative z-10 px-4 py-20">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in-up">
+          {/* Profile Image */}
+          <div className="flex justify-center mb-8">
+            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-primary/50 shadow-lg cyber-glow">
+              <img 
+                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=400&fit=crop"
+                alt="Raja - Cybersecurity Researcher"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+          
           {/* Main heading with typewriter effect */}
           <h1 className="text-5xl md:text-7xl font-bold leading-tight">
             <span className="gradient-text inline-block">
@@ -50,25 +61,6 @@ const Hero = () => {
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
             Transforming digital threats into secure solutions through innovative research and design
           </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-4 justify-center pt-4">
-            <Button 
-              size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground cyber-glow transition-all duration-300 hover:scale-105"
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              View Projects
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-105"
-            >
-              <Download className="mr-2 h-4 w-4" />
-              Download vCard
-            </Button>
-          </div>
 
           {/* Social Links */}
           <div className="flex gap-6 justify-center pt-8">
