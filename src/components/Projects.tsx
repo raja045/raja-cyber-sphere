@@ -84,118 +84,130 @@ const Projects = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {projects.map((project, index) => (
-            <Card
-              key={index}
-              onClick={() => handleProjectClick(project.id)}
-              className={`glass-card group hover-lift cursor-pointer animate-fade-in-up transition-all duration-300 ${
-                selectedProject === project.id ? 'ring-2 ring-primary' : ''
-              }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className={`h-2 bg-gradient-to-r ${project.gradient} rounded-t-lg`} />
-              <div className="p-6 space-y-4">
-                <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
-                  {project.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, tagIndex) => (
-                    <Badge 
-                      key={tagIndex} 
-                      variant="secondary"
-                      className="text-xs"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                <div className="flex gap-4 pt-4">
-                  <button className="text-muted-foreground hover:text-primary transition-colors duration-300">
-                    <Github className="h-5 w-5" />
-                  </button>
-                  <button className="text-muted-foreground hover:text-primary transition-colors duration-300">
-                    <ExternalLink className="h-5 w-5" />
-                  </button>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
+          {projects.map((project, index) => {
+            // Calculate if preview should appear after this card
+            const showPreviewAfter = selectedProject !== null && 
+              Math.floor(selectedProject / 3) === Math.floor(index / 3) && 
+              (index % 3 === 2 || index === projects.length - 1 || index === selectedProject);
 
-        {/* Project Preview Section */}
-        {selectedProjectData && (
-          <div className="mt-12 max-w-7xl mx-auto animate-fade-in">
-            <Card className="glass-card p-8">
-              <div className="flex justify-between items-start mb-6">
-                <h3 className="text-3xl font-bold gradient-text">
-                  {selectedProjectData.title}
-                </h3>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setSelectedProject(null)}
-                  className="hover:bg-primary/10"
+            return (
+              <>
+                <Card
+                  key={index}
+                  onClick={() => handleProjectClick(project.id)}
+                  className={`glass-card group hover-lift cursor-pointer animate-fade-in-up transition-all duration-300 ${
+                    selectedProject === project.id ? 'ring-2 ring-primary' : ''
+                  }`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <X className="h-5 w-5" />
-                </Button>
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-lg font-semibold mb-3 text-primary">Project Overview</h4>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {selectedProjectData.fullDescription}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {selectedProjectData.tags.map((tag, tagIndex) => (
-                    <Badge 
-                      key={tagIndex} 
-                      variant="secondary"
-                      className="text-sm"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-
-                <div className="pt-6 border-t border-border">
-                  <h4 className="text-lg font-semibold mb-4 text-primary">Project Links</h4>
-                  <div className="flex flex-wrap gap-4">
-                    <Button
-                      variant="outline"
-                      className="flex items-center gap-2"
-                      disabled={!selectedProjectData.demoVideo}
-                    >
-                      <Video className="h-4 w-4" />
-                      Demo Video
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="flex items-center gap-2"
-                      disabled={!selectedProjectData.githubRepo}
-                    >
-                      <Github className="h-4 w-4" />
-                      GitHub Repository
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="flex items-center gap-2"
-                      disabled={!selectedProjectData.projectLink}
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                      Live Project
-                    </Button>
+                  <div className={`h-2 bg-gradient-to-r ${project.gradient} rounded-t-lg`} />
+                  <div className="p-6 space-y-4">
+                    <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag, tagIndex) => (
+                        <Badge 
+                          key={tagIndex} 
+                          variant="secondary"
+                          className="text-xs"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="flex gap-4 pt-4">
+                      <button className="text-muted-foreground hover:text-primary transition-colors duration-300">
+                        <Github className="h-5 w-5" />
+                      </button>
+                      <button className="text-muted-foreground hover:text-primary transition-colors duration-300">
+                        <ExternalLink className="h-5 w-5" />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-        )}
+                </Card>
+
+                {/* Project Preview Section - appears after the row of the selected project */}
+                {showPreviewAfter && selectedProjectData && (
+                  <div className="col-span-1 md:col-span-2 lg:col-span-3 animate-fade-in">
+                    <Card className="glass-card p-8">
+                      <div className="flex justify-between items-start mb-6">
+                        <h3 className="text-3xl font-bold gradient-text">
+                          {selectedProjectData.title}
+                        </h3>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedProject(null);
+                          }}
+                          className="hover:bg-primary/10"
+                        >
+                          <X className="h-5 w-5" />
+                        </Button>
+                      </div>
+
+                      <div className="space-y-6">
+                        <div>
+                          <h4 className="text-lg font-semibold mb-3 text-primary">Project Overview</h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            {selectedProjectData.fullDescription}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2">
+                          {selectedProjectData.tags.map((tag, tagIndex) => (
+                            <Badge 
+                              key={tagIndex} 
+                              variant="secondary"
+                              className="text-sm"
+                            >
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+
+                        <div className="pt-6 border-t border-border">
+                          <h4 className="text-lg font-semibold mb-4 text-primary">Project Links</h4>
+                          <div className="flex flex-wrap gap-4">
+                            <Button
+                              variant="outline"
+                              className="flex items-center gap-2"
+                              disabled={!selectedProjectData.demoVideo}
+                            >
+                              <Video className="h-4 w-4" />
+                              Demo Video
+                            </Button>
+                            <Button
+                              variant="outline"
+                              className="flex items-center gap-2"
+                              disabled={!selectedProjectData.githubRepo}
+                            >
+                              <Github className="h-4 w-4" />
+                              GitHub Repository
+                            </Button>
+                            <Button
+                              variant="outline"
+                              className="flex items-center gap-2"
+                              disabled={!selectedProjectData.projectLink}
+                            >
+                              <ExternalLink className="h-4 w-4" />
+                              Live Project
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
+                )}
+              </>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
