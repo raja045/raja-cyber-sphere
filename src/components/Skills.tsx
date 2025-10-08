@@ -91,6 +91,15 @@ const Skills = () => {
             </Badge>
           </div>
         </div>
+
+        {/* TryHackMe Badge */}
+        <div className="mt-8 flex justify-center animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+          <iframe 
+            src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=866810" 
+            className="border-none w-full max-w-md h-auto"
+            title="TryHackMe Profile Badge"
+          />
+        </div>
       </div>
     </section>
   );
