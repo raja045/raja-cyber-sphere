@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Video } from "lucide-react";
+import { ExternalLink, Github, Video, ChevronRight } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -100,11 +100,10 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Card
               key={project.id}
-              onClick={() => handleProjectClick(project.id)}
-              className="glass-card group hover-lift cursor-pointer animate-fade-in-up transition-all duration-300"
+              className="glass-card group hover-lift animate-fade-in-up transition-all duration-300 overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className={`h-2 bg-gradient-to-r ${project.gradient} rounded-t-lg`} />
+              <div className={`h-2 bg-gradient-to-r ${project.gradient}`} />
               <div className="p-6 space-y-4">
                 <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
                   {project.title}
@@ -123,13 +122,16 @@ const Projects = () => {
                     </Badge>
                   ))}
                 </div>
-                <div className="flex gap-4 pt-4">
-                  <button className="text-muted-foreground hover:text-primary transition-colors duration-300">
-                    <Github className="h-5 w-5" />
-                  </button>
-                  <button className="text-muted-foreground hover:text-primary transition-colors duration-300">
-                    <ExternalLink className="h-5 w-5" />
-                  </button>
+                <div className="pt-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleProjectClick(project.id)}
+                    className="w-full group-hover:border-primary transition-colors duration-300"
+                  >
+                    Show More
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  </Button>
                 </div>
               </div>
             </Card>
