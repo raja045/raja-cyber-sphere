@@ -9,10 +9,12 @@ import Experience from "@/components/Experience";
 import Education from "@/components/Education";
 import WriteUps from "@/components/WriteUps";
 import Contact from "@/components/Contact";
+import CursorGlow from "@/components/CursorGlow";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <CursorGlow />
       <Navigation />
       <section id="whoami">
         <Hero />
