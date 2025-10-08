@@ -46,37 +46,41 @@ const Navigation = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
+          {/* Logo on the left */}
           <a
             href="#whoami"
             onClick={(e) => scrollToSection(e, "#whoami")}
-            className="text-xl font-bold bg-gradient-to-r from-cyber-cyan via-cyber-purple to-cyber-pink bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+            className="text-2xl font-bold gradient-text hover:opacity-80 transition-opacity"
           >
             Raja
           </a>
 
-          <ul className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  onClick={(e) => scrollToSection(e, item.href)}
-                  className="text-sm font-medium text-foreground/80 hover:text-cyber-cyan transition-colors relative group"
-                >
-                  {item.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyber-cyan to-cyber-purple group-hover:w-full transition-all duration-300" />
-                </a>
-              </li>
-            ))}
-          </ul>
+          {/* Navigation items on the right */}
+          <div className="hidden md:flex items-center space-x-8">
+            <ul className="flex items-center space-x-8">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    onClick={(e) => scrollToSection(e, item.href)}
+                    className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors relative group"
+                  >
+                    {item.label}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
+                  </a>
+                </li>
+              ))}
+            </ul>
 
-          <a
-            href="/terminal"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:block px-4 py-2 text-sm font-medium bg-gradient-to-r from-cyber-cyan to-cyber-purple rounded-lg hover:opacity-90 transition-opacity"
-          >
-            Terminal
-          </a>
+            <a
+              href="/terminal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 text-sm font-medium bg-gradient-to-r from-primary to-secondary rounded-lg hover:opacity-90 transition-opacity"
+            >
+              Terminal
+            </a>
+          </div>
         </div>
       </div>
     </nav>
