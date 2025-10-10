@@ -36,8 +36,8 @@ const Hero = () => {
   useEffect(() => {
     const currentText = roles[roleIndex];
     
-    const typingSpeed = isDeleting ? 50 : 100;
-    const pauseTime = isDeleting ? 500 : 2000;
+    const typingSpeed = isDeleting ? 30 : 60;
+    const pauseTime = isDeleting ? 200 : 1000;
 
     if (!isDeleting && currentRole === currentText) {
       const pauseTimeout = setTimeout(() => setIsDeleting(true), pauseTime);
