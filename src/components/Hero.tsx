@@ -6,6 +6,11 @@ const Hero = () => {
   const [text, setText] = useState("");
   const fullText = "Hi, I'm Raja — Cybersecurity Researcher & Designer.";
   const [showCursor, setShowCursor] = useState(true);
+  
+  const roles = ["Cybersecurity Enthusiast", "CTF Player", "Troubleshooter"];
+  const [currentRole, setCurrentRole] = useState("");
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     let currentIndex = 0;
@@ -27,6 +32,34 @@ const Hero = () => {
       clearInterval(cursorInterval);
     };
   }, []);
+
+  useEffect(() => {
+    const currentText = roles[roleIndex];
+    
+    const typingSpeed = isDeleting ? 50 : 100;
+    const pauseTime = isDeleting ? 500 : 2000;
+
+    if (!isDeleting && currentRole === currentText) {
+      const pauseTimeout = setTimeout(() => setIsDeleting(true), pauseTime);
+      return () => clearTimeout(pauseTimeout);
+    }
+
+    if (isDeleting && currentRole === "") {
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setCurrentRole((prev) =>
+        isDeleting
+          ? currentText.slice(0, prev.length - 1)
+          : currentText.slice(0, prev.length + 1)
+      );
+    }, typingSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [currentRole, roleIndex, isDeleting, roles]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -57,9 +90,12 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* Tagline */}
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            Transforming digital threats into secure solutions through innovative research and design
+          {/* Tagline with typing animation */}
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto min-h-[2em] flex items-center justify-center">
+            <span className="text-primary font-semibold">
+              {currentRole}
+              {showCursor && <span className="animate-glow-pulse">|</span>}
+            </span>
           </p>
 
           {/* Social Links */}
