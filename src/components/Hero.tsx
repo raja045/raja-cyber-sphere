@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, Github, Linkedin, Mail } from "lucide-react";
 
+const roles = ["Cybersecurity Enthusiast", "CTF Player", "Troubleshooter"];
+
 const Hero = () => {
   const [text, setText] = useState("");
   const fullText = "Hi, I'm Raja — Cybersecurity Researcher & Designer.";
   const [showCursor, setShowCursor] = useState(true);
   
-  const roles = ["Cybersecurity Enthusiast", "CTF Player", "Troubleshooter"];
   const [currentRole, setCurrentRole] = useState("");
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -36,8 +37,8 @@ const Hero = () => {
   useEffect(() => {
     const currentText = roles[roleIndex];
     
-    const typingSpeed = isDeleting ? 30 : 60;
-    const pauseTime = isDeleting ? 200 : 1000;
+    const typingSpeed = isDeleting ? 50 : 100;
+    const pauseTime = isDeleting ? 100 : 800;
 
     if (!isDeleting && currentRole === currentText) {
       const pauseTimeout = setTimeout(() => setIsDeleting(true), pauseTime);
@@ -59,7 +60,7 @@ const Hero = () => {
     }, typingSpeed);
 
     return () => clearTimeout(timeout);
-  }, [currentRole, roleIndex, isDeleting, roles]);
+  }, [currentRole, roleIndex, isDeleting]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
