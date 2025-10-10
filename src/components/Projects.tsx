@@ -3,6 +3,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, Video, ChevronRight } from "lucide-react";
+import { useCardTilt } from "@/hooks/useCardTilt";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import {
   Dialog,
   DialogContent,
@@ -73,6 +75,58 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [open, setOpen] = useState(false);
 
+  const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
+    const { cardRef, handleMouseMove, handleMouseLeave } = useCardTilt();
+    const { elementRef, isVisible } = useScrollAnimation();
+
+    return (
+      <div ref={elementRef} className={`animate-on-scroll ${isVisible ? 'visible' : ''} stagger-${(index % 6) + 1}`}>
+        <Card
+          ref={cardRef}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          className="glass-card group hover-tilt transition-all duration-300 overflow-hidden cursor-pointer"
+          onClick={() => handleProjectClick(project.id)}
+        >
+          <div className={`h-2 bg-gradient-to-r ${project.gradient}`} />
+          <div className="p-6 space-y-4">
+            <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300 glitch-effect">
+              {project.title}
+            </h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              {project.description}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {project.tags.map((tag, tagIndex) => (
+                <Badge 
+                  key={tagIndex} 
+                  variant="secondary"
+                  className="text-xs hover:scale-110 transition-transform duration-200 cursor-pointer"
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+            <div className="pt-4">
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full group-hover:border-primary transition-colors duration-300"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleProjectClick(project.id);
+                }}
+              >
+                Show More
+                <ChevronRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </Card>
+      </div>
+    );
+  };
+
   const handleProjectClick = (projectId: number) => {
     setSelectedProject(projectId);
     setOpen(true);
@@ -98,43 +152,7 @@ const Projects = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {projects.map((project, index) => (
-            <Card
-              key={project.id}
-              className="glass-card group hover-lift animate-fade-in-up transition-all duration-300 overflow-hidden"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className={`h-2 bg-gradient-to-r ${project.gradient}`} />
-              <div className="p-6 space-y-4">
-                <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
-                  {project.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, tagIndex) => (
-                    <Badge 
-                      key={tagIndex} 
-                      variant="secondary"
-                      className="text-xs"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                <div className="pt-4">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleProjectClick(project.id)}
-                    className="w-full group-hover:border-primary transition-colors duration-300"
-                  >
-                    Show More
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </Card>
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
 

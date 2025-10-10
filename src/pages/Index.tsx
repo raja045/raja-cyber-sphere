@@ -10,10 +10,14 @@ import Education from "@/components/Education";
 import WriteUps from "@/components/WriteUps";
 import Contact from "@/components/Contact";
 import CursorGlow from "@/components/CursorGlow";
+import MatrixRain from "@/components/MatrixRain";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <MatrixRain />
+      <ScrollProgress />
       <CursorGlow />
       <Navigation />
       <section id="whoami">
@@ -42,13 +46,13 @@ const Index = () => {
         href="/terminal"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-8 right-8 z-50"
+        className="fixed bottom-8 right-8 z-50 group"
       >
         <Button
           size="lg"
-          className="rounded-full h-14 w-14 p-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 bg-primary hover:bg-primary/90"
+          className="rounded-full h-14 w-14 p-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110 bg-primary hover:bg-primary/90 animate-float cyber-glow"
         >
-          <TerminalIcon className="h-6 w-6" />
+          <TerminalIcon className="h-6 w-6 group-hover:rotate-12 transition-transform duration-300" />
         </Button>
       </a>
     </div>

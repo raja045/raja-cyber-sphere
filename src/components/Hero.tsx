@@ -65,10 +65,10 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card opacity-50" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card opacity-50 animate-pulse-glow" />
       
-      {/* Cyber grid overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,219,222,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,219,222,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+      {/* Cyber grid overlay with animation */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,219,222,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,219,222,0.03)_1px,transparent_1px)] bg-[size:50px_50px] animate-fade-in" />
       
       <div className="container relative z-10 px-4 py-20">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in-up">
@@ -127,11 +127,13 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Floating particles effect */}
+      {/* Floating particles effect with varied animations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-float" />
-        <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-secondary rounded-full animate-float" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-accent rounded-full animate-float" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-float cyber-glow" />
+        <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-secondary rounded-full animate-float cyber-glow" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-accent rounded-full animate-float cyber-glow" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 right-1/3 w-2 h-2 bg-primary rounded-full animate-float" style={{ animationDelay: '0.5s' }} />
+        <div className="absolute bottom-1/3 right-1/4 w-3 h-3 bg-secondary rounded-full animate-float" style={{ animationDelay: '1.5s' }} />
       </div>
     </section>
   );
