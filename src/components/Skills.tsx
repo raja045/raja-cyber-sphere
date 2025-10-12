@@ -42,6 +42,17 @@ const skillCategories = [
       { name: "Wireshark", logo: wiresharkLogo },
       { name: "Nmap", logo: nmapLogo },
       { name: "Splunk", logo: splunkLogo },
+      // Future tools - uncomment and add logos when ready
+      // { name: "Kali Linux", logo: kaliLogo },
+      // { name: "John the Ripper", logo: johnLogo },
+      // { name: "Hydra", logo: hydraLogo },
+      // { name: "Aircrack-ng", logo: aircrackLogo },
+      // { name: "OWASP ZAP", logo: zapLogo },
+      // { name: "Nikto", logo: niktoLogo },
+      // { name: "SQLMap", logo: sqlmapLogo },
+      // { name: "Hashcat", logo: hashcatLogo },
+      // { name: "Snort", logo: snortLogo },
+      // { name: "Nessus", logo: nessusLogo },
     ],
     color: "text-secondary",
   },
@@ -63,15 +74,15 @@ const Skills = () => {
                 ref={elementRef}
                 className={`animate-on-scroll ${isVisible ? 'visible' : ''} stagger-${(skillIndex % 6) + 1}`}
               >
-                <Card className="glass-card p-4 hover-lift flex items-center gap-3 min-w-[180px]">
-                  <div className="w-8 h-8 flex items-center justify-center">
+                <Card className="glass-card p-3 hover-lift flex items-center gap-2">
+                  <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center">
                     <img 
                       src={skill.logo} 
                       alt={`${skill.name} logo`}
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <span className="font-semibold text-sm">{skill.name}</span>
+                  <span className="font-semibold text-sm whitespace-nowrap">{skill.name}</span>
                 </Card>
               </div>
             );
@@ -131,7 +142,7 @@ const Skills = () => {
           <h3 className="text-2xl font-bold mb-6 text-center">
             <span className="text-primary">//</span> Tools
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 max-w-6xl mx-auto">
             <SkillCard category={skillCategories.find(c => c.title === "Tools")!} index={5} />
           </div>
         </div>
