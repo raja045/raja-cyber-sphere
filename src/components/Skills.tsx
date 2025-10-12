@@ -2,6 +2,11 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Shield, Network, Cloud, Code, Wrench } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import burpSuiteLogo from "@/assets/burp-suite.png";
+import metasploitLogo from "@/assets/metasploit.jpg";
+import wiresharkLogo from "@/assets/wireshark.avif";
+import nmapLogo from "@/assets/nmap.png";
+import splunkLogo from "@/assets/splunk.png";
 
 const skillCategories = [
   {
@@ -32,11 +37,11 @@ const skillCategories = [
     title: "Tools",
     icon: Wrench,
     skills: [
-      { name: "Burp Suite", icon: Shield },
-      { name: "Metasploit", icon: Code },
-      { name: "Wireshark", icon: Network },
-      { name: "Nmap", icon: Network },
-      { name: "Splunk", icon: Cloud },
+      { name: "Burp Suite", logo: burpSuiteLogo },
+      { name: "Metasploit", logo: metasploitLogo },
+      { name: "Wireshark", logo: wiresharkLogo },
+      { name: "Nmap", logo: nmapLogo },
+      { name: "Splunk", logo: splunkLogo },
     ],
     color: "text-secondary",
   },
@@ -52,7 +57,6 @@ const Skills = () => {
       return (
         <>
           {category.skills.map((skill: any, skillIndex: number) => {
-            const SkillIcon = skill.icon;
             return (
               <div 
                 key={skillIndex} 
@@ -60,8 +64,12 @@ const Skills = () => {
                 className={`animate-on-scroll ${isVisible ? 'visible' : ''} stagger-${(skillIndex % 6) + 1}`}
               >
                 <Card className="glass-card p-4 hover-lift flex items-center gap-3 min-w-[180px]">
-                  <div className={`p-2 rounded-lg bg-primary/10 ${category.color}`}>
-                    <SkillIcon className="h-6 w-6" />
+                  <div className="w-8 h-8 flex items-center justify-center">
+                    <img 
+                      src={skill.logo} 
+                      alt={`${skill.name} logo`}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <span className="font-semibold text-sm">{skill.name}</span>
                 </Card>
