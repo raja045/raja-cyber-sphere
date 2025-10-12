@@ -142,7 +142,7 @@ const Skills = () => {
           <h3 className="text-2xl font-bold mb-6 text-center">
             <span className="text-primary">//</span> Tools
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
+          <div className="flex flex-wrap gap-0 max-w-6xl mx-auto">
             <SkillCard category={skillCategories.find(c => c.title === "Tools")!} index={5} />
           </div>
         </div>
