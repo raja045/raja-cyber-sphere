@@ -2,17 +2,11 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Shield, Network, Cloud, Code, Wrench } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import burpSuiteLogo from "@/assets/finalB.png";
-import metasploitLogo from "@/assets/finalM.jpg";
+import burpSuiteLogo from "@/assets/burp-suite.png";
+import metasploitLogo from "@/assets/metasploit.jpg";
 import wiresharkLogo from "@/assets/wireshark.avif";
 import nmapLogo from "@/assets/nmap.png";
-import splunkLogo from "@/assets/finalS.png";
-import virtualboxLogo from "@/assets/Virtualbox_logo.png";
-import kaliLogo from "@/assets/kaliFinal.jpg";
-import dockerLogo from "@/assets/docker.webp";
-import juypterLogo from "@/assets/Jupyter_logo.svg.png";
-import gitLogo from "@/assets/Git-Icon-Black.png";
-
+import splunkLogo from "@/assets/splunk.png";
 
 const skillCategories = [
   {
@@ -48,15 +42,6 @@ const skillCategories = [
       { name: "Wireshark", logo: wiresharkLogo },
       { name: "Nmap", logo: nmapLogo },
       { name: "Splunk", logo: splunkLogo },
-      { name: "Virtual Box", logo: virtualboxLogo },
-      { name: "Kali Linux", logo: kaliLogo },
-      { name: "Docker", logo: dockerLogo },
-      { name: "Juypter", logo: juypterLogo },
-      { name: "Git", logo: gitLogo },
-
-
-
-
       // Future tools - uncomment and add logos when ready
       // { name: "Kali Linux", logo: kaliLogo },
       // { name: "John the Ripper", logo: johnLogo },
