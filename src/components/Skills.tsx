@@ -53,10 +53,6 @@ const skillCategories = [
       { name: "Docker", logo: dockerLogo },
       { name: "Juypter", logo: juypterLogo },
       { name: "Git", logo: gitLogo },
-
-
-
-
       // Future tools - uncomment and add logos when ready
       // { name: "Kali Linux", logo: kaliLogo },
       // { name: "John the Ripper", logo: johnLogo },
