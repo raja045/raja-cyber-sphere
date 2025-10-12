@@ -31,7 +31,13 @@ const skillCategories = [
   {
     title: "Tools",
     icon: Wrench,
-    skills: ["Burp Suite", "Metasploit", "Wireshark", "Nmap", "Splunk"],
+    skills: [
+      { name: "Burp Suite", icon: Shield },
+      { name: "Metasploit", icon: Code },
+      { name: "Wireshark", icon: Network },
+      { name: "Nmap", icon: Network },
+      { name: "Splunk", icon: Cloud },
+    ],
     color: "text-secondary",
   },
 ];
@@ -41,6 +47,32 @@ const Skills = () => {
     const { elementRef, isVisible } = useScrollAnimation();
     const Icon = category.icon;
 
+    // Special rendering for Tools section
+    if (category.title === "Tools") {
+      return (
+        <>
+          {category.skills.map((skill: any, skillIndex: number) => {
+            const SkillIcon = skill.icon;
+            return (
+              <div 
+                key={skillIndex} 
+                ref={elementRef}
+                className={`animate-on-scroll ${isVisible ? 'visible' : ''} stagger-${(skillIndex % 6) + 1}`}
+              >
+                <Card className="glass-card p-4 hover-lift flex items-center gap-3 min-w-[180px]">
+                  <div className={`p-2 rounded-lg bg-primary/10 ${category.color}`}>
+                    <SkillIcon className="h-6 w-6" />
+                  </div>
+                  <span className="font-semibold text-sm">{skill.name}</span>
+                </Card>
+              </div>
+            );
+          })}
+        </>
+      );
+    }
+
+    // Regular rendering for other categories
     return (
       <div ref={elementRef} className={`animate-on-scroll ${isVisible ? 'visible' : ''} stagger-${(index % 6) + 1}`}>
         <Card className="glass-card p-6 hover-lift">
@@ -51,13 +83,13 @@ const Skills = () => {
             <h3 className="text-xl font-bold glitch-effect">{category.title}</h3>
           </div>
           <div className="flex flex-wrap gap-2">
-            {category.skills.map((skill, skillIndex) => (
+            {category.skills.map((skill: any, skillIndex: number) => (
               <Badge
                 key={skillIndex}
                 variant="secondary"
                 className="text-xs hover:scale-110 hover:shadow-lg transition-all duration-200 cursor-pointer"
               >
-                {skill}
+                {typeof skill === 'string' ? skill : skill.name}
               </Badge>
             ))}
           </div>
@@ -79,9 +111,21 @@ const Skills = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {skillCategories.map((category, index) => (
-            <SkillCard key={index} category={category} index={index} />
-          ))}
+          {skillCategories.map((category, index) => 
+            category.title === "Tools" ? null : (
+              <SkillCard key={index} category={category} index={index} />
+            )
+          )}
+        </div>
+
+        {/* Tools Section - Special Layout */}
+        <div className="mt-12">
+          <h3 className="text-2xl font-bold mb-6 text-center">
+            <span className="text-primary">//</span> Tools
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            <SkillCard category={skillCategories.find(c => c.title === "Tools")!} index={5} />
+          </div>
         </div>
 
         {/* Certifications */}
