@@ -74,7 +74,7 @@ const Skills = () => {
                 ref={elementRef}
                 className={`animate-on-scroll ${isVisible ? 'visible' : ''} stagger-${(skillIndex % 6) + 1}`}
               >
-                <Card className="glass-card p-4 hover-lift flex items-center gap-3">
+                <Card className="glass-card p-4 hover-lift flex items-center gap-3 w-fit">
                   <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center">
                     <img 
                       src={skill.logo} 
@@ -82,7 +82,7 @@ const Skills = () => {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <span className="font-semibold">{skill.name}</span>
+                  <span className="font-semibold whitespace-nowrap">{skill.name}</span>
                 </Card>
               </div>
             );
