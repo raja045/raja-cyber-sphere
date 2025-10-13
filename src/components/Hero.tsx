@@ -83,11 +83,11 @@ const Hero = () => {
       
       <div className="container relative z-10 px-4 py-20">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left side - Image (9:16 aspect ratio) */}
+          {/* Left side - Image (4:3 aspect ratio) */}
           <div className="animate-fade-in-up flex justify-center">
-            <div className="relative w-full max-w-md aspect-[9/16] overflow-hidden rounded-lg border-2 border-primary/50 shadow-2xl cyber-glow">
+            <div className="relative w-full max-w-lg aspect-[4/3] overflow-hidden rounded-lg border-2 border-primary/50 shadow-2xl cyber-glow">
               <img 
-                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=450&h=800&fit=crop"
+                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=640&h=480&fit=crop"
                 alt="Raja - Cybersecurity Researcher"
                 className="w-full h-full object-cover"
               />

@@ -1,178 +1,122 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Mail, Github, Linkedin, Twitter, Download, ExternalLink } from "lucide-react";
-import { QRCodeSVG } from "qrcode.react";
-import { toast } from "@/hooks/use-toast";
+import { Mail, Linkedin, Phone, FileText, MessageSquare, Calendar } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Contact = () => {
-  const [showQR, setShowQR] = useState(false);
   const { elementRef, isVisible } = useScrollAnimation();
 
-  const socialLinks = [
-    { icon: Github, href: "https://github.com", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-    { icon: Mail, href: "mailto:raja@example.com", label: "Email" },
+  const contactCards = [
+    {
+      icon: Mail,
+      title: "Email",
+      content: "raja@example.com",
+      href: "mailto:raja@example.com",
+    },
+    {
+      icon: Phone,
+      title: "WhatsApp",
+      content: "+1 234 567 890",
+      href: "https://wa.me/1234567890",
+    },
+    {
+      icon: Linkedin,
+      title: "LinkedIn",
+      content: "Connect with me",
+      href: "https://linkedin.com",
+    },
+    {
+      icon: FileText,
+      title: "Download Resume",
+      content: "View my experience",
+      href: "/resume.pdf",
+      download: true,
+    },
   ];
-
-  const publicProfiles = [
-    { name: "HackTheBox", href: "https://hackthebox.com", icon: ExternalLink },
-    { name: "TryHackMe", href: "https://tryhackme.com", icon: ExternalLink },
-    { name: "VulnHub", href: "https://vulnhub.com", icon: ExternalLink },
-  ];
-
-  const vCardData = `BEGIN:VCARD
-VERSION:3.0
-FN:Raja
-TITLE:Cybersecurity Researcher & Designer
-EMAIL:raja@example.com
-URL:https://github.com
-URL:https://linkedin.com
-NOTE:Securing the digital frontier
-END:VCARD`;
-
-  const handleDownloadVCard = () => {
-    const blob = new Blob([vCardData], { type: "text/vcard" });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "raja-contact.vcf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    window.URL.revokeObjectURL(url);
-    toast({
-      title: "vCard Downloaded",
-      description: "Contact card saved successfully",
-    });
-  };
-
-  const handleNotifyMe = () => {
-    toast({
-      title: "Notification Sent",
-      description: "I'll get back to you soon!",
-    });
-  };
 
   return (
     <section className="py-20 px-4">
-      <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-12 animate-fade-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Let's Connect</span>
+      <div className="container mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="text-center mb-16 animate-fade-in-up">
+          <h2 className="text-4xl md:text-5xl font-bold mb-2">
+            Let's Connect
           </h2>
-          <p className="text-xl text-muted-foreground">
-            Ready to collaborate on innovative cybersecurity solutions
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6" />
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Ready to discuss platform engineering solutions? I'd love to hear about your
+            infrastructure challenges and explore how we can build something scalable
+            together.
           </p>
         </div>
 
-        <div ref={elementRef} className={`animate-on-scroll ${isVisible ? 'visible' : ''}`}>
-          <Card className="glass-card p-8 max-w-2xl mx-auto">
-            <div className="text-center space-y-6">
-              <p className="text-lg text-muted-foreground">
-                Interested in discussing cybersecurity projects, research opportunities, or potential collaborations? 
-                I'd love to hear from you!
-              </p>
-
-              <div className="flex flex-wrap gap-4 justify-center pt-4">
-                <Button 
-                  size="lg" 
-                  onClick={handleNotifyMe}
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground cyber-glow transition-all duration-300 hover:scale-105"
+        {/* Contact Cards Grid */}
+        <div ref={elementRef} className={`animate-on-scroll ${isVisible ? 'visible' : ''} mb-16`}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {contactCards.map((card, index) => {
+              const Icon = card.icon;
+              return (
+                <a
+                  key={index}
+                  href={card.href}
+                  target={card.href.startsWith('http') ? '_blank' : undefined}
+                  rel={card.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  download={card.download}
+                  className="group"
                 >
-                  <Mail className="mr-2 h-5 w-5" />
-                  Notify Me
-                </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  onClick={handleDownloadVCard}
-                  className="border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-105"
-                >
-                  <Download className="mr-2 h-5 w-5" />
-                  Download vCard
-                </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  onClick={() => setShowQR(true)}
-                  className="border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-105"
-                >
-                  Show QR Code
-                </Button>
-              </div>
+                  <Card className="glass-card p-6 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-lg mb-1">{card.title}</h3>
+                        <p className={`text-sm ${card.title === "Download Resume" ? "text-primary" : "text-muted-foreground"}`}>
+                          {card.content}
+                        </p>
+                      </div>
+                    </div>
+                  </Card>
+                </a>
+              );
+            })}
+          </div>
+        </div>
 
-              <div className="pt-8 space-y-6">
-                <div>
-                  <p className="text-sm text-muted-foreground mb-4">Connect with me on</p>
-                  <div className="flex gap-4 justify-center">
-                    {socialLinks.map((link, index) => {
-                      const Icon = link.icon;
-                      return (
-                        <a
-                          key={index}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-3 rounded-lg bg-card/50 border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-110 cyber-glow"
-                          aria-label={link.label}
-                        >
-                          <Icon className="h-5 w-5" />
-                        </a>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div>
-                  <p className="text-sm text-muted-foreground mb-4">Public Profiles</p>
-                  <div className="flex flex-wrap gap-3 justify-center">
-                    {publicProfiles.map((profile, index) => (
-                      <a
-                        key={index}
-                        href={profile.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-card/50 border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-105 text-sm"
-                      >
-                        {profile.name}
-                        <ExternalLink className="h-3 w-3" />
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
+        {/* Call to Action Section */}
+        <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <Card className="glass-card p-8 md:p-12 max-w-4xl mx-auto text-center">
+            <h3 className="text-3xl md:text-4xl font-bold mb-4">
+              Ready to Start Your Project?
+            </h3>
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Let's discuss your vision and create something extraordinary
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Button 
+                size="lg"
+                className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground transition-all duration-300 hover:scale-105"
+              >
+                <MessageSquare className="mr-2 h-5 w-5" />
+                Send a Message
+              </Button>
+              <Button 
+                size="lg"
+                variant="outline"
+                className="border-border hover:bg-card transition-all duration-300 hover:scale-105"
+              >
+                <Calendar className="mr-2 h-5 w-5" />
+                Schedule a Call
+              </Button>
             </div>
           </Card>
         </div>
 
+        {/* Footer */}
         <div className="text-center mt-12 text-sm text-muted-foreground animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
           <p>© 2025 Raja. Securing the digital frontier, one project at a time.</p>
         </div>
       </div>
-
-      <Dialog open={showQR} onOpenChange={setShowQR}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Scan QR Code</DialogTitle>
-          </DialogHeader>
-          <div className="flex flex-col items-center gap-4 py-4">
-            <div className="p-4 bg-white rounded-lg">
-              <QRCodeSVG value={vCardData} size={200} level="H" />
-            </div>
-            <p className="text-sm text-muted-foreground text-center">
-              Scan this code with your phone to download contact details
-            </p>
-            <Button onClick={handleDownloadVCard} className="w-full">
-              <Download className="mr-2 h-4 w-4" />
-              Download vCard Instead
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
     </section>
   );
 };
