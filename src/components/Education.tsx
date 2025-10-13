@@ -7,7 +7,7 @@ const education = [
   {
     degree: "M.S. in Cybersecurity",
     institution: "Florida International University (FIU)",
-    period: "January 2024 – December2025",
+    period: "Jan2024 – Dec2025",
     gpa: "3.8/4.0",
     achievements: [
       "Graduate Research Assistant",
