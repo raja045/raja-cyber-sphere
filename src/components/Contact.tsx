@@ -10,20 +10,20 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "raja@example.com",
-      href: "mailto:raja@example.com",
+      content: "sraja456@outlook.com",
+      href: "mailto:sraja456@outlook.com",
     },
     {
       icon: Phone,
-      title: "WhatsApp",
-      content: "+1 234 567 890",
+      title: "Phone / Message",
+      content: "+17866273359",
       href: "https://wa.me/1234567890",
     },
     {
       icon: Linkedin,
       title: "LinkedIn",
       content: "Connect with me",
-      href: "https://linkedin.com",
+      href: "https://linkedin.com/in/raja045",
     },
     {
       icon: FileText,
