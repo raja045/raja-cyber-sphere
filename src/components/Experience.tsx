@@ -5,18 +5,97 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const experiences = [
   {
+    role: "Vice President of Outgoing Global Exchange (oGX)",
+    organization: "AIESEC in Miami",
+    period: "Jan 2025 – Present",
+    description: [
+      "Led 50+ international exchange programs, connecting students and professionals with global internships and volunteering.",
+      "Directed strategy, planning, and execution of global exchange projects, ensuring alignment with AIESEC’s mission.",
+      "Implemented weekly meetings for team members, improving efficiency and collaboration by 25%.",
+      "Built relationships with partners and sponsors, expanding opportunities by 20% year-over-year.",
+    ].join(" "),
+    technologies: ["Leadership", "Global Exchange", "Strategy", "Team Management"],
+  },
+  {
+    role: "Team Member - Outgoing Global Exchange (oGX)",
+    organization: "AIESEC in Miami",
+    period: "Jan 2024 – Dec 2024",
+    description: [
+      "Guided exchange program participants through the process.",
+      "Participated in consultancy, marketing, social events, and conferences.",
+      "Assisted with partnerships and explored global opportunities, building cross-cultural connections.",
+    ].join(" "),
+    technologies: ["Consultancy", "Marketing", "Event Management", "Collaboration"],
+  },
+  {
     role: "Graduate Student Assistant",
-    organization: "FIU School of Engineering & Computing",
+    organization: "FIU College of Engineering & Computing",
     period: "Aug 2024 – Present",
-    description: "Supporting advanced research initiatives in cybersecurity and assisting faculty with technical projects and student mentorship.",
-    technologies: ["Research", "Technical Support", "Mentorship"],
+    description: [
+      "Provided support to students across cloud computing, HCI, and microcomputers, helping 50+ students complete assignments.",
+      "Assisted in labs/projects, including AWS, Wix, Microsoft Office, improving performance by 15%.",
+      "Supported faculty by clarifying concepts, troubleshooting, and reducing query resolution time by 20%.",
+      "Evaluated and graded coursework, maintaining 100% on-time grading compliance.",
+    ].join(" "),
+    technologies: ["Student Support", "Cloud Computing", "Teaching", "Grading"],
+  },
+  {
+    role: "Graduate Research Assistant",
+    organization: "FIU College of Engineering & Computing",
+    period: "Jan 2025 – Apr 2025",
+    description: [
+      "Analyzed vulnerabilities in LLMs, VLMs, and diffusion models, identifying 30+ critical weaknesses.",
+      "Developed adversarial attacks, including prompt concealment and MMA-Diffusion extensions.",
+      "Investigated jailbreaking techniques, uncovering security gaps and proposing novel defenses.",
+    ].join(" "),
+    technologies: ["AI Security", "Adversarial ML", "Research", "Prompt Injection"],
   },
   {
     role: "Graduate Research Assistant",
     organization: "FIU Cyber Security and Privacy Lab",
     period: "Feb 2024 – Aug 2024",
-    description: "Conducted cutting-edge research in digital forensics and privacy-preserving technologies, contributing to multiple research papers and projects.",
+    description: [
+      "Labeled custom dataset of 10,000+ entries for ML behavioral pattern detection, improving accuracy by 18%.",
+      "Interviewed users on misinformation perception, providing qualitative insights.",
+      "Documented findings in Jupyter Notebooks and MS Office, enabling faster decision-making.",
+    ].join(" "),
     technologies: ["Digital Forensics", "Privacy Tech", "Research Papers", "ML"],
+  },
+  {
+    role: "White-hat Security Researcher",
+    organization: "HackerOne, Bugcrowd",
+    period: "Jul 2023 – Feb 2024",
+    description: [
+      "Performed 50+ security assessments and penetration tests, reporting 80+ critical vulnerabilities.",
+      "Documented vulnerabilities across OWASP Top 10 categories.",
+      "Used Burp Suite, Nmap, OWASP ZAP, Metasploit for manual and automated testing.",
+      "Coordinated with dev teams for vulnerability remediation.",
+    ].join(" "),
+    technologies: ["Security Testing", "OWASP", "Penetration Testing", "Bug Bounty"],
+  },
+  {
+    role: "Undergraduate Academic Researcher",
+    organization: "Lovely Professional University",
+    period: "Jan 2023 – Jul 2023",
+    description: [
+      "Reviewed privacy challenges and anonymity tools (TOR, I2P, browser extensions).",
+      "Analyzed effectiveness and usability of anonymity technologies.",
+      "Evaluated privacy-enhancing tech and their role in data protection.",
+      "Concluded robust solutions for user privacy, with future improvements needed.",
+    ].join(" "),
+    technologies: ["Privacy", "Anonymity", "Research", "TOR"],
+  },
+  {
+    role: "Cyber Security Intern",
+    organization: "Verzeo",
+    period: "May 2021 – Jul 2021",
+    description: [
+      "Supported Product Security Incident Response Team (PSIRT) in incident analysis, improving response efficiency by 20%.",
+      "Assisted integration of security tools into management systems, enhancing threat visibility.",
+      "Validated vulnerability submissions using Burp Suite and OWASP ZAP.",
+      "Performed access control assessments, contributing to improved product security.",
+    ].join(" "),
+    technologies: ["Incident Response", "Security Tools", "Vulnerability Assessment", "Access Control"],
   },
 ];
 
