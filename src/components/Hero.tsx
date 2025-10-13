@@ -2,27 +2,36 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, Github, Linkedin, Mail } from "lucide-react";
 
-const roles = ["Cybersecurity Enthusiast", "CTF Player", "Troubleshooter"];
+const roles = [
+  "Cyber Security Enthusiast",
+  "CTF Player",
+  "Penetration Tester",
+  "LLM Security Researcher",
+  "Trouble Shooter"
+];
 
 const Hero = () => {
-  const [text, setText] = useState("");
-  const fullText = "Hi, I'm Raja — Cybersecurity Researcher & Designer.";
+  const [promptText, setPromptText] = useState("");
+  const fullPromptText = "root@raja:~$ whoami ";
   const [showCursor, setShowCursor] = useState(true);
+  const [promptComplete, setPromptComplete] = useState(false);
   
   const [currentRole, setCurrentRole] = useState("");
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  // Animate the prompt text first
   useEffect(() => {
     let currentIndex = 0;
     const interval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setText(fullText.slice(0, currentIndex));
+      if (currentIndex <= fullPromptText.length) {
+        setPromptText(fullPromptText.slice(0, currentIndex));
         currentIndex++;
       } else {
+        setPromptComplete(true);
         clearInterval(interval);
       }
-    }, 50);
+    }, 100);
 
     const cursorInterval = setInterval(() => {
       setShowCursor((prev) => !prev);
@@ -34,11 +43,13 @@ const Hero = () => {
     };
   }, []);
 
+  // Animate the rotating roles after prompt is complete
   useEffect(() => {
+    if (!promptComplete) return;
+
     const currentText = roles[roleIndex];
-    
     const typingSpeed = isDeleting ? 50 : 100;
-    const pauseTime = isDeleting ? 100 : 800;
+    const pauseTime = isDeleting ? 100 : 1500;
 
     if (!isDeleting && currentRole === currentText) {
       const pauseTimeout = setTimeout(() => setIsDeleting(true), pauseTime);
@@ -60,7 +71,7 @@ const Hero = () => {
     }, typingSpeed);
 
     return () => clearTimeout(timeout);
-  }, [currentRole, roleIndex, isDeleting]);
+  }, [currentRole, roleIndex, isDeleting, promptComplete]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -71,58 +82,63 @@ const Hero = () => {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(0,219,222,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,219,222,0.03)_1px,transparent_1px)] bg-[size:50px_50px] animate-fade-in" />
       
       <div className="container relative z-10 px-4 py-20">
-        <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in-up">
-          {/* Profile Image */}
-          <div className="flex justify-center mb-8">
-            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-primary/50 shadow-lg cyber-glow">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left side - Image (16:9 aspect ratio) */}
+          <div className="animate-fade-in-up">
+            <div className="relative w-full aspect-video overflow-hidden rounded-lg border-2 border-primary/50 shadow-2xl cyber-glow">
               <img 
-                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=400&fit=crop"
+                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&h=450&fit=crop"
                 alt="Raja - Cybersecurity Researcher"
                 className="w-full h-full object-cover"
               />
             </div>
           </div>
-          
-          {/* Main heading with typewriter effect */}
-          <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-            <span className="gradient-text inline-block">
-              {text}
-              {showCursor && <span className="animate-glow-pulse">|</span>}
-            </span>
-          </h1>
 
-          {/* Tagline with typing animation */}
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto min-h-[2em] flex items-center justify-center">
-            <span className="text-primary font-semibold">
-              {currentRole}
-              {showCursor && <span className="animate-glow-pulse">|</span>}
-            </span>
-          </p>
+          {/* Right side - Text with animations */}
+          <div className="space-y-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            {/* Terminal prompt with typing animation */}
+            <div className="font-mono text-lg md:text-xl text-primary">
+              {promptText}
+              {!promptComplete && showCursor && <span className="animate-glow-pulse">|</span>}
+            </div>
 
-          {/* Social Links */}
-          <div className="flex gap-6 justify-center pt-8">
-            <a 
-              href="https://github.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors duration-300"
-            >
-              <Github className="h-6 w-6" />
-            </a>
-            <a 
-              href="https://linkedin.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors duration-300"
-            >
-              <Linkedin className="h-6 w-6" />
-            </a>
-            <a 
-              href="mailto:raja@example.com"
-              className="text-muted-foreground hover:text-primary transition-colors duration-300"
-            >
-              <Mail className="h-6 w-6" />
-            </a>
+            {/* Rotating roles with typing animation */}
+            {promptComplete && (
+              <div className="min-h-[4rem] flex items-center">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                  <span className="gradient-text">
+                    {currentRole}
+                    {showCursor && <span className="animate-glow-pulse">|</span>}
+                  </span>
+                </h1>
+              </div>
+            )}
+
+            {/* Social Links */}
+            <div className="flex gap-6 pt-8">
+              <a 
+                href="https://github.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
+              >
+                <Github className="h-7 w-7" />
+              </a>
+              <a 
+                href="https://linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
+              >
+                <Linkedin className="h-7 w-7" />
+              </a>
+              <a 
+                href="mailto:raja@example.com"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
+              >
+                <Mail className="h-7 w-7" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
