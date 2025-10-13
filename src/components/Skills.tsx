@@ -2,11 +2,16 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Shield, Network, Cloud, Code, Wrench } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import burpSuiteLogo from "@/assets/burp-suite.png";
-import metasploitLogo from "@/assets/metasploit.jpg";
+import burpSuiteLogo from "@/assets/finalB.png";
+import metasploitLogo from "@/assets/finalM.png";
 import wiresharkLogo from "@/assets/wireshark.avif";
 import nmapLogo from "@/assets/nmap.png";
-import splunkLogo from "@/assets/splunk.png";
+import splunkLogo from "@/assets/finalS.png";
+import kaliLogo from "@/assets/kaliFinal_Background_Removed.png";
+import dockerLogo from "@/assets/docker_Background_Removed.png";
+import gitLogo from "@/assets/Git-Icon-Black.png";
+import jupyterLogo from "@/assets/Jupyter_logo.svg.png";
+import virtualboxLogo from "@/assets/Virtualbox_logo.png";
 
 const skillCategories = [
   {
@@ -42,17 +47,11 @@ const skillCategories = [
       { name: "Wireshark", logo: wiresharkLogo },
       { name: "Nmap", logo: nmapLogo },
       { name: "Splunk", logo: splunkLogo },
-      // Future tools - uncomment and add logos when ready
-      // { name: "Kali Linux", logo: kaliLogo },
-      // { name: "John the Ripper", logo: johnLogo },
-      // { name: "Hydra", logo: hydraLogo },
-      // { name: "Aircrack-ng", logo: aircrackLogo },
-      // { name: "OWASP ZAP", logo: zapLogo },
-      // { name: "Nikto", logo: niktoLogo },
-      // { name: "SQLMap", logo: sqlmapLogo },
-      // { name: "Hashcat", logo: hashcatLogo },
-      // { name: "Snort", logo: snortLogo },
-      // { name: "Nessus", logo: nessusLogo },
+      { name: "Kali Linux", logo: kaliLogo },
+      { name: "Docker", logo: dockerLogo },
+      { name: "Git", logo: gitLogo },
+      { name: "Jupyter", logo: jupyterLogo },
+      { name: "VirtualBox", logo: virtualboxLogo },
     ],
     color: "text-secondary",
   },
