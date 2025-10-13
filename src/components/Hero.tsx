@@ -83,11 +83,11 @@ const Hero = () => {
       
       <div className="container relative z-10 px-4 py-20">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left side - Image (16:9 aspect ratio) */}
-          <div className="animate-fade-in-up">
-            <div className="relative w-full aspect-video overflow-hidden rounded-lg border-2 border-primary/50 shadow-2xl cyber-glow">
+          {/* Left side - Image (9:16 aspect ratio) */}
+          <div className="animate-fade-in-up flex justify-center">
+            <div className="relative w-full max-w-md aspect-[9/16] overflow-hidden rounded-lg border-2 border-primary/50 shadow-2xl cyber-glow">
               <img 
-                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&h=450&fit=crop"
+                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=450&h=800&fit=crop"
                 alt="Raja - Cybersecurity Researcher"
                 className="w-full h-full object-cover"
               />
@@ -104,13 +104,24 @@ const Hero = () => {
 
             {/* Rotating roles with typing animation */}
             {promptComplete && (
-              <div className="min-h-[4rem] flex items-center">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                  <span className="gradient-text">
-                    {currentRole}
-                    {showCursor && <span className="animate-glow-pulse">|</span>}
-                  </span>
-                </h1>
+              <div className="space-y-4">
+                <div className="min-h-[3rem] flex items-center">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                    <span className="gradient-text">
+                      {currentRole}
+                      {showCursor && <span className="animate-glow-pulse">|</span>}
+                    </span>
+                  </h1>
+                </div>
+                
+                {/* Description */}
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
+                  I'm a passionate cybersecurity professional specializing in penetration testing, 
+                  CTF competitions, and LLM security research. With expertise in vulnerability 
+                  assessment and ethical hacking, I help organizations identify and mitigate security 
+                  risks. I thrive on solving complex security challenges and staying ahead of emerging 
+                  threats in the ever-evolving cyber landscape.
+                </p>
               </div>
             )}
 
