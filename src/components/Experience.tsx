@@ -13,7 +13,7 @@ const experiences = [
       "Directed strategy, planning, and execution of global exchange projects, ensuring alignment with AIESEC’s mission.",
       "Implemented weekly meetings for team members, improving efficiency and collaboration by 25%.",
       "Built relationships with partners and sponsors, expanding opportunities by 20% year-over-year.",
-    ].join(" "),
+    ],
     technologies: ["Leadership", "Global Exchange", "Strategy", "Team Management"],
   },
   {
@@ -24,7 +24,7 @@ const experiences = [
       "Guided exchange program participants through the process.",
       "Participated in consultancy, marketing, social events, and conferences.",
       "Assisted with partnerships and explored global opportunities, building cross-cultural connections.",
-    ].join(" "),
+    ],
     technologies: ["Consultancy", "Marketing", "Event Management", "Collaboration"],
   },
   {
@@ -36,7 +36,7 @@ const experiences = [
       "Assisted in labs/projects, including AWS, Wix, Microsoft Office, improving performance by 15%.",
       "Supported faculty by clarifying concepts, troubleshooting, and reducing query resolution time by 20%.",
       "Evaluated and graded coursework, maintaining 100% on-time grading compliance.",
-    ].join(" "),
+    ],
     technologies: ["Student Support", "Cloud Computing", "Teaching", "Grading"],
   },
   {
@@ -47,7 +47,7 @@ const experiences = [
       "Analyzed vulnerabilities in LLMs, VLMs, and diffusion models, identifying 30+ critical weaknesses.",
       "Developed adversarial attacks, including prompt concealment and MMA-Diffusion extensions.",
       "Investigated jailbreaking techniques, uncovering security gaps and proposing novel defenses.",
-    ].join(" "),
+    ],
     technologies: ["AI Security", "Adversarial ML", "Research", "Prompt Injection"],
   },
   {
@@ -58,7 +58,7 @@ const experiences = [
       "Labeled custom dataset of 10,000+ entries for ML behavioral pattern detection, improving accuracy by 18%.",
       "Interviewed users on misinformation perception, providing qualitative insights.",
       "Documented findings in Jupyter Notebooks and MS Office, enabling faster decision-making.",
-    ].join(" "),
+    ],
     technologies: ["Digital Forensics", "Privacy Tech", "Research Papers", "ML"],
   },
   {
@@ -70,7 +70,7 @@ const experiences = [
       "Documented vulnerabilities across OWASP Top 10 categories.",
       "Used Burp Suite, Nmap, OWASP ZAP, Metasploit for manual and automated testing.",
       "Coordinated with dev teams for vulnerability remediation.",
-    ].join(" "),
+    ],
     technologies: ["Security Testing", "OWASP", "Penetration Testing", "Bug Bounty"],
   },
   {
@@ -82,7 +82,7 @@ const experiences = [
       "Analyzed effectiveness and usability of anonymity technologies.",
       "Evaluated privacy-enhancing tech and their role in data protection.",
       "Concluded robust solutions for user privacy, with future improvements needed.",
-    ].join(" "),
+    ],
     technologies: ["Privacy", "Anonymity", "Research", "TOR"],
   },
   {
@@ -94,7 +94,7 @@ const experiences = [
       "Assisted integration of security tools into management systems, enhancing threat visibility.",
       "Validated vulnerability submissions using Burp Suite and OWASP ZAP.",
       "Performed access control assessments, contributing to improved product security.",
-    ].join(" "),
+    ],
     technologies: ["Incident Response", "Security Tools", "Vulnerability Assessment", "Access Control"],
   },
 ];
@@ -122,9 +122,11 @@ const Experience = () => {
               <p className="text-sm text-muted-foreground">{exp.period}</p>
             </div>
           </div>
-          <p className="text-muted-foreground mb-4 leading-relaxed">
-            {exp.description}
-          </p>
+          <ul className="text-muted-foreground mb-4 leading-relaxed list-disc pl-6">
+            {exp.description.map((desc: string, i: number) => (
+              <li key={i}>{desc}</li>
+            ))}
+          </ul>
           <div className="flex flex-wrap gap-2">
             {exp.technologies.map((tech, techIndex) => (
               <Badge 
