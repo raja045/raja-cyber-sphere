@@ -7,12 +7,11 @@ const education = [
   {
     degree: "M.S. in Cybersecurity",
     institution: "Florida International University (FIU)",
-    period: "2024 – 2025",
+    period: "January 2024 – December2025",
     gpa: "3.8/4.0",
     achievements: [
       "Graduate Research Assistant",
-      "Focus on Digital Forensics and Privacy",
-      "Advanced Network Security",
+      "CCDC, Team Leader for FIU Team",
     ],
     gradient: "from-primary/20 to-secondary/20",
   },
@@ -22,9 +21,9 @@ const education = [
     period: "2019 – 2023",
     gpa: "3.6/4.0",
     achievements: [
-      "Dean's List - Multiple Semesters",
-      "Cybersecurity Club President",
-      "Winner - National CTF Competition",
+      "Undergraduate Academic Researcher",
+      "Member of NOOBARMY Cyber Club",
+      "Participated in 50+ CTF's",
     ],
     gradient: "from-secondary/20 to-accent/20",
   },
