@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Download, Github, Linkedin, Mail } from "lucide-react";
 
 const roles = [
-  "Cyber Security Enthusiast",
-  "CTF Player",
+  "Cyber Security",
   "Penetration Tester",
-  "LLM Security Researcher",
+  "LLM Security",
+    "CTF Player",
   "Trouble Shooter"
 ];
 
@@ -116,11 +116,7 @@ const Hero = () => {
                 
                 {/* Description */}
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
-                  I'm a passionate cybersecurity professional specializing in penetration testing, 
-                  CTF competitions, and LLM security research. With expertise in vulnerability 
-                  assessment and ethical hacking, I help organizations identify and mitigate security 
-                  risks. I thrive on solving complex security challenges and staying ahead of emerging 
-                  threats in the ever-evolving cyber landscape.
+                Cybersecurity professional with expertise in penetration testing, LLM Security research, and secure cloud architecture. Developed secure systems through projects in VPN deployment, IAM, and ML-based threat detection. Passionate about advancing AI safety, ethical hacking, and next-generation cloud and system defense.
                 </p>
               </div>
             )}
@@ -128,7 +124,7 @@ const Hero = () => {
             {/* Social Links */}
             <div className="flex gap-6 pt-8">
               <a 
-                href="https://github.com" 
+                href="https://github.com/raja045" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
@@ -136,7 +132,7 @@ const Hero = () => {
                 <Github className="h-7 w-7" />
               </a>
               <a 
-                href="https://linkedin.com" 
+                href="https://linkedin.com/in/raja045" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
@@ -144,7 +140,7 @@ const Hero = () => {
                 <Linkedin className="h-7 w-7" />
               </a>
               <a 
-                href="mailto:raja@example.com"
+                href="mailto:sraja456@outlook.com"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
               >
                 <Mail className="h-7 w-7" />

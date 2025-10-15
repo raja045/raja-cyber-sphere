@@ -15,9 +15,9 @@ const MatrixRain = () => {
 
     const columns = Math.floor(canvas.width / 20);
     const drops: number[] = Array(columns).fill(1);
-
-    const matrix = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+    const matrix = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン!@#$%^&*()-_=+[]{};:'\",.<>/?\\|`~";
     const chars = matrix.split("");
+
 
     function draw() {
       if (!ctx || !canvas) return;
