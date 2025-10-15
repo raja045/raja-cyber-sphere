@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, Github, Linkedin, Mail } from "lucide-react";
+import profilePic from "@/assets/raja-photo.jpg";
 
 const roles = [
   "Cyber Security",
   "Penetration Tester",
   "LLM Security",
-    "CTF Player",
+  "CTF Player",
   "Trouble Shooter"
 ];
 
@@ -83,13 +84,14 @@ const Hero = () => {
       
       <div className="container relative z-10 px-4 py-20">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left side - Image (4:3 aspect ratio) */}
-          <div className="animate-fade-in-up flex justify-center">
-            <div className="relative w-full max-w-lg aspect-[4/3] overflow-hidden rounded-lg border-2 border-primary/50 shadow-2xl cyber-glow">
-              <img 
-                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=640&h=480&fit=crop"
-                alt="Raja - Cybersecurity Researcher"
-                className="w-full h-full object-cover"
+          {/* Left side - Image (static, no border animation) */}
+          <div className="flex justify-center">
+            <div className="relative w-full max-w-lg aspect-[4/3] overflow-hidden">
+              <img
+                src={profilePic}
+                alt="Raja Shekar — Cybersecurity Researcher"
+                className="block w-full h-full object-cover border-0 rounded-none"
+                loading="lazy"
               />
             </div>
           </div>
@@ -102,21 +104,30 @@ const Hero = () => {
               {!promptComplete && showCursor && <span className="animate-glow-pulse">|</span>}
             </div>
 
-            {/* Rotating roles with typing animation */}
+            {/* Rotating roles with typing animation and prominent name */}
             {promptComplete && (
               <div className="space-y-4">
+                {/* Full name */}
                 <div className="min-h-[3rem] flex items-center">
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
+                    <span className="gradient-text">Raja Shekar</span>
+                    <span className="sr-only"> — Trouble Shooter</span>
+                  </h1>
+                </div>
+
+                {/* Rotating role under the name */}
+                <div className="min-h-[2.5rem] flex items-center">
+                  <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-primary">
                     <span className="gradient-text">
                       {currentRole}
                       {showCursor && <span className="animate-glow-pulse">|</span>}
                     </span>
-                  </h1>
+                  </h2>
                 </div>
-                
+
                 {/* Description */}
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
-                Cybersecurity professional with expertise in penetration testing, LLM Security research, and secure cloud architecture. Developed secure systems through projects in VPN deployment, IAM, and ML-based threat detection. Passionate about advancing AI safety, ethical hacking, and next-generation cloud and system defense.
+                  Cybersecurity professional with expertise in penetration testing, LLM Security research, and secure cloud architecture. Developed secure systems through projects in VPN deployment, IAM, and ML-based threat detection. Passionate about advancing AI safety, ethical hacking, and next-generation cloud and system defense.
                 </p>
               </div>
             )}
