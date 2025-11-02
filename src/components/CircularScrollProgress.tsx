@@ -22,7 +22,7 @@ const CircularScrollProgress = () => {
 
   return (
     <div className="fixed bottom-8 left-8 z-50">
-      <div className="relative w-22 h-22 flex items-center justify-center">
+      <div className="relative w-23 h-23 flex items-center justify-center">
         {/* Background circle */}
         <div className="absolute inset-0 rounded-full bg-background/80 backdrop-blur-sm border border-border/50" />
         
