@@ -12,12 +12,14 @@ import Contact from "@/components/Contact";
 import CursorGlow from "@/components/CursorGlow";
 import MatrixRain from "@/components/MatrixRain";
 import ScrollProgress from "@/components/ScrollProgress";
+import CircularScrollProgress from "@/components/CircularScrollProgress";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
       <MatrixRain />
       <ScrollProgress />
+      <CircularScrollProgress />
       <CursorGlow />
       <Navigation />
       <section id="whoami">
