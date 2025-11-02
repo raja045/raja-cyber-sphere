@@ -16,13 +16,13 @@ const CircularScrollProgress = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const radius = 45;
+  const radius = 35;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (scrollProgress / 100) * circumference;
 
   return (
     <div className="fixed bottom-8 left-8 z-50">
-      <div className="relative w-28 h-28 flex items-center justify-center">
+      <div className="relative w-20 h-20 flex items-center justify-center">
         {/* Background circle */}
         <div className="absolute inset-0 rounded-full bg-background/80 backdrop-blur-sm border border-border/50" />
         
@@ -58,7 +58,7 @@ const CircularScrollProgress = () => {
         
         {/* Percentage text */}
         <div className="relative text-center">
-          <span className="text-2xl font-bold gradient-text">
+          <span className="text-base font-bold gradient-text">
             {Math.round(scrollProgress)}%
           </span>
         </div>
