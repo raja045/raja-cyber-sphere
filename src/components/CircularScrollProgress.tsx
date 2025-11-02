@@ -22,7 +22,7 @@ const CircularScrollProgress = () => {
 
   return (
     <div className="fixed bottom-8 left-8 z-50">
-      <div className="relative w-28 h-28 flex items-center justify-center">
+      <div className="relative w-21 h-21 flex items-center justify-center">
         {/* Background circle */}
         <div className="absolute inset-0 rounded-full bg-background/80 backdrop-blur-sm border border-border/50" />
         
@@ -58,7 +58,7 @@ const CircularScrollProgress = () => {
         
         {/* Percentage text */}
         <div className="relative text-center">
-          <span className="text-2xl font-bold gradient-text">
+          <span className="text-lg font-bold gradient-text">
             {Math.round(scrollProgress)}%
           </span>
         </div>
