@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Mail, Linkedin, Phone, FileText, MessageSquare, Calendar } from "lucide-react";
+import { Mail, Linkedin, Phone, CreditCard, MessageSquare, Calendar } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -13,49 +13,49 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { QRCodeSVG } from "qrcode.react";
+import html2canvas from "html2canvas";
+import { MapPin, Globe } from "lucide-react";
 
 const Contact = () => {
-  const { elementRef, isVisible } = useScrollAnimation();
+  const { elementRef } = useScrollAnimation();
 
-  // Dialog / OTP state for phone verification
+  // OTP state
   const [isPhoneDialogOpen, setIsPhoneDialogOpen] = useState(false);
-  // owner's phone (hidden until user verifies)
   const ownerPhone = "+17866273359";
   const [userPhone, setUserPhone] = useState("");
   const [otp, setOtp] = useState("");
-  const [generatedOtp, setGeneratedOtp] = useState<string | null>(null);
   const [otpSent, setOtpSent] = useState(false);
   const [verificationMessage, setVerificationMessage] = useState<string | null>(null);
   const [isVerified, setIsVerified] = useState(false);
   const API_BASE = import.meta.env.VITE_API_BASE || '';
 
-  const contactCards = [
-    {
-      icon: Mail,
-      title: "Email",
-      content: "sraja456@outlook.com",
-      href: "mailto:sraja456@outlook.com",
-    },
-    {
-      icon: Phone,
-      title: "Phone / Message",
-      content: "Verify to view",
-      href: undefined,
-    },
-    {
-      icon: Linkedin,
-      title: "LinkedIn",
-      content: "Connect with me",
-      href: "https://linkedin.com/in/raja045",
-    },
-    {
-      icon: FileText,
-      title: "Download Resume",
-      content: "View my experience",
-      href: "/resume.pdf",
-      download: true,
-    },
-  ];
+  // Business card state
+  const [isBusinessCardOpen, setIsBusinessCardOpen] = useState(false);
+  const businessCardRef = useRef<HTMLDivElement>(null);
+
+  const downloadBusinessCard = async () => {
+    if (businessCardRef.current) {
+      const canvas = await html2canvas(businessCardRef.current, {
+        scale: 2,
+        backgroundColor: '#000000',
+      });
+      const link = document.createElement('a');
+      link.download = 'raja-business-card.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+  };
+
+  const vCardData = `BEGIN:VCARD
+VERSION:3.0
+FN:Raja Sekhar
+TITLE:Cybersecurity & Platform Engineering Expert
+EMAIL:sraja456@outlook.com
+TEL:+17866273359
+URL:${window.location.origin}
+URL;type=LinkedIn:https://linkedin.com/in/raja045
+END:VCARD`;
 
   return (
     <section className="py-20 px-4">
@@ -74,80 +74,90 @@ const Contact = () => {
         </div>
 
         {/* Contact Cards Grid */}
-  {/* Keep contact cards visible by default to avoid them being hidden before the intersection observer fires */}
-  <div ref={elementRef} className={`animate-on-scroll visible mb-16`}>
+        <div ref={elementRef} className="animate-on-scroll visible mb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {contactCards.map((card, index) => {
-              const Icon = card.icon;
-              // For the Phone / Message card, open an OTP dialog instead of navigating away
-              if (card.title === "Phone / Message") {
-                return (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      // open dialog to enter visitor's phone for OTP
-                      setUserPhone("");
-                      setIsPhoneDialogOpen(true);
-                      setOtp("");
-                      setGeneratedOtp(null);
-                      setOtpSent(false);
-                      setVerificationMessage(null);
-                      setIsVerified(false);
-                    }}
-                    className="group text-left w-full"
-                  >
-                    <Card className="glass-card p-6 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                      <div className="flex items-start gap-4">
-                        <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                          <Icon className="h-6 w-6" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-lg mb-1">{card.title}</h3>
-                          <p className={`text-sm ${card.download ? "text-primary" : "text-muted-foreground"}`}>
-                            {card.content}
-                          </p>
-                        </div>
-                      </div>
-                    </Card>
-                  </button>
-                );
-              }
+            {/* Email Card */}
+            <a href="mailto:sraja456@outlook.com" className="group">
+              <Card className="glass-card p-6 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                    <Mail className="h-6 w-6" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg mb-1">Email</h3>
+                    <p className="text-sm text-muted-foreground">sraja456@outlook.com</p>
+                  </div>
+                </div>
+              </Card>
+            </a>
 
-              return (
-                <a
-                  key={index}
-                  href={card.href}
-                  target={card.href.startsWith('http') ? '_blank' : undefined}
-                  rel={card.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  download={card.download}
-                  className="group"
-                >
-                  <Card className="glass-card p-6 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                        <Icon className="h-6 w-6" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-lg mb-1">{card.title}</h3>
-                        <p className={`text-sm ${card.download ? "text-primary" : "text-muted-foreground"}`}>
-                          {card.content}
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
-                </a>
-              );
-            })}
+            {/* Phone Card */}
+            <button
+              onClick={() => {
+                setUserPhone("");
+                setIsPhoneDialogOpen(true);
+                setOtp("");
+                setOtpSent(false);
+                setVerificationMessage(null);
+                setIsVerified(false);
+              }}
+              className="group text-left w-full"
+            >
+              <Card className="glass-card p-6 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                    <Phone className="h-6 w-6" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg mb-1">Phone / Message</h3>
+                    <p className="text-sm text-muted-foreground">Verify to view</p>
+                  </div>
+                </div>
+              </Card>
+            </button>
+
+            {/* LinkedIn Card */}
+            <a href="https://linkedin.com/in/raja045" target="_blank" rel="noopener noreferrer" className="group">
+              <Card className="glass-card p-6 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                    <Linkedin className="h-6 w-6" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg mb-1">LinkedIn</h3>
+                    <p className="text-sm text-muted-foreground">Connect with me</p>
+                  </div>
+                </div>
+              </Card>
+            </a>
+
+            {/* Business Card */}
+            <button
+              onClick={() => setIsBusinessCardOpen(true)}
+              className="group text-left w-full"
+            >
+              <Card className="glass-card p-6 hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                    <CreditCard className="h-6 w-6" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg mb-1">Business Card</h3>
+                    <p className="text-sm text-primary">Save my contact</p>
+                  </div>
+                </div>
+              </Card>
+            </button>
           </div>
         </div>
 
-        {/* Phone OTP Dialog (simulated) */}
+        {/* Phone OTP Dialog */}
         <Dialog open={isPhoneDialogOpen} onOpenChange={setIsPhoneDialogOpen}>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Verify your phone</DialogTitle>
               <DialogDescription>
-                Enter your mobile number to receive a one-time PIN. Once you verify your number, the contact's phone will be revealed.
+                Enter your mobile number to receive a one-time PIN. Once you verify your number, the contact phone will be revealed.
               </DialogDescription>
             </DialogHeader>
 
@@ -161,7 +171,7 @@ const Contact = () => {
                   />
 
                   {!otpSent ? (
-                    <p className="text-sm text-muted-foreground">Tap "Send OTP" to receive a PIN (simulated).</p>
+                    <p className="text-sm text-muted-foreground">Tap Send OTP to receive a PIN (simulated).</p>
                   ) : (
                     <p className="text-sm text-muted-foreground">An OTP has been sent to {userPhone}.</p>
                   )}
@@ -178,7 +188,7 @@ const Contact = () => {
                 </>
               ) : (
                 <div className="text-center">
-                  <p className="text-lg font-medium mb-2">Contact's phone number</p>
+                  <p className="text-lg font-medium mb-2">Contact phone number</p>
                   <p className="text-xl font-semibold mb-4">{ownerPhone}</p>
                   <div className="flex justify-center gap-2">
                     <Button size="sm" onClick={() => { navigator.clipboard?.writeText(ownerPhone); setVerificationMessage('Number copied to clipboard'); }}>
@@ -252,6 +262,117 @@ const Contact = () => {
               </div>
               <DialogClose asChild>
                 <Button size="sm" variant="ghost">Close</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* Business Card Dialog */}
+        <Dialog open={isBusinessCardOpen} onOpenChange={setIsBusinessCardOpen}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Business Card</DialogTitle>
+              <DialogDescription>
+                Download my business card or scan the QR code on your mobile device
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="grid md:grid-cols-2 gap-6 mt-4">
+              {/* Business Card Preview */}
+              <div ref={businessCardRef}>
+                <Card className="bg-gradient-to-br from-card via-card to-primary/5 p-8 border-2 border-primary/20">
+                  <div className="text-center mb-6">
+                    <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                      Raja Sekhar
+                    </h2>
+                    <p className="text-lg text-muted-foreground font-medium">
+                      Cybersecurity & Platform Engineering Expert
+                    </p>
+                    <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mt-3" />
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                        <Mail className="h-4 w-4" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Email</p>
+                        <p className="font-medium">sraja456@outlook.com</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                        <Phone className="h-4 w-4" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Phone</p>
+                        <p className="font-medium">+1 (786) 627-3359</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                        <Linkedin className="h-4 w-4" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">LinkedIn</p>
+                        <p className="font-medium">linkedin.com/in/raja045</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                        <Globe className="h-4 w-4" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Website</p>
+                        <p className="font-medium">{window.location.origin}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                        <MapPin className="h-4 w-4" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Location</p>
+                        <p className="font-medium">Available for Remote Work</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-border text-center">
+                    <p className="text-xs text-muted-foreground italic">
+                      Securing the digital frontier, one project at a time.
+                    </p>
+                  </div>
+                </Card>
+              </div>
+
+              {/* QR Code for Mobile */}
+              <div className="flex flex-col items-center justify-center space-y-4">
+                <div className="bg-white p-4 rounded-lg">
+                  <QRCodeSVG 
+                    value={vCardData}
+                    size={200}
+                    level="H"
+                    includeMargin
+                  />
+                </div>
+                <p className="text-sm text-center text-muted-foreground">
+                  Scan with your phone to save contact
+                </p>
+              </div>
+            </div>
+
+            <DialogFooter className="flex-col sm:flex-row gap-2">
+              <Button onClick={downloadBusinessCard} className="w-full sm:w-auto">
+                Download as Image
+              </Button>
+              <DialogClose asChild>
+                <Button variant="outline" className="w-full sm:w-auto">Close</Button>
               </DialogClose>
             </DialogFooter>
           </DialogContent>
