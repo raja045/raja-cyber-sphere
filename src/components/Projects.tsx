@@ -138,10 +138,12 @@ const Projects = () => {
 
   const selectedProjectData = selectedProject !== null ? projects.find(p => p.id === selectedProject) : null;
 
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
+
   return (
     <section id="projects" className="py-20 px-4">
       <div className="container mx-auto">
-        <div className="text-center mb-12 animate-fade-in-up">
+        <div ref={titleRef} className={`text-center mb-12 animate-on-scroll ${titleVisible ? 'visible' : ''}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="gradient-text">Featured Projects</span>
           </h2>
