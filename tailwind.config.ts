@@ -91,8 +91,8 @@ export default {
           "100%": { transform: "translateY(100vh)", opacity: "0" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(189 97% 55% / 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(189 97% 55% / 0.6)" },
+          "0%, 100%": { boxShadow: "0 0 20px hsl(220 13% 30% / 0.1)" },
+          "50%": { boxShadow: "0 0 30px hsl(220 13% 30% / 0.2)" },
         },
         "slide-in-left": {
           "0%": { transform: "translateX(-100px)", opacity: "0" },
@@ -123,9 +123,9 @@ export default {
         "scale-in": "scale-in 0.5s ease-out",
       },
       backgroundImage: {
-        "gradient-cyber": "var(--gradient-cyber)",
-        "gradient-matrix": "var(--gradient-matrix)",
-        "gradient-neon": "var(--gradient-neon)",
+        "gradient-subtle": "var(--gradient-subtle)",
+        "gradient-light": "var(--gradient-light)",
+        "gradient-neutral": "var(--gradient-neutral)",
       },
     },
   },
