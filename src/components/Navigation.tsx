@@ -44,8 +44,8 @@ const Navigation = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-lg border-b border-border shadow-lg"
-          : "bg-transparent"
+          ? "bg-background/30 backdrop-blur-xl border-b border-border/20"
+          : "bg-background/10 backdrop-blur-md"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -54,7 +54,7 @@ const Navigation = () => {
           <a
             href="#whoami"
             onClick={(e) => scrollToSection(e, "#whoami")}
-            className="text-2xl font-bold gradient-text hover:opacity-80 transition-opacity"
+            className="text-2xl font-bold text-foreground hover:text-foreground/80 transition-colors"
           >
             Raja
           </a>
@@ -67,10 +67,10 @@ const Navigation = () => {
                   <a
                     href={item.href}
                     onClick={(e) => scrollToSection(e, item.href)}
-                    className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors relative group"
+                    className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors relative group"
                   >
                     {item.label}
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-foreground/50 group-hover:w-full transition-all duration-300" />
                   </a>
                 </li>
               ))}
@@ -80,7 +80,7 @@ const Navigation = () => {
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="rounded-full"
+              className="rounded-full hover:bg-foreground/10"
             >
               <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -91,7 +91,7 @@ const Navigation = () => {
               href="/terminal"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-sm font-medium bg-gradient-to-r from-primary to-secondary rounded-lg hover:opacity-90 transition-opacity"
+              className="px-4 py-2 text-sm font-medium bg-foreground/10 hover:bg-foreground/20 rounded-lg transition-colors backdrop-blur-sm border border-foreground/20"
             >
               Terminal
             </a>
