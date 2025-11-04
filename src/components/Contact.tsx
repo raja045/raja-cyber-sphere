@@ -18,7 +18,6 @@ import html2canvas from "html2canvas";
 import { MapPin, Globe } from "lucide-react";
 
 const Contact = () => {
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
   const { elementRef } = useScrollAnimation();
 
   // OTP state
@@ -62,7 +61,7 @@ END:VCARD`;
     <section className="py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
-        <div ref={titleRef} className={`text-center mb-16 animate-on-scroll ${titleVisible ? 'visible' : ''}`}>
+        <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-4xl md:text-5xl font-bold mb-2">
             Let's Connect
           </h2>

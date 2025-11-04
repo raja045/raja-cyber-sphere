@@ -16,7 +16,7 @@ interface Experience {
 }
 
 const Experience = () => {
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { elementRef: ref, isVisible } = useScrollAnimation();
 
   const experiences: Experience[] = [
     {
@@ -99,69 +99,6 @@ const Experience = () => {
     }
   ];
 
-  const ExperienceCard = ({ exp, expIndex }: { exp: Experience; expIndex: number }) => {
-    const { elementRef, isVisible } = useScrollAnimation();
-    
-    return (
-      <div
-        ref={elementRef}
-        className={`relative animate-on-scroll ${isVisible ? 'visible' : ''} stagger-${(expIndex % 6) + 1}`}
-      >
-        {/* Timeline Dot */}
-        <div className="absolute left-8 top-8 w-4 h-4 -ml-[7px] rounded-full bg-primary ring-4 ring-background z-10">
-          <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75" />
-        </div>
-
-        {/* Company Card */}
-        <Card className="ml-20 p-6 hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary bg-card/50 backdrop-blur-sm group">
-          <div className="flex items-start gap-4 mb-6">
-            <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-              <Briefcase className="w-6 h-6 text-primary" />
-            </div>
-            <div className="flex-1">
-              <h3 className="text-2xl font-bold text-foreground mb-1">{exp.company}</h3>
-              <div className="h-1 w-20 bg-gradient-to-r from-primary to-transparent rounded-full" />
-            </div>
-          </div>
-
-          {/* Roles within the company */}
-          <div className="space-y-6">
-            {exp.roles.map((role, roleIndex) => (
-              <div
-                key={roleIndex}
-                className={`${roleIndex !== 0 ? 'pt-6 border-t border-border/50' : ''}`}
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
-                  <h4 className="text-lg font-semibold text-foreground">{role.title}</h4>
-                  <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                    <Calendar className="w-4 h-4" />
-                    <span>{role.period}</span>
-                  </div>
-                </div>
-
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  {role.description}
-                </p>
-
-                {/* Skills Tags */}
-                <div className="flex flex-wrap gap-2">
-                  {role.skills.map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Card>
-      </div>
-    );
-  };
-
   return (
     <section id="experience" className="py-20 bg-background/50 relative overflow-hidden">
       {/* Decorative background */}
@@ -171,7 +108,7 @@ const Experience = () => {
       }} />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div ref={titleRef} className={`text-center mb-16 animate-on-scroll ${titleVisible ? 'visible' : ''}`}>
+        <div ref={ref} className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl font-bold mb-4">Work Experience</h2>
           <p className="text-muted-foreground text-lg">
             My professional journey and contributions
@@ -184,7 +121,64 @@ const Experience = () => {
 
           <div className="space-y-4">
             {experiences.map((exp, expIndex) => (
-              <ExperienceCard key={expIndex} exp={exp} expIndex={expIndex} />
+              <div
+                key={expIndex}
+                className={`relative transition-all duration-1000 delay-${expIndex * 100} ${
+                  isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+                }`}
+              >
+                {/* Timeline Dot */}
+                <div className="absolute left-8 top-8 w-4 h-4 -ml-[7px] rounded-full bg-primary ring-4 ring-background z-10">
+                  <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75" />
+                </div>
+
+                {/* Company Card */}
+                <Card className="ml-20 p-6 hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary bg-card/50 backdrop-blur-sm group">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                      <Briefcase className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-foreground mb-1">{exp.company}</h3>
+                      <div className="h-1 w-20 bg-gradient-to-r from-primary to-transparent rounded-full" />
+                    </div>
+                  </div>
+
+                  {/* Roles within the company */}
+                  <div className="space-y-6">
+                    {exp.roles.map((role, roleIndex) => (
+                      <div
+                        key={roleIndex}
+                        className={`${roleIndex !== 0 ? 'pt-6 border-t border-border/50' : ''}`}
+                      >
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+                          <h4 className="text-lg font-semibold text-foreground">{role.title}</h4>
+                          <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                            <Calendar className="w-4 h-4" />
+                            <span>{role.period}</span>
+                          </div>
+                        </div>
+
+                        <p className="text-muted-foreground leading-relaxed mb-4">
+                          {role.description}
+                        </p>
+
+                        {/* Skills Tags */}
+                        <div className="flex flex-wrap gap-2">
+                          {role.skills.map((skill, skillIndex) => (
+                            <span
+                              key={skillIndex}
+                              className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </div>
             ))}
           </div>
         </div>

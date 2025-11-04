@@ -58,8 +58,6 @@ const skillCategories = [
 ];
 
 const Skills = () => {
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
-  
   const SkillCard = ({ category, index }: { category: typeof skillCategories[0]; index: number }) => {
     const { elementRef, isVisible } = useScrollAnimation();
     const Icon = category.icon;
@@ -121,7 +119,7 @@ const Skills = () => {
   return (
     <section className="py-20 px-4 bg-card/30">
       <div className="container mx-auto">
-        <div ref={titleRef} className={`text-center mb-12 animate-on-scroll ${titleVisible ? 'visible' : ''}`}>
+        <div className="text-center mb-12 animate-fade-in-up">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="gradient-text">Technical Arsenal</span>
           </h2>
