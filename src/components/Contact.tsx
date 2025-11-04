@@ -307,8 +307,8 @@ END:VCARD`;
                         <Phone className="h-4 w-4" />
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Phone</p>
-                        <p className="font-medium">+1 (786) 627-3359</p>
+                        <p className="text-sm text-muted-foreground">Blog</p>
+                        <p className="font-medium">https://medium.com/@nakamotosecurity</p>
                       </div>
                     </div>
 
