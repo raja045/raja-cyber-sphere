@@ -328,7 +328,7 @@ END:VCARD`;
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Website</p>
-                        <p className="font-medium">{window.location.origin}</p>
+                        <p className="font-medium">rajareddy.site</p>
                       </div>
                     </div>
 
@@ -338,7 +338,7 @@ END:VCARD`;
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Location</p>
-                        <p className="font-medium">Available for Remote Work</p>
+                        <p className="font-medium">Miami, Florida.</p>
                       </div>
                     </div>
                   </div>
