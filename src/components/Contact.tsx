@@ -308,7 +308,7 @@ END:VCARD`;
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Blog</p>
-                        <p className="font-medium">https://medium.com/@nakamotosecurity</p>
+                        <p className="font-medium">medium.com/@nakamotosecurity</p>
                       </div>
                     </div>
 
