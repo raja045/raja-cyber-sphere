@@ -30,6 +30,8 @@ const education = [
 ];
 
 const Education = () => {
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  
   const EducationCard = ({ edu, index }: { edu: typeof education[0]; index: number }) => {
     const { elementRef, isVisible } = useScrollAnimation();
 
@@ -80,7 +82,7 @@ const Education = () => {
   return (
     <section className="py-20 px-4 bg-card/30">
       <div className="container mx-auto max-w-5xl">
-        <div className="text-center mb-12 animate-fade-in-up">
+        <div ref={titleRef} className={`text-center mb-12 animate-on-scroll ${titleVisible ? 'visible' : ''}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="gradient-text">Academic Foundation</span>
           </h2>
