@@ -13,6 +13,7 @@ import CursorGlow from "@/components/CursorGlow";
 import MatrixRain from "@/components/MatrixRain";
 import ScrollProgress from "@/components/ScrollProgress";
 import CircularScrollProgress from "@/components/CircularScrollProgress";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const Index = () => {
   return (
@@ -21,6 +22,7 @@ const Index = () => {
       <ScrollProgress />
       <CircularScrollProgress />
       <CursorGlow />
+      <ScrollToTop />
       <Navigation />
       <section id="whoami">
         <Hero />
