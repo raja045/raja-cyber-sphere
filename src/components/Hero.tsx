@@ -3,6 +3,21 @@ import { Button } from "@/components/ui/button";
 import { Download, Github, Linkedin, Mail } from "lucide-react";
 import profilePic from "@/assets/raja-photo.jpg";
 
+const useParallax = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return scrollY;
+};
+
 const roles = [
   "Cyber Security",
   "Penetration Tester",
@@ -12,6 +27,7 @@ const roles = [
 ];
 
 const Hero = () => {
+  const scrollY = useParallax();
   const [promptText, setPromptText] = useState("");
   const fullPromptText = "root@raja:~$ whoami ";
   const [showCursor, setShowCursor] = useState(true);
@@ -76,16 +92,25 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card opacity-50 animate-pulse-glow" />
+      {/* Animated background gradient with parallax */}
+      <div 
+        className="absolute inset-0 bg-gradient-to-br from-background via-background to-card opacity-50 animate-pulse-glow"
+        style={{ transform: `translateY(${scrollY * 0.5}px)` }}
+      />
       
-      {/* Cyber grid overlay with animation */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,219,222,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,219,222,0.03)_1px,transparent_1px)] bg-[size:50px_50px] animate-fade-in" />
+      {/* Cyber grid overlay with animation and parallax */}
+      <div 
+        className="absolute inset-0 bg-[linear-gradient(rgba(0,219,222,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,219,222,0.03)_1px,transparent_1px)] bg-[size:50px_50px] animate-fade-in"
+        style={{ transform: `translateY(${scrollY * 0.3}px)` }}
+      />
       
       <div className="container relative z-10 px-4 py-20">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left side - Image (static, no border animation) */}
-          <div className="flex justify-center">
+          {/* Left side - Image with parallax */}
+          <div 
+            className="flex justify-center"
+            style={{ transform: `translateY(${scrollY * 0.15}px)` }}
+          >
             <div className="relative w-full max-w-lg aspect-[4/3] overflow-hidden">
               <img
                 src={profilePic}
@@ -96,8 +121,14 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right side - Text with animations */}
-          <div className="space-y-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          {/* Right side - Text with animations and parallax */}
+          <div 
+            className="space-y-6 animate-fade-in-up" 
+            style={{ 
+              animationDelay: '0.2s',
+              transform: `translateY(${scrollY * 0.1}px)` 
+            }}
+          >
             {/* Terminal prompt with typing animation */}
             <div className="font-mono text-lg md:text-xl text-primary">
               {promptText}
@@ -161,13 +192,28 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Floating particles effect with varied animations */}
+      {/* Floating particles effect with varied animations and parallax */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-float cyber-glow" />
-        <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-secondary rounded-full animate-float cyber-glow" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-accent rounded-full animate-float cyber-glow" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-1/2 right-1/3 w-2 h-2 bg-primary rounded-full animate-float" style={{ animationDelay: '0.5s' }} />
-        <div className="absolute bottom-1/3 right-1/4 w-3 h-3 bg-secondary rounded-full animate-float" style={{ animationDelay: '1.5s' }} />
+        <div 
+          className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-float cyber-glow"
+          style={{ transform: `translateY(${scrollY * 0.2}px)` }}
+        />
+        <div 
+          className="absolute top-1/3 right-1/4 w-3 h-3 bg-secondary rounded-full animate-float cyber-glow" 
+          style={{ animationDelay: '1s', transform: `translateY(${scrollY * 0.25}px)` }}
+        />
+        <div 
+          className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-accent rounded-full animate-float cyber-glow" 
+          style={{ animationDelay: '2s', transform: `translateY(${scrollY * 0.18}px)` }}
+        />
+        <div 
+          className="absolute top-1/2 right-1/3 w-2 h-2 bg-primary rounded-full animate-float" 
+          style={{ animationDelay: '0.5s', transform: `translateY(${scrollY * 0.22}px)` }}
+        />
+        <div 
+          className="absolute bottom-1/3 right-1/4 w-3 h-3 bg-secondary rounded-full animate-float" 
+          style={{ animationDelay: '1.5s', transform: `translateY(${scrollY * 0.28}px)` }}
+        />
       </div>
     </section>
   );
