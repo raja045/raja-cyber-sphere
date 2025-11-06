@@ -14,6 +14,7 @@ import MatrixRain from "@/components/MatrixRain";
 import ScrollProgress from "@/components/ScrollProgress";
 import CircularScrollProgress from "@/components/CircularScrollProgress";
 import ScrollToTop from "@/components/ScrollToTop";
+import VisitorCounter from "@/components/VisitorCounter";
 
 const Index = () => {
   return (
@@ -23,6 +24,7 @@ const Index = () => {
       <CircularScrollProgress />
       <CursorGlow />
       <ScrollToTop />
+      <VisitorCounter />
       <Navigation />
       <section id="whoami">
         <Hero />

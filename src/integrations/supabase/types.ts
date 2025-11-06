@@ -41,12 +41,31 @@ export type Database = {
         }
         Relationships: []
       }
+      site_stats: {
+        Row: {
+          id: string
+          last_updated: string
+          visitor_count: number
+        }
+        Insert: {
+          id?: string
+          last_updated?: string
+          visitor_count?: number
+        }
+        Update: {
+          id?: string
+          last_updated?: string
+          visitor_count?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
       cleanup_expired_otps: { Args: never; Returns: undefined }
+      increment_visitor_count: { Args: never; Returns: number }
     }
     Enums: {
       [_ in never]: never
