@@ -59,6 +59,27 @@ export type Database = {
         }
         Relationships: []
       }
+      unique_visitors: {
+        Row: {
+          first_visit: string
+          id: string
+          last_visit: string
+          visitor_id: string
+        }
+        Insert: {
+          first_visit?: string
+          id?: string
+          last_visit?: string
+          visitor_id: string
+        }
+        Update: {
+          first_visit?: string
+          id?: string
+          last_visit?: string
+          visitor_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -66,6 +87,7 @@ export type Database = {
     Functions: {
       cleanup_expired_otps: { Args: never; Returns: undefined }
       increment_visitor_count: { Args: never; Returns: number }
+      track_unique_visitor: { Args: { p_visitor_id: string }; Returns: Json }
     }
     Enums: {
       [_ in never]: never
