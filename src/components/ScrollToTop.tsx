@@ -4,11 +4,17 @@ import { Button } from "@/components/ui/button";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [shouldPulse, setShouldPulse] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.scrollY > 300) {
-        setIsVisible(true);
+        if (!isVisible) {
+          setIsVisible(true);
+          setShouldPulse(true);
+          // Stop pulsing after 3 seconds
+          setTimeout(() => setShouldPulse(false), 3000);
+        }
       } else {
         setIsVisible(false);
       }
@@ -16,7 +22,7 @@ const ScrollToTop = () => {
 
     window.addEventListener("scroll", toggleVisibility);
     return () => window.removeEventListener("scroll", toggleVisibility);
-  }, []);
+  }, [isVisible]);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -33,7 +39,7 @@ const ScrollToTop = () => {
         isVisible 
           ? "opacity-100 scale-100 translate-y-0" 
           : "opacity-0 scale-75 translate-y-10 pointer-events-none"
-      }`}
+      } ${shouldPulse ? "animate-pulse" : ""}`}
     >
       <ArrowUp className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-1" />
       <span className="sr-only">Scroll to top</span>
