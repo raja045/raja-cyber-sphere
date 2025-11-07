@@ -12,6 +12,10 @@ import dockerLogo from "@/assets/docker_Background_Removed.png";
 import gitLogo from "@/assets/Git-Icon-Black.png";
 import jupyterLogo from "@/assets/Jupyter_logo.svg.png";
 import virtualboxLogo from "@/assets/Virtualbox_logo.png";
+import openvasLogo from "@/assets/openvas.png";
+import nessusLogo from "@/assets/nessus.png";
+import awsLogo from "@/assets/aws.png";
+import azureLogo from "@/assets/azure.png";
 
 const skillCategories = [
   {
@@ -46,7 +50,11 @@ const skillCategories = [
       { name: "Metasploit", logo: metasploitLogo },
       { name: "Wireshark", logo: wiresharkLogo },
       { name: "Nmap", logo: nmapLogo },
+      { name: "OpenVAS", logo: openvasLogo },
+      { name: "Nessus", logo: nessusLogo },
       { name: "Splunk", logo: splunkLogo },
+      { name: "AWS", logo: awsLogo },
+      { name: "Azure", logo: azureLogo },
       { name: "Kali Linux", logo: kaliLogo },
       { name: "Docker", logo: dockerLogo },
       { name: "Git", logo: gitLogo },
