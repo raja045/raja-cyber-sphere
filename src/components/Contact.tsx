@@ -13,9 +13,16 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { QRCodeSVG } from "qrcode.react";
 import html2canvas from "html2canvas";
 import { MapPin, Globe } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
@@ -34,6 +41,51 @@ const Contact = () => {
   // Business card state
   const [isBusinessCardOpen, setIsBusinessCardOpen] = useState(false);
   const businessCardRef = useRef<HTMLDivElement>(null);
+
+  // Contact form state
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const { toast } = useToast();
+
+  // Contact form validation schema
+  const contactFormSchema = z.object({
+    name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+    email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+    message: z.string().trim().min(1, "Message is required").max(1000, "Message must be less than 1000 characters"),
+  });
+
+  const form = useForm<z.infer<typeof contactFormSchema>>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
+
+  const onSubmitContactForm = async (values: z.infer<typeof contactFormSchema>) => {
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: values,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Message sent!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+      
+      form.reset();
+      setIsContactFormOpen(false);
+    } catch (error: any) {
+      console.error("Error sending message:", error);
+      toast({
+        title: "Failed to send message",
+        description: error.message || "Please try again or email me directly.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const downloadBusinessCard = async () => {
     if (businessCardRef.current) {
@@ -379,6 +431,77 @@ END:VCARD`;
           </DialogContent>
         </Dialog>
 
+        {/* Contact Form Dialog */}
+        <Dialog open={isContactFormOpen} onOpenChange={setIsContactFormOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Send me a message</DialogTitle>
+              <DialogDescription>
+                Fill out the form below and I'll get back to you as soon as possible.
+              </DialogDescription>
+            </DialogHeader>
+
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmitContactForm)} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder="your.email@example.com" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Message</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Tell me about your project or inquiry..."
+                          className="min-h-[120px]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <DialogFooter className="gap-2">
+                  <DialogClose asChild>
+                    <Button type="button" variant="outline">Cancel</Button>
+                  </DialogClose>
+                  <Button type="submit" disabled={form.formState.isSubmitting}>
+                    {form.formState.isSubmitting ? "Sending..." : "Send Message"}
+                  </Button>
+                </DialogFooter>
+              </form>
+            </Form>
+          </DialogContent>
+        </Dialog>
+
         {/* Call to Action Section */}
         <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <Card className="glass-card p-8 md:p-12 max-w-4xl mx-auto text-center">
@@ -389,15 +512,14 @@ END:VCARD`;
               Let's discuss your vision and create something extraordinary
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <a href="mailto:sraja456@outlook.com" className="group">
-                <Button 
-                  size="lg"
-                  className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground transition-all duration-300 hover:scale-105"
-                >
-                  <MessageSquare className="mr-2 h-5 w-5" />
-                  Send a Message
-                </Button>
-              </a>
+              <Button 
+                size="lg"
+                onClick={() => setIsContactFormOpen(true)}
+                className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground transition-all duration-300 hover:scale-105"
+              >
+                <MessageSquare className="mr-2 h-5 w-5" />
+                Send a Message
+              </Button>
 
               <a
                 href="https://cal.com/raja045"
