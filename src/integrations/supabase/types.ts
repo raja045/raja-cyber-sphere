@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      contact_submissions: {
+        Row: {
+          email: string
+          id: string
+          ip_address: string | null
+          submitted_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          email: string
+          id?: string
+          ip_address?: string | null
+          submitted_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          email?: string
+          id?: string
+          ip_address?: string | null
+          submitted_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       otp_verifications: {
         Row: {
           code: string
@@ -86,6 +110,7 @@ export type Database = {
     }
     Functions: {
       cleanup_expired_otps: { Args: never; Returns: undefined }
+      cleanup_old_contact_submissions: { Args: never; Returns: undefined }
       increment_visitor_count: { Args: never; Returns: number }
       track_unique_visitor: { Args: { p_visitor_id: string }; Returns: Json }
     }

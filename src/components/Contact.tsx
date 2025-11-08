@@ -68,7 +68,18 @@ const Contact = () => {
         body: values,
       });
 
-      if (error) throw error;
+      if (error) {
+        // Check if it's a rate limit error
+        if (error.message?.includes("Too many submissions")) {
+          throw new Error("You've reached the submission limit. Please try again later.");
+        }
+        throw error;
+      }
+
+      // Check if the response indicates rate limiting
+      if (data && !data.success && data.error) {
+        throw new Error(data.error);
+      }
 
       toast({
         title: "Message sent!",
@@ -79,9 +90,15 @@ const Contact = () => {
       setIsContactFormOpen(false);
     } catch (error: any) {
       console.error("Error sending message:", error);
+      
+      // Show user-friendly rate limit message
+      const errorMessage = error.message?.includes("Too many submissions") || error.message?.includes("submission limit")
+        ? error.message
+        : "Failed to send message. Please try again or email me directly.";
+      
       toast({
-        title: "Failed to send message",
-        description: error.message || "Please try again or email me directly.",
+        title: "Unable to send message",
+        description: errorMessage,
         variant: "destructive",
       });
     }
