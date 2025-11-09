@@ -2,167 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes matrix-fall {
-  0% {
-    transform: translateY(-100%);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh);
-    opacity: 0;
-  }
-}
-
-@keyframes glitch {
-  0%, 100% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px hsl(220 13% 30% / 0.1);
-  }
-  50% {
-    box-shadow: 0 0 30px hsl(220 13% 30% / 0.2);
-  }
-}
-
-@keyframes slide-in-left {
-  0% {
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slide-in-right {
-  0% {
-    transform: translateX(100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes scale-in {
-  0% {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    /* Light mode - Minimalistic */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
+    --card: 222 47% 14%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 220 13% 30%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 189 97% 55%;
+    --primary-foreground: 222 47% 11%;
 
-    --secondary: 220 9% 46%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 271 91% 65%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 220 13% 95%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 220 13% 91%;
-    --accent-foreground: 220 13% 30%;
+    --accent: 142 76% 36%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 220 13% 30%;
+    --border: 217 33% 25%;
+    --input: 217 33% 25%;
+    --ring: 189 97% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Minimalistic gradients */
-    --gradient-subtle: linear-gradient(135deg, hsl(220 13% 30%) 0%, hsl(220 9% 46%) 100%);
-    --gradient-light: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 13% 95%) 100%);
-    --gradient-neutral: linear-gradient(90deg, hsl(220 13% 91%) 0%, hsl(0 0% 100%) 50%, hsl(220 13% 91%) 100%);
+    /* Cyber gradients */
+    --gradient-cyber: linear-gradient(135deg, hsl(189 97% 55%) 0%, hsl(271 91% 65%) 100%);
+    --gradient-matrix: linear-gradient(180deg, hsl(142 76% 36%) 0%, hsl(189 97% 55%) 100%);
+    --gradient-neon: linear-gradient(90deg, hsl(271 91% 65%) 0%, hsl(189 97% 55%) 50%, hsl(142 76% 36%) 100%);
     
-    /* Subtle shadows */
-    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1);
+    /* Shadows and glows */
+    --glow-primary: 0 0 20px hsl(189 97% 55% / 0.5);
+    --glow-secondary: 0 0 20px hsl(271 91% 65% / 0.5);
+    --glow-accent: 0 0 20px hsl(142 76% 36% / 0.5);
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
-
-  .dark {
-    /* Dark mode - Minimalistic */
-    --background: 0 0% 10%;
-    --foreground: 0 0% 95%;
-
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 95%;
-
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 95%;
-
-    --primary: 220 13% 70%;
-    --primary-foreground: 0 0% 10%;
-
-    --secondary: 220 9% 60%;
-    --secondary-foreground: 0 0% 10%;
-
-    --muted: 0 0% 15%;
-    --muted-foreground: 220 9% 60%;
-
-    --accent: 0 0% 18%;
-    --accent-foreground: 0 0% 95%;
-
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 95%;
-
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 220 13% 70%;
   }
 }
 
@@ -183,50 +71,23 @@ All colors MUST be HSL.
 
 @layer components {
   .gradient-text {
-    background: var(--gradient-subtle);
+    background: var(--gradient-neon);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .glass-card {
-    @apply bg-card/80 backdrop-blur-lg border border-border/50;
+    @apply bg-card/50 backdrop-blur-md border border-border/50;
   }
 
-  .subtle-glow {
-    box-shadow: var(--shadow-md);
+  .cyber-glow {
+    box-shadow: var(--glow-primary);
   }
 
   .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl;
   }
-
-  .hover-tilt {
-    @apply transition-transform duration-300;
-    transform-style: preserve-3d;
-  }
-
-  .hover-tilt:hover {
-    transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale(1.02);
-  }
-
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-  }
-
-  .animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .stagger-1 { transition-delay: 0.1s; }
-  .stagger-2 { transition-delay: 0.2s; }
-  .stagger-3 { transition-delay: 0.3s; }
-  .stagger-4 { transition-delay: 0.4s; }
-  .stagger-5 { transition-delay: 0.5s; }
-  .stagger-6 { transition-delay: 0.6s; }
 }
 
 @layer base {

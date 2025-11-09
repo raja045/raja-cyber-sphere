@@ -82,30 +82,6 @@ export default {
           "0%": { width: "0" },
           "100%": { width: "100%" },
         },
-        "marquee": {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
-        "matrix-fall": {
-          "0%": { transform: "translateY(-100%)", opacity: "1" },
-          "100%": { transform: "translateY(100vh)", opacity: "0" },
-        },
-        "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(220 13% 30% / 0.1)" },
-          "50%": { boxShadow: "0 0 30px hsl(220 13% 30% / 0.2)" },
-        },
-        "slide-in-left": {
-          "0%": { transform: "translateX(-100px)", opacity: "0" },
-          "100%": { transform: "translateX(0)", opacity: "1" },
-        },
-        "slide-in-right": {
-          "0%": { transform: "translateX(100px)", opacity: "0" },
-          "100%": { transform: "translateX(0)", opacity: "1" },
-        },
-        "scale-in": {
-          "0%": { transform: "scale(0.9)", opacity: "0" },
-          "100%": { transform: "scale(1)", opacity: "1" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -115,17 +91,11 @@ export default {
         "glow-pulse": "glow-pulse 2s ease-in-out infinite",
         "float": "float 3s ease-in-out infinite",
         "typewriter": "typewriter 3s steps(40) forwards",
-        "marquee": "marquee 30s linear infinite",
-        "matrix-fall": "matrix-fall 3s linear infinite",
-        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "slide-in-left": "slide-in-left 0.6s ease-out",
-        "slide-in-right": "slide-in-right 0.6s ease-out",
-        "scale-in": "scale-in 0.5s ease-out",
       },
       backgroundImage: {
-        "gradient-subtle": "var(--gradient-subtle)",
-        "gradient-light": "var(--gradient-light)",
-        "gradient-neutral": "var(--gradient-neutral)",
+        "gradient-cyber": "var(--gradient-cyber)",
+        "gradient-matrix": "var(--gradient-matrix)",
+        "gradient-neon": "var(--gradient-neon)",
       },
     },
   },
