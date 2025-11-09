@@ -46,11 +46,22 @@ const Contact = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const { toast } = useToast();
 
-  // Contact form validation schema
+  // Contact form validation schema with enhanced security
   const contactFormSchema = z.object({
-    name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
-    email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
-    message: z.string().trim().min(1, "Message is required").max(1000, "Message must be less than 1000 characters"),
+    name: z.string()
+      .trim()
+      .min(1, "Name is required")
+      .max(100, "Name must be less than 100 characters")
+      .regex(/^[a-zA-Z\s'-]+$/, "Name can only contain letters, spaces, hyphens, and apostrophes"),
+    email: z.string()
+      .trim()
+      .email("Invalid email address")
+      .max(255, "Email must be less than 255 characters"),
+    message: z.string()
+      .trim()
+      .min(10, "Message must be at least 10 characters")
+      .max(2000, "Message must be less than 2000 characters"),
+    website: z.string().max(0).optional(), // Honeypot field - must be empty
   });
 
   const form = useForm<z.infer<typeof contactFormSchema>>({
@@ -59,26 +70,32 @@ const Contact = () => {
       name: "",
       email: "",
       message: "",
+      website: "", // Honeypot field
     },
   });
 
   const onSubmitContactForm = async (values: z.infer<typeof contactFormSchema>) => {
     try {
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: values,
+        body: {
+          name: values.name,
+          email: values.email,
+          message: values.message,
+          website: values.website, // Include honeypot for bot detection
+        },
       });
 
       if (error) {
         // Check if it's a rate limit error
-        if (error.message?.includes("Too many submissions")) {
+        if (error.message?.includes("Too many submissions") || error.message?.includes("Rate limit")) {
           throw new Error("You've reached the submission limit. Please try again later.");
         }
         throw error;
       }
 
-      // Check if the response indicates rate limiting
-      if (data && !data.success && data.error) {
-        throw new Error(data.error);
+      // Check if the response indicates rate limiting or other errors
+      if (data && !data.success) {
+        throw new Error(data.error || "Failed to send message");
       }
 
       toast({
@@ -91,8 +108,10 @@ const Contact = () => {
     } catch (error: any) {
       console.error("Error sending message:", error);
       
-      // Show user-friendly rate limit message
-      const errorMessage = error.message?.includes("Too many submissions") || error.message?.includes("submission limit")
+      // Show user-friendly error messages
+      const errorMessage = error.message?.includes("Too many submissions") || 
+                          error.message?.includes("submission limit") ||
+                          error.message?.includes("Rate limit")
         ? error.message
         : "Failed to send message. Please try again or email me directly.";
       
@@ -460,6 +479,25 @@ END:VCARD`;
 
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmitContactForm)} className="space-y-4">
+                {/* Honeypot field - hidden from users but visible to bots */}
+                <FormField
+                  control={form.control}
+                  name="website"
+                  render={({ field }) => (
+                    <FormItem className="hidden">
+                      <FormLabel>Website</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type="text"
+                          autoComplete="off"
+                          tabIndex={-1}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+
                 <FormField
                   control={form.control}
                   name="name"
