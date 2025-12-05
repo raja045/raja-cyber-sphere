@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Video, ChevronRight } from "lucide-react";
+import { ExternalLink, Github, Video, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
 import { useCardTilt } from "@/hooks/useCardTilt";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import {
@@ -137,9 +137,15 @@ const projects = [
   },
 ];
 
+const INITIAL_PROJECTS_COUNT = 6;
+
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [open, setOpen] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleProjects = showAll ? projects : projects.slice(0, INITIAL_PROJECTS_COUNT);
+  const hasMoreProjects = projects.length > INITIAL_PROJECTS_COUNT;
 
   const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
     const { cardRef, handleMouseMove, handleMouseLeave } = useCardTilt();
@@ -219,10 +225,32 @@ const Projects = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {projects.map((project, index) => (
+          {visibleProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
+
+        {hasMoreProjects && (
+          <div className="flex justify-end mt-8 max-w-7xl mx-auto">
+            <Button
+              variant="outline"
+              onClick={() => setShowAll(!showAll)}
+              className="flex items-center gap-2 hover:border-primary transition-colors duration-300"
+            >
+              {showAll ? (
+                <>
+                  Show Less
+                  <ChevronUp className="h-4 w-4" />
+                </>
+              ) : (
+                <>
+                  Show More ({projects.length - INITIAL_PROJECTS_COUNT} more)
+                  <ChevronDown className="h-4 w-4" />
+                </>
+              )}
+            </Button>
+          </div>
+        )}
 
         {/* Project Modal */}
         <Dialog open={open} onOpenChange={setOpen}>
