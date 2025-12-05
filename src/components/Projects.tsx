@@ -113,6 +113,17 @@ const projects = [
     githubRepo: "https://github.com/raja045/Email-Spam-Detection-Using-Logistic-Regression",
     projectLink: "",
   },
+  {
+    id: 9,
+    title: "Cloud Security with IAM",
+    description: "AWS IAM implementation demonstrating secure access management across development and production environments.",
+    tags: ["AWS", "IAM", "Cloud Security", "Access Management"],
+    gradient: "from-secondary/20 to-primary/20",
+    fullDescription: "This project demonstrates AWS Identity and Access Management (IAM) setup using separate development and production instances. It includes detailed instructions and configuration for IAM roles, policies, and user management. The implementation showcases best practices for secure cloud access control, least privilege principles, and environment isolation for enterprise-grade security.",
+    demoVideo: "",
+    githubRepo: "https://github.com/raja045/Cloud_Security_with_IAM",
+    projectLink: "",
+  },
 ];
 
 const Projects = () => {
