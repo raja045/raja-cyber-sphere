@@ -124,6 +124,17 @@ const projects = [
     githubRepo: "https://github.com/raja045/Cloud_Security_with_IAM",
     projectLink: "",
   },
+  {
+    id: 10,
+    title: "CyberWatch",
+    description: "Cybersecurity threat tracking and newsletter system for staying updated on the latest security threats and vulnerabilities.",
+    tags: ["Cybersecurity", "Threat Intelligence", "Newsletter", "Monitoring"],
+    gradient: "from-accent/20 to-secondary/20",
+    fullDescription: "CyberWatch is a comprehensive cybersecurity threat tracking and newsletter system designed to keep security professionals informed about the latest threats, vulnerabilities, and security news. The system aggregates threat intelligence from multiple sources, provides automated alerts, and delivers curated security newsletters to help organizations stay ahead of emerging cyber threats.",
+    demoVideo: "",
+    githubRepo: "https://github.com/raja045/CyberWatch",
+    projectLink: "",
+  },
 ];
 
 const Projects = () => {
