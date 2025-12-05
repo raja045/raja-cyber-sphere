@@ -22,7 +22,7 @@ const projects = [
     gradient: "from-primary/20 to-secondary/20",
     fullDescription: "This project focuses on developing advanced forensic analysis capabilities for digital images. By extracting and analyzing EXIF metadata, GPS coordinates, camera settings, and modification history, the tool can detect image manipulation, verify authenticity, and provide detailed forensic reports. The system uses machine learning algorithms to identify patterns and anomalies in metadata that may indicate tampering or forgery.",
     demoVideo: "",
-    githubRepo: "",
+    githubRepo: "https://github.com/raja045/ImageForensicsUsingMetaData",
     projectLink: "",
   },
   {
@@ -33,7 +33,7 @@ const projects = [
     gradient: "from-secondary/20 to-accent/20",
     fullDescription: "A fully functional Security Operations Center built in a home lab environment. This project includes deployment of SIEM solutions, log aggregation and analysis, real-time threat detection, automated incident response workflows, and comprehensive security monitoring. The SOC utilizes Splunk for log management, implements network traffic analysis, and includes custom detection rules for identifying suspicious activities and potential security breaches.",
     demoVideo: "",
-    githubRepo: "",
+    githubRepo: "https://github.com/raja045/HomeLab-Security-Operations-Center",
     projectLink: "",
   },
   {
@@ -44,7 +44,7 @@ const projects = [
     gradient: "from-accent/20 to-primary/20",
     fullDescription: "Implementation of Payment Card Industry Data Security Standard (PCI DSS) compliance on Privileged Access Workstations. This project includes system hardening, access control implementation, audit logging configuration, secure authentication mechanisms, network segmentation, and continuous compliance monitoring. The solution ensures that sensitive payment data is protected according to industry standards and regulatory requirements.",
     demoVideo: "",
-    githubRepo: "",
+    githubRepo: "https://github.com/raja045/SecurePaw",
     projectLink: "",
   },
   {
@@ -55,7 +55,7 @@ const projects = [
     gradient: "from-primary/20 to-accent/20",
     fullDescription: "A comprehensive web application penetration testing project following OWASP Top 10 methodology. This includes vulnerability assessment, security testing for SQL injection, cross-site scripting (XSS), authentication bypass, session management issues, and other common web vulnerabilities. The project utilizes industry-standard tools like Burp Suite, OWASP ZAP, and custom scripts to identify and document security weaknesses with detailed remediation recommendations.",
     demoVideo: "",
-    githubRepo: "",
+    githubRepo: "https://github.com/raja045/WebApplicationPenetrationProject",
     projectLink: "",
   },
   {
