@@ -25,14 +25,8 @@ const Experience = () => {
         {
           title: "Vice President of Outgoing Global Exchange (oGX)",
           period: "Jan 2025 – Present",
-          description: "Led 50+ international exchange programs, connecting students and professionals with global internships and volunteering. Directed strategy, planning, and execution of global exchange projects, ensuring alignment with AIESEC's mission. Implemented weekly meetings for team members, improving efficiency and collaboration by 25%. Built relationships with partners and sponsors, expanding opportunities by 20% year-over-year.",
+          description: "Directed the Outgoing Global Exchange Program, enhancing international internship operations and participant engagement. Implemented strategies that improved conversion follow-up efficiency by 20%, optimizing the customer experience. Facilitated weekly performance meetings to boost team alignment, resulting in a significant increase in operational efficiency. Recognized with the \"Outgoing Talent Award\" for exceptional performance in outbound mobility.",
           skills: ["Leadership", "Global Exchange", "Strategy", "Team Management"]
-        },
-        {
-          title: "Team Member - Outgoing Global Exchange (oGX)",
-          period: "Jan 2024 – Dec 2024",
-          description: "Guided exchange program participants through the process. Participated in consultancy, marketing, social events, and conferences. Assisted with partnerships and explored global opportunities, building cross-cultural connections.",
-          skills: ["Consultancy", "Marketing", "Event Management", "Collaboration"]
         }
       ]
     },
@@ -40,16 +34,16 @@ const Experience = () => {
       company: "FIU College of Engineering & Computing",
       roles: [
         {
-          title: "Graduate Student Assistant",
-          period: "Aug 2024 – Present",
-          description: "Provided support to students across cloud computing, HCI, and microcomputers, helping 50+ students complete assignments. Assisted in labs/projects, including AWS, Wix, Microsoft Office, improving performance by 15%. Supported faculty by clarifying concepts, troubleshooting, and reducing query resolution time by 20%. Evaluated and graded coursework, maintaining 100% on-time grading compliance.",
-          skills: ["Student Support", "Cloud Computing", "Teaching", "Grading"]
+          title: "Graduate Teaching Assistant",
+          period: "Jun 2024 – Dec 2025",
+          description: "Delivered hands-on AWS lab sessions to 30–50 students across Cloud Computing and HCI courses. Proactively updated course materials every semester to reflect real-time AWS UI and service changes. Managed grading, office hours, and student progress monitoring for 50+ students across multiple semesters.",
+          skills: ["AWS", "Cloud Computing", "HCI", "Teaching", "Grading"]
         },
         {
-          title: "Graduate Research Assistant",
+          title: "Graduate Research Assistant – Under Professor Ruimin Sun",
           period: "Jan 2025 – Apr 2025",
-          description: "Analyzed vulnerabilities in LLMs, VLMs, and diffusion models, identifying 30+ critical weaknesses. Developed adversarial attacks, including prompt concealment and MMA-Diffusion extensions. Investigated jailbreaking techniques, uncovering security gaps and proposing novel defenses.",
-          skills: ["AI Security", "Adversarial ML"]
+          description: "Engineered reproducible adversarial attacks on Stable Diffusion models improving attack success rate by 35%. Pioneered a novel cryptographic prompt injection methodology as a new LLM jailbreak attack direction. Automated AI red teaming pipelines increasing jailbreak detection efficiency by 45%.",
+          skills: ["AI Security", "Adversarial ML", "LLM Jailbreaking", "Red Teaming"]
         }
       ]
     },
@@ -59,8 +53,19 @@ const Experience = () => {
         {
           title: "Graduate Research Assistant",
           period: "Feb 2024 – Aug 2024",
-          description: "Labeled custom dataset of 10,000+ entries for ML behavioral pattern detection, improving accuracy by 18%. Interviewed users on misinformation perception, providing qualitative insights. Documented findings in Jupyter Notebooks and MS Office, enabling faster decision-making.",
-          skills: ["Digital Forensics", "Privacy Tech", "Research Papers", "ML"]
+          description: "Engineered a 10,000+ entry dataset boosting ML model accuracy by 18%. Conducted user interviews to derive behavioral features enhancing model prediction accuracy. Visualized research findings accelerating team decision-making by 25%.",
+          skills: ["Digital Forensics", "Privacy Tech", "Research", "ML", "Data Visualization"]
+        }
+      ]
+    },
+    {
+      company: "EduRun Group",
+      roles: [
+        {
+          title: "Junior Cyber Security Engineer",
+          period: "Jan 2022 – Dec 2023",
+          description: "Proactively identified and neutralized a critical SQL Injection vulnerability in a customer-facing web application, preventing a catastrophic data breach impacting tens of thousands of customers. Conducted comprehensive security audits, vulnerability assessments, and penetration testing aligned with NIST CSF, ISO/IEC 27001, and OWASP Top 10 — achieving a 45% reduction in undetected threat vectors and 50% decrease in high-severity risk exposure. Automated 600+ monthly PKI certificate operations, reduced secrets mismanagement by 80% via Azure Key Vault, and improved SOC incident MTTR by 40% while resolving 100+ security incidents. Administered Active Directory, MFA, and RBAC policies, and built security automation frameworks using Java, Python, Bash, Splunk, Nessus, Burp Suite, Docker, and Azure.",
+          skills: ["Penetration Testing", "OWASP", "NIST CSF", "Azure", "PKI", "Splunk", "Python", "Docker"]
         }
       ]
     },
@@ -72,28 +77,6 @@ const Experience = () => {
           period: "Jul 2023 – Feb 2024",
           description: "Performed 50+ security assessments and penetration tests, reporting 80+ critical vulnerabilities. Documented vulnerabilities across OWASP Top 10 categories. Used Burp Suite, Nmap, OWASP ZAP, Metasploit for manual and automated testing. Coordinated with dev teams for vulnerability remediation.",
           skills: ["Security Testing", "OWASP", "Penetration Testing", "Bug Bounty"]
-        }
-      ]
-    },
-    {
-      company: "Lovely Professional University",
-      roles: [
-        {
-          title: "Undergraduate Academic Researcher",
-          period: "Jan 2023 – Jul 2023",
-          description: "Reviewed privacy challenges and anonymity tools (TOR, I2P, browser extensions). Analyzed effectiveness and usability of anonymity technologies. Evaluated privacy-enhancing tech and their role in data protection. Concluded robust solutions for user privacy, with future improvements needed.",
-          skills: ["Privacy", "Anonymity", "Research", "TOR"]
-        }
-      ]
-    },
-    {
-      company: "Verzeo",
-      roles: [
-        {
-          title: "Cyber Security Intern",
-          period: "May 2021 – Jul 2021",
-          description: "Supported Product Security Incident Response Team (PSIRT) in incident analysis, improving response efficiency by 20%. Assisted integration of security tools into management systems, enhancing threat visibility. Validated vulnerability submissions using Burp Suite and OWASP ZAP. Performed access control assessments, contributing to improved product security.",
-          skills: ["Incident Response", "Security Tools", "Vulnerability Assessment", "Access Control"]
         }
       ]
     }
