@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Download, Github, Linkedin, Mail } from "lucide-react";
-import profilePic from "@/assets/raja-photo.jpg";
+import { Github, Linkedin, Mail } from "lucide-react";
+import profilePic from "@/assets/raja-photo.png";
+import comptiaLogo from "@/assets/comptia-security-plus.svg";
+import sc200Logo from "@/assets/sc200-logo.png";
 
 const useParallax = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -37,7 +38,6 @@ const Hero = () => {
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // Animate the prompt text first
   useEffect(() => {
     let currentIndex = 0;
     const interval = setInterval(() => {
@@ -60,7 +60,6 @@ const Hero = () => {
     };
   }, []);
 
-  // Animate the rotating roles after prompt is complete
   useEffect(() => {
     if (!promptComplete) return;
 
@@ -92,36 +91,52 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated background gradient with parallax */}
+      {/* Subtle grid overlay */}
       <div 
-        className="absolute inset-0 bg-gradient-to-br from-background via-background to-card opacity-50 animate-pulse-glow"
-        style={{ transform: `translateY(${scrollY * 0.5}px)` }}
-      />
-      
-      {/* Cyber grid overlay with animation and parallax */}
-      <div 
-        className="absolute inset-0 bg-[linear-gradient(rgba(0,219,222,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,219,222,0.03)_1px,transparent_1px)] bg-[size:50px_50px] animate-fade-in"
+        className="absolute inset-0 bg-[linear-gradient(hsl(var(--border)/0.3)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border)/0.3)_1px,transparent_1px)] bg-[size:60px_60px] animate-fade-in"
         style={{ transform: `translateY(${scrollY * 0.3}px)` }}
       />
       
       <div className="container relative z-10 px-4 py-20">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left side - Image with parallax */}
+          {/* Left side - Circular profile image */}
           <div 
             className="flex justify-center"
             style={{ transform: `translateY(${scrollY * 0.15}px)` }}
           >
-            <div className="relative w-full max-w-lg aspect-[4/3] overflow-hidden">
-              <img
-                src={profilePic}
-                alt="Raja Shekar — Cybersecurity Researcher"
-                className="block w-full h-full object-cover border-0 rounded-none"
-                loading="lazy"
-              />
+            <div className="relative">
+              {/* Outer ring */}
+              <div className="w-72 h-72 md:w-80 md:h-80 rounded-full border-2 border-primary/30 p-2">
+                <div className="w-full h-full rounded-full overflow-hidden border-2 border-primary/50">
+                  <img
+                    src={profilePic}
+                    alt="Raja Shekar — Cybersecurity Researcher"
+                    className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              {/* Certification badges around the photo */}
+              <a
+                href="https://www.credly.com/badges/90745a3d-f6eb-417d-8f2f-e36112983ce6/public_url"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute -bottom-2 -left-4 w-20 h-20 rounded-full bg-card border-2 border-border shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+              >
+                <img src={comptiaLogo} alt="CompTIA Security+" className="w-14 h-14 object-contain" />
+              </a>
+              <a
+                href="https://learn.microsoft.com/en-us/users/rajashekarreddyseelam-6577/credentials/706e401dd6e8a955"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute -bottom-2 -right-4 w-20 h-20 rounded-full bg-card border-2 border-border shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+              >
+                <img src={sc200Logo} alt="Microsoft SC-200" className="w-14 h-14 object-contain" />
+              </a>
             </div>
           </div>
 
-          {/* Right side - Text with animations and parallax */}
+          {/* Right side - Text */}
           <div 
             className="space-y-6 animate-fade-in-up" 
             style={{ 
@@ -129,34 +144,28 @@ const Hero = () => {
               transform: `translateY(${scrollY * 0.1}px)` 
             }}
           >
-            {/* Terminal prompt with typing animation */}
+            {/* Terminal prompt */}
             <div className="font-mono text-lg md:text-xl text-primary">
               {promptText}
               {!promptComplete && showCursor && <span className="animate-glow-pulse">|</span>}
             </div>
 
-            {/* Rotating roles with typing animation and prominent name */}
             {promptComplete && (
               <div className="space-y-4">
-                {/* Full name */}
                 <div className="min-h-[3rem] flex items-center">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-                    <span className="gradient-text">Raja Shekar</span>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-foreground">
+                    Raja Shekar
                     <span className="sr-only"> — Trouble Shooter</span>
                   </h1>
                 </div>
 
-                {/* Rotating role under the name */}
                 <div className="min-h-[2.5rem] flex items-center">
                   <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-primary">
-                    <span className="gradient-text">
-                      {currentRole}
-                      {showCursor && <span className="animate-glow-pulse">|</span>}
-                    </span>
+                    {currentRole}
+                    {showCursor && <span className="animate-glow-pulse">|</span>}
                   </h2>
                 </div>
 
-                {/* Description */}
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
                   Cybersecurity professional with expertise in penetration testing, LLM Security research, and secure cloud architecture. Developed secure systems through projects in VPN deployment, IAM, and ML-based threat detection. Passionate about advancing AI safety, ethical hacking, and next-generation cloud and system defense.
                 </p>
@@ -192,27 +201,19 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Floating particles effect with varied animations and parallax */}
+      {/* Subtle floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div 
-          className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-float cyber-glow"
+          className="absolute top-1/4 left-1/4 w-1.5 h-1.5 bg-primary/30 rounded-full animate-float"
           style={{ transform: `translateY(${scrollY * 0.2}px)` }}
         />
         <div 
-          className="absolute top-1/3 right-1/4 w-3 h-3 bg-secondary rounded-full animate-float cyber-glow" 
+          className="absolute top-1/3 right-1/4 w-2 h-2 bg-primary/20 rounded-full animate-float" 
           style={{ animationDelay: '1s', transform: `translateY(${scrollY * 0.25}px)` }}
         />
         <div 
-          className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-accent rounded-full animate-float cyber-glow" 
+          className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-accent/20 rounded-full animate-float" 
           style={{ animationDelay: '2s', transform: `translateY(${scrollY * 0.18}px)` }}
-        />
-        <div 
-          className="absolute top-1/2 right-1/3 w-2 h-2 bg-primary rounded-full animate-float" 
-          style={{ animationDelay: '0.5s', transform: `translateY(${scrollY * 0.22}px)` }}
-        />
-        <div 
-          className="absolute bottom-1/3 right-1/4 w-3 h-3 bg-secondary rounded-full animate-float" 
-          style={{ animationDelay: '1.5s', transform: `translateY(${scrollY * 0.28}px)` }}
         />
       </div>
     </section>

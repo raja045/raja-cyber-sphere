@@ -42,10 +42,10 @@
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px hsl(220 13% 30% / 0.1);
+    box-shadow: 0 0 20px hsl(210 15% 20% / 0.1);
   }
   50% {
-    box-shadow: 0 0 30px hsl(220 13% 30% / 0.2);
+    box-shadow: 0 0 30px hsl(210 15% 20% / 0.2);
   }
 }
 
@@ -82,89 +82,76 @@
   }
 }
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    /* Light mode - Colorful Minimalistic */
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    /* Light mode - Professional Dark Contrast */
+    --background: 220 20% 97%;
+    --foreground: 220 25% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 220 25% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 220 25% 10%;
 
-    --primary: 173 80% 40%;
+    --primary: 210 100% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 262 83% 58%;
+    --secondary: 220 20% 20%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 220 15% 93%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 38 92% 50%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 200 80% 40%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 173 80% 40%;
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 210 100% 45%;
 
     --radius: 0.5rem;
 
-    /* Colorful gradients */
-    --gradient-subtle: linear-gradient(135deg, hsl(173 80% 40%) 0%, hsl(262 83% 58%) 100%);
-    --gradient-light: linear-gradient(180deg, hsl(210 40% 98%) 0%, hsl(210 40% 96%) 100%);
-    --gradient-neutral: linear-gradient(90deg, hsl(173 80% 40% / 0.1) 0%, hsl(262 83% 58% / 0.1) 100%);
-    --gradient-warm: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(0 84% 60%) 100%);
-    
-    /* Colorful shadows */
-    --shadow-sm: 0 1px 2px 0 hsl(173 80% 40% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(173 80% 40% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(173 80% 40% / 0.1);
-    --shadow-glow: 0 0 20px hsl(173 80% 40% / 0.3);
-    
-    /* Transitions */
+    --shadow-sm: 0 1px 2px 0 hsl(220 25% 10% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(220 25% 10% / 0.08);
+    --shadow-lg: 0 10px 15px -3px hsl(220 25% 10% / 0.1);
+
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
   .dark {
-    /* Dark mode - Colorful Minimalistic */
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
+    /* Dark mode - Professional Deep */
+    --background: 220 25% 6%;
+    --foreground: 220 15% 92%;
 
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 98%;
+    --card: 220 25% 10%;
+    --card-foreground: 220 15% 92%;
 
-    --popover: 222 47% 6%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 220 25% 8%;
+    --popover-foreground: 220 15% 92%;
 
-    --primary: 173 80% 50%;
-    --primary-foreground: 222 47% 6%;
+    --primary: 210 100% 55%;
+    --primary-foreground: 220 25% 6%;
 
-    --secondary: 262 83% 68%;
-    --secondary-foreground: 222 47% 6%;
+    --secondary: 220 15% 75%;
+    --secondary-foreground: 220 25% 6%;
 
-    --muted: 222 47% 12%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 220 20% 14%;
+    --muted-foreground: 220 10% 55%;
 
-    --accent: 38 92% 55%;
-    --accent-foreground: 222 47% 6%;
+    --accent: 200 80% 50%;
+    --accent-foreground: 220 25% 6%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 220 15% 92%;
 
-    --border: 222 47% 15%;
-    --input: 222 47% 15%;
-    --ring: 173 80% 50%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 210 100% 55%;
   }
 }
 
@@ -185,10 +172,8 @@ All colors MUST be HSL.
 
 @layer components {
   .gradient-text {
-    background: var(--gradient-subtle);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: hsl(var(--primary));
+    -webkit-text-fill-color: hsl(var(--primary));
   }
 
   .glass-card {
@@ -229,14 +214,4 @@ All colors MUST be HSL.
   .stagger-4 { transition-delay: 0.4s; }
   .stagger-5 { transition-delay: 0.5s; }
   .stagger-6 { transition-delay: 0.6s; }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
 }
