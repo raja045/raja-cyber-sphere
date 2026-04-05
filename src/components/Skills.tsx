@@ -2,6 +2,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Shield, Network, Cloud, Code, Wrench } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import comptiaLogo from "@/assets/comptia-security-plus.svg";
+import sc200Logo from "@/assets/sc200-logo.png";
 import burpSuiteLogo from "@/assets/finalB.png";
 import metasploitLogo from "@/assets/finalM.png";
 import wiresharkLogo from "@/assets/wireshark.avif";
@@ -159,20 +161,18 @@ const Skills = () => {
         {/* Certifications */}
         <div className="mt-12 text-center animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
           <h3 className="text-2xl font-bold mb-6">Certifications</h3>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <a href="https://www.credly.com/badges/90745a3d-f6eb-417d-8f2f-e36112983ce6/public_url" target="_blank" rel="noopener noreferrer">
-              <Badge variant="outline" className="text-lg py-2 px-4 border-primary/50 hover:bg-primary/10 transition-colors cursor-pointer">
-                CompTIA Security+
-              </Badge>
+          <div className="flex flex-wrap gap-6 justify-center">
+            <a href="https://www.credly.com/badges/90745a3d-f6eb-417d-8f2f-e36112983ce6/public_url" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 border border-primary/50 rounded-lg py-3 px-5 hover:bg-primary/10 transition-colors cursor-pointer">
+              <img src={comptiaLogo} alt="CompTIA Security+" className="w-10 h-10 object-contain" />
+              <span className="text-lg font-semibold">CompTIA Security+</span>
             </a>
-            <a href="https://learn.microsoft.com/en-us/users/rajashekarreddyseelam-6577/credentials/706e401dd6e8a955" target="_blank" rel="noopener noreferrer">
-              <Badge variant="outline" className="text-lg py-2 px-4 border-secondary/50 hover:bg-secondary/10 transition-colors cursor-pointer">
-                SC-200: Microsoft Security Operations Analyst Associate
-              </Badge>
+            <a href="https://learn.microsoft.com/en-us/users/rajashekarreddyseelam-6577/credentials/706e401dd6e8a955" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 border border-secondary/50 rounded-lg py-3 px-5 hover:bg-secondary/10 transition-colors cursor-pointer">
+              <img src={sc200Logo} alt="Microsoft SC-200" className="w-10 h-10 object-contain" />
+              <span className="text-lg font-semibold">SC-200: Security Operations Analyst</span>
             </a>
-            <Badge variant="outline" className="text-lg py-2 px-4 border-accent/50">
-              CPTE (Certified Penetration Testing Engineer)
-            </Badge>
+            <div className="flex items-center gap-3 border border-accent/50 rounded-lg py-3 px-5">
+              <span className="text-lg font-semibold">CPTE (Certified Penetration Testing Engineer)</span>
+            </div>
           </div>
         </div>
 
