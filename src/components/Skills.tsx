@@ -160,10 +160,17 @@ const Skills = () => {
         <div className="mt-12 text-center animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
           <h3 className="text-2xl font-bold mb-6">Certifications</h3>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Badge variant="outline" className="text-lg py-2 px-4 border-primary/50">
-              CEH (Certified Ethical Hacker)
-            </Badge>
-            <Badge variant="outline" className="text-lg py-2 px-4 border-secondary/50">
+            <a href="https://www.credly.com/badges/90745a3d-f6eb-417d-8f2f-e36112983ce6/public_url" target="_blank" rel="noopener noreferrer">
+              <Badge variant="outline" className="text-lg py-2 px-4 border-primary/50 hover:bg-primary/10 transition-colors cursor-pointer">
+                CompTIA Security+
+              </Badge>
+            </a>
+            <a href="https://learn.microsoft.com/en-us/users/rajashekarreddyseelam-6577/credentials/706e401dd6e8a955" target="_blank" rel="noopener noreferrer">
+              <Badge variant="outline" className="text-lg py-2 px-4 border-secondary/50 hover:bg-secondary/10 transition-colors cursor-pointer">
+                SC-200: Microsoft Security Operations Analyst Associate
+              </Badge>
+            </a>
+            <Badge variant="outline" className="text-lg py-2 px-4 border-accent/50">
               CPTE (Certified Penetration Testing Engineer)
             </Badge>
           </div>
