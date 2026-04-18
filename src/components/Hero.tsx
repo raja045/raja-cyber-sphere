@@ -20,7 +20,7 @@ const useParallax = () => {
 };
 
 const roles = [
-  "Cyber Security",
+  "SOC Analyst",
   "Penetration Tester",
   "LLM Security",
   "CTF Player",
