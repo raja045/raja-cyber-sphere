@@ -62,9 +62,9 @@ const Navigation = () => {
           <a
             href="#whoami"
             onClick={(e) => scrollToSection(e, "#whoami")}
-            className="text-2xl font-bold text-foreground hover:text-foreground/80 transition-colors"
+            className="font-mono text-xl md:text-2xl font-semibold text-foreground hover:text-primary transition-colors tracking-tight"
           >
-            Raja
+            <span className="text-primary">&lt;</span>Raja<span className="text-primary">/&gt;</span>
           </a>
 
           {/* Navigation items on the right */}
