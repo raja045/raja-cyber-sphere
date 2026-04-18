@@ -25,7 +25,6 @@ const Index = () => {
       <CircularScrollProgress />
       <CursorGlow />
       <ScrollToTop />
-      <VisitorCounter />
       <Navigation />
       <section id="whoami">
         <Hero />
@@ -42,13 +41,18 @@ const Index = () => {
       <section id="education">
         <Education />
       </section>
+      <section id="volunteering">
+        <Volunteering />
+      </section>
       <section id="writeups">
         <WriteUps />
       </section>
       <section id="contact">
         <Contact />
       </section>
-      
+
+      <VisitorCounter />
+
       <a
         href="/terminal"
         target="_blank"
