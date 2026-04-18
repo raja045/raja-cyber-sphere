@@ -7,6 +7,7 @@ import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
+import Volunteering from "@/components/Volunteering";
 import WriteUps from "@/components/WriteUps";
 import Contact from "@/components/Contact";
 import CursorGlow from "@/components/CursorGlow";
@@ -24,7 +25,6 @@ const Index = () => {
       <CircularScrollProgress />
       <CursorGlow />
       <ScrollToTop />
-      <VisitorCounter />
       <Navigation />
       <section id="whoami">
         <Hero />
@@ -41,13 +41,18 @@ const Index = () => {
       <section id="education">
         <Education />
       </section>
+      <section id="volunteering">
+        <Volunteering />
+      </section>
       <section id="writeups">
         <WriteUps />
       </section>
       <section id="contact">
         <Contact />
       </section>
-      
+
+      <VisitorCounter />
+
       <a
         href="/terminal"
         target="_blank"

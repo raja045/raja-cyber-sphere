@@ -20,7 +20,7 @@ const useParallax = () => {
 };
 
 const roles = [
-  "Cyber Security",
+  "SOC Analyst",
   "Penetration Tester",
   "LLM Security",
   "CTF Player",
@@ -154,7 +154,7 @@ const Hero = () => {
               <div className="space-y-4">
                 <div className="min-h-[3rem] flex items-center">
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-foreground">
-                    Raja Shekar
+                    Raja Shekar Reddy Seelam
                     <span className="sr-only"> — Trouble Shooter</span>
                   </h1>
                 </div>

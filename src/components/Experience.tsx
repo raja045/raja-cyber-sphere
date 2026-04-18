@@ -20,25 +20,8 @@ const Experience = () => {
 
   const experiences: Experience[] = [
     {
-      company: "AIESEC in Miami",
-      roles: [
-        {
-          title: "Vice President of Outgoing Global Exchange (oGX)",
-          period: "Jan 2025 – Present",
-          description: "Directed the Outgoing Global Exchange Program, enhancing international internship operations and participant engagement. Implemented strategies that improved conversion follow-up efficiency by 20%, optimizing the customer experience. Facilitated weekly performance meetings to boost team alignment, resulting in a significant increase in operational efficiency. Recognized with the \"Outgoing Talent Award\" for exceptional performance in outbound mobility.",
-          skills: ["Leadership", "Global Exchange", "Strategy", "Team Management"]
-        }
-      ]
-    },
-    {
       company: "FIU College of Engineering & Computing",
       roles: [
-        {
-          title: "Graduate Teaching Assistant",
-          period: "Jun 2024 – Dec 2025",
-          description: "Delivered hands-on AWS lab sessions to 30–50 students across Cloud Computing and HCI courses. Proactively updated course materials every semester to reflect real-time AWS UI and service changes. Managed grading, office hours, and student progress monitoring for 50+ students across multiple semesters.",
-          skills: ["AWS", "Cloud Computing", "HCI", "Teaching", "Grading"]
-        },
         {
           title: "Graduate Research Assistant – Under Professor Ruimin Sun",
           period: "Jan 2025 – Apr 2025",
