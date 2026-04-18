@@ -27,6 +27,7 @@ const Navigation = () => {
     { label: "Skills", href: "#skills" },
     { label: "Experience", href: "#experience" },
     { label: "Education", href: "#education" },
+    { label: "Volunteering", href: "#volunteering" },
     { label: "Write-ups", href: "#writeups" },
     { label: "Contact", href: "#contact" },
   ];
