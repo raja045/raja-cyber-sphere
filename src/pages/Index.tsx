@@ -8,7 +8,7 @@ import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
 import Volunteering from "@/components/Volunteering";
-import WriteUps from "@/components/WriteUps";
+
 import Contact from "@/components/Contact";
 import CursorGlow from "@/components/CursorGlow";
 import MatrixRain from "@/components/MatrixRain";
@@ -43,9 +43,6 @@ const Index = () => {
       </section>
       <section id="volunteering">
         <Volunteering />
-      </section>
-      <section id="writeups">
-        <WriteUps />
       </section>
       <section id="contact">
         <Contact />
