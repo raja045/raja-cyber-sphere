@@ -7,6 +7,7 @@ import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
+import Volunteering from "@/components/Volunteering";
 import WriteUps from "@/components/WriteUps";
 import Contact from "@/components/Contact";
 import CursorGlow from "@/components/CursorGlow";
