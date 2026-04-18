@@ -153,7 +153,7 @@ const Hero = () => {
             {promptComplete && (
               <div className="space-y-4">
                 <div className="min-h-[3rem] flex items-center">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-foreground">
+                  <h1 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-foreground whitespace-nowrap tracking-tight">
                     Raja Shekar Reddy Seelam
                     <span className="sr-only"> — Trouble Shooter</span>
                   </h1>
