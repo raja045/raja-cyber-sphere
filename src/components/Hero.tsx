@@ -168,7 +168,7 @@ const Hero = () => {
                 </div>
 
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
-                  SOC Analyst & offensive security researcher with <strong className="text-foreground">150+ CVEs responsibly disclosed</strong> (HackerOne · Bugcrowd · NCIIPC), <strong className="text-foreground">50+ penetration tests</strong>, and <strong className="text-foreground">100+ security incidents</strong> resolved at 40% MTTR reduction. Built a production-grade HomeLab SOC (OPNsense · Suricata · Wazuh · AD) that reconstructs full Cyber Kill Chains in under 4 minutes from telemetry alone. M.S. Cybersecurity from FIU (GPA 3.9). Adversarial AI / LLM red-team research published through FIU's Cybersecurity & Privacy Lab.
+                  SOC analyst with an offensive backbone — <strong className="text-foreground">150+ CVEs disclosed</strong>, <strong className="text-foreground">100+ incidents resolved</strong>. M.S. Cybersecurity, FIU.
                 </p>
               </div>
             )}
