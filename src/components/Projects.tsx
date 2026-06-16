@@ -248,25 +248,25 @@ const Projects = () => {
   const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
 
   return (
-    <section id="projects" className="py-20 px-4">
+    <section className="py-16 md:py-24 px-4 md:px-6">
       <div className="container mx-auto">
-        <div ref={titleRef} className={`text-center mb-12 animate-on-scroll ${titleVisible ? 'visible' : ''}`}>
+        <div ref={titleRef} className={`text-center mb-12 md:mb-16 animate-on-scroll ${titleVisible ? 'visible' : ''}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="gradient-text">Featured Projects</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             Exploring the intersection of security, technology, and innovation
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {visibleProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
 
         {hasMoreProjects && (
-          <div className="flex justify-end mt-8 max-w-7xl mx-auto">
+          <div className="flex justify-end mt-8 max-w-6xl mx-auto">
             <Button
               variant="outline"
               onClick={() => setShowAll(!showAll)}

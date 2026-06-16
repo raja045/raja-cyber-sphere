@@ -83,13 +83,13 @@ const Education = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-card/30">
-      <div className="container mx-auto max-w-5xl">
-        <div ref={titleRef} className={`text-center mb-12 animate-on-scroll ${titleVisible ? 'visible' : ''}`}>
+    <section className="py-16 md:py-24 px-4 md:px-6 bg-card/30">
+      <div className="container mx-auto max-w-6xl">
+        <div ref={titleRef} className={`text-center mb-12 md:mb-16 animate-on-scroll ${titleVisible ? 'visible' : ''}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="gradient-text">Academic Foundation</span>
           </h2>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-base md:text-lg text-muted-foreground">
             Building expertise through rigorous academic training
           </p>
         </div>
