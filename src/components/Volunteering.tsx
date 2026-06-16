@@ -22,11 +22,47 @@ const Volunteering = () => {
       organization: "AIESEC in Miami",
       roles: [
         {
-          title: "Vice President of Outgoing Global Exchange (oGX)",
+          title: "Vice President — Outgoing Global Exchange (oGX)",
           period: "Jan 2025 – Present",
           description:
-            "Directed the Outgoing Global Exchange Program, enhancing international internship operations and participant engagement. Implemented strategies that improved conversion follow-up efficiency by 20%, optimizing the customer experience. Facilitated weekly performance meetings to boost team alignment, resulting in a significant increase in operational efficiency. Recognized with the \"Outgoing Talent Award\" for exceptional performance in outbound mobility.",
-          skills: ["Leadership", "Global Exchange", "Strategy", "Team Management"],
+            "Directed the Outgoing Global Exchange Program, scaling international internship operations and participant engagement. Implemented a structured pipeline-management cadence that improved conversion follow-up efficiency by 20%. Led weekly performance reviews and partner sales calls — driving measurable team alignment and operational efficiency. Recognized with the \"Outgoing Talent Award\" for exceptional performance in outbound mobility. Built durable sales + pipeline-management skills directly transferable to security pre-sales / solutions-engineering roles.",
+          skills: ["Leadership", "Sales", "Pipeline Management", "Strategy", "Cross-Cultural Comms"],
+        },
+      ],
+    },
+    {
+      organization: "FIU Collegiate Cyber Defense Competition (CCDC)",
+      roles: [
+        {
+          title: "Team Leader — Florida Regional CCDC",
+          period: "2024 – 2025",
+          description:
+            "Captained the FIU CCDC team through Florida regional defense competitions — coordinated 6+ teammates across blue-team specializations (network, AD, web, cloud, IR, scoring engine). Built the team's pre-competition lab playbook covering Wazuh tuning, AD hardening baselines, OPNsense + Suricata rule tuning, and incident-injection response patterns. Delivered post-competition debriefs and translated red-team findings into defensive playbook updates for the next year's cohort.",
+          skills: ["Blue Team", "Team Leadership", "Active Directory", "Wazuh", "Incident Response"],
+        },
+      ],
+    },
+    {
+      organization: "NCIIPC — National Critical Information Infrastructure Protection Centre (India)",
+      roles: [
+        {
+          title: "Responsible Disclosure Program Contributor",
+          period: "Jun 2023 – Present",
+          description:
+            "Voluntarily contributed to India's national-critical-infrastructure protection mission by responsibly disclosing 100+ vulnerabilities affecting government and public-sector portals — SQLi, OTP bypass, web cache poisoning, broken authentication, and sensitive data exposure. Delivered CVSS-scored, MITRE ATT&CK-mapped reports with full PoCs and remediation guidance to NCIIPC analysts. Pro-bono security work for the national CERT ecosystem.",
+          skills: ["Responsible Disclosure", "Public Sector", "CVSS", "MITRE ATT&CK", "Pro Bono"],
+        },
+      ],
+    },
+    {
+      organization: "NOOBARMY Cyber Club — LPU",
+      roles: [
+        {
+          title: "Active Member · CTF Player",
+          period: "2020 – 2023",
+          description:
+            "Active member of LPU's premier cybersecurity student collective — participated in 50+ CTFs across TryHackMe, HackTheBox, picoCTF, and intercollegiate events. Mentored junior members on web exploitation, reverse engineering, and OSINT challenge categories. Helped organize internal red-team / blue-team training events that seeded the next generation of FIU-bound + corporate-SOC-bound members.",
+          skills: ["CTF", "Mentorship", "Web Exploitation", "OSINT", "Community Building"],
         },
       ],
     },

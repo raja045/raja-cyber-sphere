@@ -1,10 +1,12 @@
 import { ExternalLink } from "lucide-react";
 
 const latestProjects = [
-  { name: "AI-Powered Threat Detection System", status: "In Progress" },
-  { name: "Zero Trust Network Architecture", status: "Research Phase" },
-  { name: "Blockchain Security Audit Framework", status: "Planning" },
-  { name: "Advanced Malware Analysis Lab", status: "In Progress" },
+  { name: "OSCP Certification Prep — HTB + PWK Labs", status: "In Progress" },
+  { name: "First CVE Acquisition — moving from disclosure to authority", status: "Active" },
+  { name: "Kubernetes Security Lab — Falco + OPA Gatekeeper", status: "In Progress" },
+  { name: "Terraform / IaC Security — tfsec + Checkov pipelines", status: "Planning" },
+  { name: "CrowdStrike Falcon Engineering — EDR + RTR workflows", status: "Learning" },
+  { name: "Intune + ServiceNow at Enterprise Scale", status: "Learning" },
 ];
 
 const AnnouncementBar = () => {

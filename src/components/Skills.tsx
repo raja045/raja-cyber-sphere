@@ -21,28 +21,116 @@ import azureLogo from "@/assets/azure1.png";
 
 const skillCategories = [
   {
-    title: "Cybersecurity",
+    title: "SOC · SIEM · Defensive",
     icon: Shield,
-    skills: ["Penetration Testing", "SIEM", "Incident Response", "Threat Analysis", "Digital Forensics"],
+    skills: [
+      "SOC Tier 1 / Tier 2 Triage",
+      "Splunk (SPL, Dashboards, Correlation)",
+      "Microsoft Sentinel",
+      "Defender XDR",
+      "Wazuh",
+      "Suricata IDS/IPS",
+      "SOAR Automation",
+      "Threat Hunting",
+      "IoC Enrichment (VirusTotal)",
+      "Incident Response",
+    ],
     color: "text-primary",
+  },
+  {
+    title: "Offensive Security",
+    icon: Wrench,
+    skills: [
+      "Penetration Testing",
+      "Web App Security",
+      "API Security",
+      "OWASP Top 10",
+      "SQL Injection",
+      "XSS",
+      "Authentication Bypass",
+      "Bug Bounty (150+ CVEs)",
+      "MITRE ATT&CK",
+      "Recon Automation",
+    ],
+    color: "text-secondary",
+  },
+  {
+    title: "AI / LLM Security",
+    icon: Shield,
+    skills: [
+      "LLM Red Teaming",
+      "Adversarial ML",
+      "Garak",
+      "PAIR",
+      "GCG",
+      "JailbreakBench",
+      "Stable Diffusion Attacks",
+      "Prompt Injection",
+      "PyTorch",
+      "Hugging Face",
+    ],
+    color: "text-accent",
   },
   {
     title: "Network Security",
     icon: Network,
-    skills: ["Firewall Configuration", "IDS/IPS", "VPN", "Network Monitoring", "Packet Analysis"],
+    skills: [
+      "OPNsense Firewall",
+      "Suricata IDS/IPS",
+      "VLAN Segmentation",
+      "VPN (WireGuard / OpenVPN)",
+      "TCP/IP",
+      "PCAP / NetFlow",
+      "Wireshark",
+      "Nmap",
+    ],
     color: "text-secondary",
   },
   {
-    title: "Cloud & AI",
+    title: "Cloud & Infrastructure",
     icon: Cloud,
-    skills: ["AWS Security", "Azure", "Machine Learning", "TensorFlow", "Cloud Architecture"],
+    skills: [
+      "AWS (IAM, CloudTrail, S3, EC2, VPC)",
+      "Azure (Sentinel, Key Vault, App Service)",
+      "GCP",
+      "Active Directory",
+      "Docker",
+      "GitHub Actions CI/CD",
+      "PKI Automation",
+    ],
     color: "text-accent",
   },
   {
-    title: "Programming",
+    title: "Programming · Automation",
     icon: Code,
-    skills: ["Python", "JavaScript", "Bash", "PowerShell", "SQL"],
+    skills: [
+      "Python",
+      "Bash",
+      "JavaScript",
+      "TypeScript",
+      "Java",
+      "Node.js",
+      "PowerShell",
+      "SQL",
+      "Jupyter Notebooks",
+    ],
     color: "text-primary",
+  },
+  {
+    title: "Frameworks · Compliance",
+    icon: Shield,
+    skills: [
+      "MITRE ATT&CK",
+      "Cyber Kill Chain",
+      "NIST CSF",
+      "NIST SP 800-53",
+      "ISO/IEC 27001",
+      "PCI DSS (SAQ D)",
+      "OWASP Top 10",
+      "CVSS",
+      "ITIL 4",
+    ],
+    color: "text-secondary",
   },
   {
     title: "Tools",
@@ -171,7 +259,10 @@ const Skills = () => {
               <span className="text-lg font-semibold">SC-200: Security Operations Analyst</span>
             </a>
             <div className="flex items-center gap-3 border border-accent/50 rounded-lg py-3 px-5">
-              <span className="text-lg font-semibold">CPTE (Certified Penetration Testing Engineer)</span>
+              <span className="text-lg font-semibold">CEPT — Certified Expert Penetration Tester (Mile2)</span>
+            </div>
+            <div className="flex items-center gap-3 border border-primary/50 rounded-lg py-3 px-5">
+              <span className="text-lg font-semibold">ITIL 4 Foundation</span>
             </div>
           </div>
         </div>

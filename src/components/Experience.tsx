@@ -20,26 +20,27 @@ const Experience = () => {
 
   const experiences: Experience[] = [
     {
-      company: "FIU College of Engineering & Computing",
+      company: "Florida International University — Cybersecurity & Privacy Lab",
       roles: [
         {
-          title: "Graduate Research Assistant – Under Professor Ruimin Sun",
-          period: "Jan 2025 – Apr 2025",
-          description: "Engineered reproducible adversarial attacks on Stable Diffusion models improving attack success rate by 35%. Pioneered a novel cryptographic prompt injection methodology as a new LLM jailbreak attack direction. Automated AI red teaming pipelines increasing jailbreak detection efficiency by 45%.",
-          skills: ["AI Security", "Adversarial ML", "LLM Jailbreaking", "Red Teaming"]
-        }
-      ]
-    },
-    {
-      company: "FIU Cyber Security and Privacy Lab",
-      roles: [
-        {
-          title: "Graduate Research Assistant",
-          period: "Feb 2024 – Aug 2024",
-          description: "Engineered a 10,000+ entry dataset boosting ML model accuracy by 18%. Conducted user interviews to derive behavioral features enhancing model prediction accuracy. Visualized research findings accelerating team decision-making by 25%.",
-          skills: ["Digital Forensics", "Privacy Tech", "Research", "ML", "Data Visualization"]
-        }
-      ]
+          title: "Graduate Student Assistant · Prof. Ruimin Sun / Prof. Bogdan Carbunar",
+          period: "Aug 2024 – Dec 2025",
+          description:
+            "Led adversarial AI red-teaming research and student–faculty coordination across the M.S. Cybersecurity program. (1) Engineered reproducible adversarial attack pipelines against Stable Diffusion T2I models — 35% improvement in attack success rate; pioneered cryptographic prompt injection as a novel LLM jailbreak class with cryptography-aware defensive frameworks. (2) Automated LLM red teaming with Garak, PAIR, GCG, and JailbreakBench against AdvBench — 45% increase in jailbreak detection efficiency, 60% reduction in manual testing time. (3) Engineered and annotated a 10,000+ entry social-media dataset for ML behavior analysis — 18% model accuracy improvement; built Python + Jupyter analytical pipelines that accelerated team decision-making by ~25%. (4) Served as student–faculty liaison: ran weekly doubt-clearing sessions to debug lab assignments and reinforce lecture material; maintained lecture slides between cohorts and graded student assignments / lab submissions with structured rubric-based feedback.",
+          skills: [
+            "LLM Security",
+            "Adversarial ML",
+            "Stable Diffusion",
+            "Garak",
+            "PAIR",
+            "GCG",
+            "PyTorch",
+            "Research",
+            "Teaching",
+            "Python",
+          ],
+        },
+      ],
     },
     {
       company: "EduRun Group",
@@ -47,22 +48,46 @@ const Experience = () => {
         {
           title: "Junior Cyber Security Engineer",
           period: "Jan 2022 – Dec 2023",
-          description: "Proactively identified and neutralized a critical SQL Injection vulnerability in a customer-facing web application, preventing a catastrophic data breach impacting tens of thousands of customers. Conducted comprehensive security audits, vulnerability assessments, and penetration testing aligned with NIST CSF, ISO/IEC 27001, and OWASP Top 10 — achieving a 45% reduction in undetected threat vectors and 50% decrease in high-severity risk exposure. Automated 600+ monthly PKI certificate operations, reduced secrets mismanagement by 80% via Azure Key Vault, and improved SOC incident MTTR by 40% while resolving 100+ security incidents. Administered Active Directory, MFA, and RBAC policies, and built security automation frameworks using Java, Python, Bash, Splunk, Nessus, Burp Suite, Docker, and Azure.",
-          skills: ["Penetration Testing", "OWASP", "NIST CSF", "Azure", "PKI", "Splunk", "Python", "Docker"]
-        }
-      ]
+          description:
+            "SOC operations, threat modeling, and PKI automation for a multi-product education-tech platform. Built Splunk dashboards and correlation alerts — 35% faster detection, 100+ security incidents resolved with 40% MTTR reduction. Authored incident-response playbooks and SOPs aligned to NIST CSF + ISO/IEC 27001 (closed audit gap pre-certification). Threat modeling and security audits reduced undetected threat vectors by 45% and high-severity exposures by 50% within the first year. Administered Active Directory (RBAC, MFA, GPO) — 55% drop in unauthorized-access incidents. Ran phishing simulations across 300+ employees — susceptibility fell 45% in six months. Automated PKI certificate issuance (600+ certs/month) via Azure Key Vault + REST APIs — 65% faster turnaround. Discovered and remediated a critical SQL Injection in a customer-facing app, preventing potential breach of tens of thousands of records.",
+          skills: [
+            "SOC Operations",
+            "Splunk",
+            "Incident Response",
+            "Active Directory",
+            "NIST CSF",
+            "ISO 27001",
+            "Nessus",
+            "Azure Key Vault",
+            "PKI Automation",
+            "Threat Modeling",
+          ],
+        },
+      ],
     },
     {
-      company: "HackerOne, Bugcrowd",
+      company: "White-Hat Security Researcher — Freelance",
       roles: [
         {
-          title: "White-hat Security Researcher",
-          period: "Jul 2023 – Feb 2024",
-          description: "Performed 50+ security assessments and penetration tests, reporting 80+ critical vulnerabilities. Documented vulnerabilities across OWASP Top 10 categories. Used Burp Suite, Nmap, OWASP ZAP, Metasploit for manual and automated testing. Coordinated with dev teams for vulnerability remediation.",
-          skills: ["Security Testing", "OWASP", "Penetration Testing", "Bug Bounty"]
-        }
-      ]
-    }
+          title: "HackerOne · Bugcrowd · OpenBugBounty · NCIIPC",
+          period: "Jun 2023 – Present",
+          description:
+            "Executed 50+ penetration tests across web applications, APIs, and mobile platforms; surfaced 80+ critical and high-severity vulnerabilities across private VDPs — preventing potential breaches affecting 500,000+ users. Responsibly disclosed 150+ vulnerabilities across HackerOne, Bugcrowd, and NCIIPC (India's national critical-infrastructure protection body): SQLi, OTP bypass, web cache poisoning, broken authentication, sensitive data exposure, and 50+ XSS / data-leak findings via OpenBugBounty. Earned Hall of Fame credit from Inflectra Corp. for a critical-severity disclosure. Built automated recon pipelines (Python + Bash) chaining Subfinder, Amass, Shodan, and ffuf — 40% faster assessments at 95%+ detection accuracy. Delivered CVSS-scored, MITRE ATT&CK-mapped reports with full PoCs and developer-friendly remediation guidance.",
+          skills: [
+            "Penetration Testing",
+            "OWASP Top 10",
+            "Burp Suite",
+            "Metasploit",
+            "SQLmap",
+            "MobSF",
+            "MITRE ATT&CK",
+            "CVSS",
+            "Python",
+            "Bash",
+          ],
+        },
+      ],
+    },
   ];
 
   const ExperienceCard = ({ exp, expIndex }: { exp: Experience; expIndex: number }) => {

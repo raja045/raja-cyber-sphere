@@ -21,10 +21,11 @@ const useParallax = () => {
 
 const roles = [
   "SOC Analyst",
+  "Security Engineer",
   "Penetration Tester",
-  "LLM Security",
+  "LLM Security Researcher",
+  "Threat Hunter",
   "CTF Player",
-  "Trouble Shooter"
 ];
 
 const Hero = () => {
@@ -167,7 +168,7 @@ const Hero = () => {
                 </div>
 
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
-                  Cybersecurity professional with expertise in penetration testing, LLM Security research, and secure cloud architecture. Developed secure systems through projects in VPN deployment, IAM, and ML-based threat detection. Passionate about advancing AI safety, ethical hacking, and next-generation cloud and system defense.
+                  SOC Analyst & offensive security researcher with <strong className="text-foreground">150+ CVEs responsibly disclosed</strong> (HackerOne · Bugcrowd · NCIIPC), <strong className="text-foreground">50+ penetration tests</strong>, and <strong className="text-foreground">100+ security incidents</strong> resolved at 40% MTTR reduction. Built a production-grade HomeLab SOC (OPNsense · Suricata · Wazuh · AD) that reconstructs full Cyber Kill Chains in under 4 minutes from telemetry alone. M.S. Cybersecurity from FIU (GPA 3.9). Adversarial AI / LLM red-team research published through FIU's Cybersecurity & Privacy Lab.
                 </p>
               </div>
             )}
@@ -190,8 +191,8 @@ const Hero = () => {
               >
                 <Linkedin className="h-7 w-7" />
               </a>
-              <a 
-                href="mailto:sraja456@outlook.com"
+              <a
+                href="mailto:rseelam456@gmail.com"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
               >
                 <Mail className="h-7 w-7" />
