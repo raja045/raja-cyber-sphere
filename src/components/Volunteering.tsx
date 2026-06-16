@@ -23,7 +23,7 @@ const Volunteering = () => {
       roles: [
         {
           title: "Vice President — Outgoing Global Exchange (oGX)",
-          period: "Jan 2025 – Present",
+          period: "Jan 2025 – Dec 2025",
           description:
             "Directed the Outgoing Global Exchange Program, scaling international internship operations and participant engagement. Implemented a structured pipeline-management cadence that improved conversion follow-up efficiency by 20%. Led weekly performance reviews and partner sales calls — driving measurable team alignment and operational efficiency. Recognized with the \"Outgoing Talent Award\" for exceptional performance in outbound mobility. Built durable sales + pipeline-management skills directly transferable to security pre-sales / solutions-engineering roles.",
           skills: ["Leadership", "Sales", "Pipeline Management", "Strategy", "Cross-Cultural Comms"],
@@ -47,7 +47,7 @@ const Volunteering = () => {
       roles: [
         {
           title: "Responsible Disclosure Program Contributor",
-          period: "Jun 2023 – Present",
+          period: "Jun 2023 – Nov 2023",
           description:
             "Voluntarily contributed to India's national-critical-infrastructure protection mission by responsibly disclosing 100+ vulnerabilities affecting government and public-sector portals — SQLi, OTP bypass, web cache poisoning, broken authentication, and sensitive data exposure. Delivered CVSS-scored, MITRE ATT&CK-mapped reports with full PoCs and remediation guidance to NCIIPC analysts. Pro-bono security work for the national CERT ecosystem.",
           skills: ["Responsible Disclosure", "Public Sector", "CVSS", "MITRE ATT&CK", "Pro Bono"],

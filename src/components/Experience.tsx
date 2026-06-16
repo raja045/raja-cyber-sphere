@@ -24,7 +24,7 @@ const Experience = () => {
       roles: [
         {
           title: "Graduate Student Assistant · Prof. Ruimin Sun / Prof. Bogdan Carbunar",
-          period: "Aug 2024 – Dec 2025",
+          period: "Feb 2024 – Dec 2025",
           description:
             "Led adversarial AI red-teaming research and student–faculty coordination across the M.S. Cybersecurity program. (1) Engineered reproducible adversarial attack pipelines against Stable Diffusion T2I models — 35% improvement in attack success rate; pioneered cryptographic prompt injection as a novel LLM jailbreak class with cryptography-aware defensive frameworks. (2) Automated LLM red teaming with Garak, PAIR, GCG, and JailbreakBench against AdvBench — 45% increase in jailbreak detection efficiency, 60% reduction in manual testing time. (3) Engineered and annotated a 10,000+ entry social-media dataset for ML behavior analysis — 18% model accuracy improvement; built Python + Jupyter analytical pipelines that accelerated team decision-making by ~25%. (4) Served as student–faculty liaison: ran weekly doubt-clearing sessions to debug lab assignments and reinforce lecture material; maintained lecture slides between cohorts and graded student assignments / lab submissions with structured rubric-based feedback.",
           skills: [
@@ -70,7 +70,7 @@ const Experience = () => {
       roles: [
         {
           title: "HackerOne · Bugcrowd · OpenBugBounty · NCIIPC",
-          period: "Jun 2023 – Present",
+          period: "Jun 2023 – Nov 2023",
           description:
             "Executed 50+ penetration tests across web applications, APIs, and mobile platforms; surfaced 80+ critical and high-severity vulnerabilities across private VDPs — preventing potential breaches affecting 500,000+ users. Responsibly disclosed 150+ vulnerabilities across HackerOne, Bugcrowd, and NCIIPC (India's national critical-infrastructure protection body): SQLi, OTP bypass, web cache poisoning, broken authentication, sensitive data exposure, and 50+ XSS / data-leak findings via OpenBugBounty. Earned Hall of Fame credit from Inflectra Corp. for a critical-severity disclosure. Built automated recon pipelines (Python + Bash) chaining Subfinder, Amass, Shodan, and ffuf — 40% faster assessments at 95%+ detection accuracy. Delivered CVSS-scored, MITRE ATT&CK-mapped reports with full PoCs and developer-friendly remediation guidance.",
           skills: [
