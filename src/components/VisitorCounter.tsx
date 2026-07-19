@@ -58,7 +58,7 @@ const VisitorCounter = () => {
   }
 
   return (
-    <div className="w-full flex justify-center py-8 border-t border-border/30">
+    <div className="w-full flex justify-center py-5 border-t border-border/30">
       <div className="flex items-center gap-2 px-5 py-2.5 bg-card/60 backdrop-blur-md border border-border/40 rounded-full">
         <Eye className="h-4 w-4 text-primary/70" />
         <span className="text-sm font-medium text-muted-foreground">

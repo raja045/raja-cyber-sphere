@@ -171,8 +171,8 @@ const Volunteering = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+    <section className="section-padding relative overflow-hidden">
+      <div className="container mx-auto relative z-10">
         <SectionHeader
           number="05"
           title="Volunteering"
@@ -182,7 +182,7 @@ const Volunteering = () => {
         <div className="max-w-6xl mx-auto relative">
           <div className="absolute left-4 md:left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/50 to-transparent" />
 
-          <div className="space-y-6 md:space-y-8">
+          <div className="section-content-gap">
             {volunteerExperiences.map((exp, expIndex) => (
               <VolunteerCard key={expIndex} exp={exp} expIndex={expIndex} />
             ))}

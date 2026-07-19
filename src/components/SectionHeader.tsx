@@ -13,7 +13,7 @@ const SectionHeader = ({ number, title, subtitle, align = "left" }: SectionHeade
   return (
     <div
       ref={elementRef}
-      className={`mb-12 md:mb-16 animate-on-scroll ${isVisible ? "visible" : ""} ${
+      className={`mb-8 md:mb-10 animate-on-scroll ${isVisible ? "visible" : ""} ${
         align === "center" ? "text-center" : "text-left"
       }`}
     >

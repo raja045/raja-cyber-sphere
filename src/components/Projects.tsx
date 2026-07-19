@@ -247,7 +247,7 @@ const Projects = () => {
   const selectedProjectData = selectedProject !== null ? projects.find(p => p.id === selectedProject) : null;
 
   return (
-    <section className="py-16 md:py-24 px-4 md:px-6">
+    <section className="section-padding">
       <div className="container mx-auto">
         <SectionHeader
           number="01"
@@ -262,7 +262,7 @@ const Projects = () => {
         </div>
 
         {hasMoreProjects && (
-          <div className="flex justify-end mt-8 max-w-6xl mx-auto">
+          <div className="flex justify-end mt-6 max-w-6xl mx-auto">
             <Button
               variant="outline"
               onClick={() => setShowAll(!showAll)}

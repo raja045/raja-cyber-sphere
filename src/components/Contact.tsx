@@ -147,7 +147,7 @@ URL;type=LinkedIn:https://linkedin.com/in/raja045
 END:VCARD`;
 
   return (
-    <section className="py-20 px-4">
+    <section className="section-padding">
       <div className="container mx-auto max-w-6xl">
         <SectionHeader
           number="08"
@@ -156,7 +156,7 @@ END:VCARD`;
         />
 
         {/* Contact Cards Grid */}
-        <div ref={elementRef} className="animate-on-scroll visible mb-16">
+        <div ref={elementRef} className="animate-on-scroll visible mb-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {/* Email Card */}
             <a href="mailto:sraja456@outlook.com" className="group">
@@ -589,7 +589,7 @@ END:VCARD`;
         </div>
 
         {/* Footer */}
-        <div className="text-center mt-12 text-sm text-muted-foreground animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+        <div className="text-center mt-8 text-sm text-muted-foreground animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
           <p>© 2025 Raja. Securing the digital frontier, one project at a time.</p>
         </div>
       </div>

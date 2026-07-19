@@ -26,7 +26,7 @@ const Index = () => {
       <Navigation />
       <AnnouncementBar />
 
-      <main className="relative z-10">
+      <main className="relative z-10 [&>section]:scroll-mt-24">
         <section id="whoami" className="section-surface">
           <Hero />
         </section>
