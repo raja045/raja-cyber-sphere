@@ -7,10 +7,16 @@ export interface BlogPost {
   publishedAt: string;
   excerpt: string;
   platform: BlogPlatform;
-  imageUrl?: string;
+  imageUrl?: string | null;
+  readMin: number;
+  tags: string[];
 }
 
 export interface BlogFeedResponse {
   posts: BlogPost[];
   fetchedAt: string;
+  sources?: {
+    medium?: { count: number; error?: string };
+    hashnode?: { count: number; via?: string; error?: string };
+  };
 }

@@ -90,7 +90,7 @@ const BlogsNavDropdown = ({ onNavigate, variant = "desktop" }: BlogsNavDropdownP
                 <div className="flex items-center gap-2">
                   <PlatformBadge platform={post.platform} />
                   <span className="text-[11px] text-muted-foreground">
-                    {formatDistanceToNow(new Date(post.publishedAt), { addSuffix: true })}
+                    {formatDistanceToNow(new Date(post.publishedAt), { addSuffix: true })} · {post.readMin} min
                   </span>
                 </div>
               </a>

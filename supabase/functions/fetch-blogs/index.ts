@@ -1,18 +1,23 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import Parser from "https://esm.sh/rss-parser@3.13.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const BROWSER_USER_AGENT =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
+const parser = new Parser({
+  customFields: {
+    item: [["content:encoded", "contentEncoded"]],
+  },
+});
 
-const MEDIUM_USERNAME = Deno.env.get("MEDIUM_USERNAME") || "nakamotosecurity";
-const MEDIUM_RSS_URL = Deno.env.get("MEDIUM_RSS_URL") || "";
-const RSS2JSON_API_KEY = Deno.env.get("RSS2JSON_API_KEY") || "";
-const HASHNODE_HOST = Deno.env.get("HASHNODE_HOST") || "toxsec.hashnode.dev";
-const HASHNODE_RSS_URL = `https://${HASHNODE_HOST}/rss.xml`;
+const MEDIUM_FEED =
+  Deno.env.get("MEDIUM_FEED") ||
+  Deno.env.get("MEDIUM_RSS_URL") ||
+  `https://medium.com/feed/@${(Deno.env.get("MEDIUM_USERNAME") || "seeurity").replace(/^@/, "")}`;
+const HASHNODE_HOST = Deno.env.get("HASHNODE_HOST") || "seeurity.hashnode.dev";
+const HASHNODE_PAT = Deno.env.get("HASHNODE_PAT") || "";
 
 type BlogPlatform = "medium" | "hashnode";
 
@@ -23,140 +28,142 @@ interface BlogPost {
   publishedAt: string;
   excerpt: string;
   platform: BlogPlatform;
-  imageUrl?: string;
+  imageUrl?: string | null;
+  readMin: number;
+  tags: string[];
 }
 
-const decodeXml = (value = "") =>
-  value
-    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .trim();
+function estimateReadMin(html?: string): number {
+  if (!html) return 1;
+  const words = html.replace(/<[^>]+>/g, " ").trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+}
 
-const stripHtml = (value = "") =>
-  decodeXml(value).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-
-const getTagValue = (block: string, tag: string) => {
-  const match = block.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, "i"));
-  return match ? decodeXml(match[1]) : "";
-};
-
-const extractImageFromHtml = (html = "") => {
-  const match = html.match(/<img[^>]+src="([^"]+)"/i);
-  return match?.[1];
-};
-
-const parseRssItems = (xml: string, platform: BlogPlatform): BlogPost[] => {
-  const items = xml.match(/<item[\s\S]*?<\/item>/gi) || [];
-
-  return items
-    .map((item, index) => {
-      const title = getTagValue(item, "title");
-      const link = getTagValue(item, "link") || getTagValue(item, "guid");
-      const pubDate = getTagValue(item, "pubDate") || getTagValue(item, "dc:date");
-      const description =
-        getTagValue(item, "description") || getTagValue(item, "content:encoded");
-      const enclosureMatch = item.match(/<enclosure[^>]+url="([^"]+)"/i);
-      const mediaMatch = item.match(/<media:thumbnail[^>]+url="([^"]+)"/i);
-      const publishedAt = pubDate
-        ? new Date(pubDate).toISOString()
-        : new Date(0).toISOString();
-
-      return {
-        id: `${platform}-${index}-${link}`,
-        title,
-        url: link,
-        publishedAt,
-        excerpt: stripHtml(description).slice(0, 180),
-        platform,
-        imageUrl:
-          enclosureMatch?.[1] || mediaMatch?.[1] || extractImageFromHtml(description),
-      };
-    })
-    .filter((post) => post.title && post.url);
-};
-
-const buildMediumFeedUrls = (username: string, customRssUrl?: string) => {
-  if (customRssUrl) return [customRssUrl];
-  const normalized = username.replace(/^@/, "");
-  return [
-    `https://medium.com/feed/@${normalized}`,
-    `https://${normalized}.medium.com/feed`,
-    `https://medium.com/feed/${normalized}`,
-  ];
-};
-
-const fetchRss = async (url: string, platform: BlogPlatform): Promise<BlogPost[]> => {
-  try {
-    const response = await fetch(url, {
-      headers: {
-        "User-Agent": BROWSER_USER_AGENT,
-        Accept: "application/rss+xml, application/xml, text/xml, */*",
-      },
-    });
-
-    if (!response.ok) return [];
-
-    const xml = await response.text();
-    if (!xml.includes("<rss") && !xml.includes("<feed")) return [];
-
-    return parseRssItems(xml, platform);
-  } catch {
-    return [];
-  }
-};
-
-const fetchMediumViaRss2Json = async (rssUrl: string, apiKey: string) => {
-  const endpoint = new URL("https://api.rss2json.com/v1/api.json");
-  endpoint.searchParams.set("rss_url", rssUrl);
-  endpoint.searchParams.set("api_key", apiKey);
-  endpoint.searchParams.set("count", "10");
-
-  const response = await fetch(endpoint.toString());
-  if (!response.ok) return [];
-
-  const data = await response.json();
-  if (data.status !== "ok" || !data.items?.length) return [];
-
-  return data.items.map((item: any, index: number) => ({
-    id: `medium-rss2json-${index}-${item.link}`,
-    title: item.title,
-    url: item.link,
-    publishedAt: item.pubDate ? new Date(item.pubDate).toISOString() : new Date(0).toISOString(),
-    excerpt: stripHtml(item.description).slice(0, 180),
-    platform: "medium" as const,
-    imageUrl: item.thumbnail || item.enclosure?.link,
-  }));
-};
-
-const fetchMediumPosts = async () => {
-  const feedUrls = buildMediumFeedUrls(MEDIUM_USERNAME, MEDIUM_RSS_URL || undefined);
-
-  for (const url of feedUrls) {
-    const posts = await fetchRss(url, "medium");
-    if (posts.length > 0) {
-      return { posts, feedUrl: url };
-    }
-  }
-
-  if (RSS2JSON_API_KEY) {
-    for (const url of feedUrls) {
-      const posts = await fetchMediumViaRss2Json(url, RSS2JSON_API_KEY);
-      if (posts.length > 0) {
-        return { posts, feedUrl: url, via: "rss2json" };
-      }
-    }
-  }
-
+function toBlogPost(input: {
+  title: string;
+  link: string;
+  date: string;
+  thumbnail: string | null;
+  snippet: string;
+  platform: BlogPlatform;
+  readMin: number;
+  tags: string[];
+}): BlogPost {
   return {
-    posts: [],
-    feedUrl: feedUrls[0],
-    error: "No Medium posts found. Check MEDIUM_USERNAME and published stories.",
+    id: `${input.platform}-${input.link}`,
+    title: input.title,
+    url: input.link,
+    publishedAt: input.date ? new Date(input.date).toISOString() : new Date(0).toISOString(),
+    excerpt: input.snippet,
+    platform: input.platform,
+    imageUrl: input.thumbnail,
+    readMin: input.readMin,
+    tags: input.tags,
   };
-};
+}
+
+async function getMedium(): Promise<BlogPost[]> {
+  const feed = await parser.parseURL(MEDIUM_FEED);
+
+  return feed.items.map((item: any) => {
+    const img = item.contentEncoded?.match(/<img[^>]+src="([^">]+)"/);
+    return toBlogPost({
+      title: item.title ?? "",
+      link: item.link ?? "",
+      date: item.isoDate ?? item.pubDate ?? "",
+      thumbnail: img?.[1] ?? null,
+      snippet: (item.contentSnippet ?? "").slice(0, 200),
+      platform: "medium",
+      readMin: estimateReadMin(item.contentEncoded),
+      tags: item.categories ?? [],
+    });
+  });
+}
+
+async function getHashnodeGraphQL(): Promise<BlogPost[]> {
+  const query = `
+    query Posts($host: String!) {
+      publication(host: $host) {
+        posts(first: 12) {
+          edges {
+            node {
+              title
+              brief
+              url
+              publishedAt
+              readTimeInMinutes
+              coverImage { url }
+              tags { name }
+            }
+          }
+        }
+      }
+    }`;
+
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (HASHNODE_PAT) headers.Authorization = HASHNODE_PAT;
+
+  const response = await fetch("https://gql.hashnode.com", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ query, variables: { host: HASHNODE_HOST } }),
+  });
+
+  const text = await response.text();
+  if (!text.startsWith("{")) {
+    throw new Error("Hashnode GraphQL unavailable");
+  }
+
+  const json = JSON.parse(text);
+  if (json.errors?.length) {
+    throw new Error(json.errors[0]?.message || "Hashnode GraphQL error");
+  }
+
+  const edges = json?.data?.publication?.posts?.edges ?? [];
+
+  return edges.map(({ node }: any) =>
+    toBlogPost({
+      title: node.title,
+      link: node.url,
+      date: node.publishedAt,
+      thumbnail: node.coverImage?.url ?? null,
+      snippet: (node.brief ?? "").slice(0, 200),
+      platform: "hashnode",
+      readMin: node.readTimeInMinutes ?? 1,
+      tags: (node.tags ?? []).map((t: any) => t.name),
+    })
+  );
+}
+
+async function getHashnodeRss(): Promise<BlogPost[]> {
+  const feed = await parser.parseURL(`https://${HASHNODE_HOST}/rss.xml`);
+
+  return feed.items.map((item: any) => {
+    const img = item.contentEncoded?.match(/<img[^>]+src="([^">]+)"/);
+    return toBlogPost({
+      title: item.title ?? "",
+      link: item.link ?? "",
+      date: item.isoDate ?? item.pubDate ?? "",
+      thumbnail: item.enclosure?.url || img?.[1] || null,
+      snippet: (item.contentSnippet ?? "").slice(0, 200),
+      platform: "hashnode",
+      readMin: estimateReadMin(item.contentEncoded),
+      tags: item.categories ?? [],
+    });
+  });
+}
+
+async function getHashnode() {
+  try {
+    const posts = await getHashnodeGraphQL();
+    if (posts.length > 0) return { posts, via: "graphql" };
+  } catch (error) {
+    console.warn("Hashnode GraphQL failed, falling back to RSS:", error);
+  }
+
+  const posts = await getHashnodeRss();
+  return { posts, via: "rss" };
+}
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -173,12 +180,20 @@ serve(async (req) => {
       limit = Math.min(Number(url.searchParams.get("limit") || 6), 12);
     }
 
-    const [hashnodePosts, mediumResult] = await Promise.all([
-      fetchRss(HASHNODE_RSS_URL, "hashnode"),
-      fetchMediumPosts(),
-    ]);
+    const settled = await Promise.allSettled([getMedium(), getHashnode()]);
 
-    const posts = [...hashnodePosts, ...mediumResult.posts]
+    const mediumResult =
+      settled[0].status === "fulfilled"
+        ? { posts: settled[0].value }
+        : { posts: [], error: String(settled[0].reason) };
+
+    const hashnodeResult =
+      settled[1].status === "fulfilled"
+        ? settled[1].value
+        : { posts: [], via: "failed", error: String(settled[1].reason) };
+
+    const posts = [...mediumResult.posts, ...hashnodeResult.posts]
+      .filter((post) => post.title && post.url)
       .sort(
         (a, b) =>
           new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
@@ -190,17 +205,20 @@ serve(async (req) => {
         posts,
         fetchedAt: new Date().toISOString(),
         sources: {
-          hashnode: { url: HASHNODE_RSS_URL, count: hashnodePosts.length },
-          medium: {
-            url: mediumResult.feedUrl,
-            count: mediumResult.posts.length,
-            via: mediumResult.via || "rss",
-            error: mediumResult.error,
+          medium: { count: mediumResult.posts.length, error: mediumResult.error },
+          hashnode: {
+            count: hashnodeResult.posts.length,
+            via: hashnodeResult.via,
+            error: hashnodeResult.error,
           },
         },
       }),
       {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+          "Cache-Control": "s-maxage=1800, stale-while-revalidate=3600",
+        },
       }
     );
   } catch (error) {

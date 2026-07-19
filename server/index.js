@@ -85,6 +85,7 @@ app.get('/api/blogs', async (req, res) => {
   try {
     const limit = Math.min(Number(req.query.limit) || 6, 12);
     const data = await fetchBlogPosts(limit);
+    res.setHeader('Cache-Control', 's-maxage=1800, stale-while-revalidate=3600');
     return res.json(data);
   } catch (err) {
     console.error('Error fetching blogs', err);

@@ -1,17 +1,18 @@
-const mediumUsername = import.meta.env.VITE_MEDIUM_USERNAME || "nakamotosecurity";
+const mediumUsername = (import.meta.env.VITE_MEDIUM_USERNAME || "seeurity").replace(/^@/, "");
+const hashnodeHost = import.meta.env.VITE_HASHNODE_HOST || "seeurity.hashnode.dev";
 
 export const blogConfig = {
   medium: {
     username: mediumUsername,
-    profileUrl: `https://medium.com/@${mediumUsername.replace(/^@/, "")}`,
+    profileUrl: `https://medium.com/@${mediumUsername}`,
     rssUrl:
       import.meta.env.VITE_MEDIUM_RSS_URL ||
-      `https://medium.com/feed/@${mediumUsername.replace(/^@/, "")}`,
+      `https://medium.com/feed/@${mediumUsername}`,
   },
   hashnode: {
-    host: import.meta.env.VITE_HASHNODE_HOST || "toxsec.hashnode.dev",
-    profileUrl: "https://toxsec.hashnode.dev",
-    rssUrl: "https://toxsec.hashnode.dev/rss.xml",
+    host: hashnodeHost,
+    profileUrl: `https://${hashnodeHost}`,
+    rssUrl: `https://${hashnodeHost}/rss.xml`,
   },
   maxPosts: 6,
   navPreviewCount: 4,

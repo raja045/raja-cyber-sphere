@@ -43,7 +43,7 @@ const BlogCard = ({ post, index }: { post: BlogPost; index: number }) => {
                 {post.platform === "medium" ? "Medium" : "Hashnode"}
               </Badge>
               <span className="text-xs text-muted-foreground">
-                {format(new Date(post.publishedAt), "MMM d, yyyy")}
+                {format(new Date(post.publishedAt), "MMM d, yyyy")} · {post.readMin} min read
               </span>
             </div>
             <h3 className="text-lg font-bold leading-snug group-hover:text-primary transition-colors line-clamp-2">
