@@ -1,10 +1,12 @@
+const mediumUsername = import.meta.env.VITE_MEDIUM_USERNAME || "nakamotosecurity";
+
 export const blogConfig = {
   medium: {
-    username: import.meta.env.VITE_MEDIUM_USERNAME || "nakamotosecurity",
-    profileUrl: "https://medium.com/@nakamotosecurity",
+    username: mediumUsername,
+    profileUrl: `https://medium.com/@${mediumUsername.replace(/^@/, "")}`,
     rssUrl:
       import.meta.env.VITE_MEDIUM_RSS_URL ||
-      "https://medium.com/feed/@nakamotosecurity",
+      `https://medium.com/feed/@${mediumUsername.replace(/^@/, "")}`,
   },
   hashnode: {
     host: import.meta.env.VITE_HASHNODE_HOST || "toxsec.hashnode.dev",

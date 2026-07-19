@@ -5,9 +5,12 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const BROWSER_USER_AGENT =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
+
 const MEDIUM_USERNAME = Deno.env.get("MEDIUM_USERNAME") || "nakamotosecurity";
-const MEDIUM_RSS_URL =
-  Deno.env.get("MEDIUM_RSS_URL") || `https://medium.com/feed/@${MEDIUM_USERNAME}`;
+const MEDIUM_RSS_URL = Deno.env.get("MEDIUM_RSS_URL") || "";
+const RSS2JSON_API_KEY = Deno.env.get("RSS2JSON_API_KEY") || "";
 const HASHNODE_HOST = Deno.env.get("HASHNODE_HOST") || "toxsec.hashnode.dev";
 const HASHNODE_RSS_URL = `https://${HASHNODE_HOST}/rss.xml`;
 
@@ -41,6 +44,11 @@ const getTagValue = (block: string, tag: string) => {
   return match ? decodeXml(match[1]) : "";
 };
 
+const extractImageFromHtml = (html = "") => {
+  const match = html.match(/<img[^>]+src="([^"]+)"/i);
+  return match?.[1];
+};
+
 const parseRssItems = (xml: string, platform: BlogPlatform): BlogPost[] => {
   const items = xml.match(/<item[\s\S]*?<\/item>/gi) || [];
 
@@ -52,6 +60,7 @@ const parseRssItems = (xml: string, platform: BlogPlatform): BlogPost[] => {
       const description =
         getTagValue(item, "description") || getTagValue(item, "content:encoded");
       const enclosureMatch = item.match(/<enclosure[^>]+url="([^"]+)"/i);
+      const mediaMatch = item.match(/<media:thumbnail[^>]+url="([^"]+)"/i);
       const publishedAt = pubDate
         ? new Date(pubDate).toISOString()
         : new Date(0).toISOString();
@@ -63,37 +72,90 @@ const parseRssItems = (xml: string, platform: BlogPlatform): BlogPost[] => {
         publishedAt,
         excerpt: stripHtml(description).slice(0, 180),
         platform,
-        imageUrl: enclosureMatch?.[1],
+        imageUrl:
+          enclosureMatch?.[1] || mediaMatch?.[1] || extractImageFromHtml(description),
       };
     })
     .filter((post) => post.title && post.url);
+};
+
+const buildMediumFeedUrls = (username: string, customRssUrl?: string) => {
+  if (customRssUrl) return [customRssUrl];
+  const normalized = username.replace(/^@/, "");
+  return [
+    `https://medium.com/feed/@${normalized}`,
+    `https://${normalized}.medium.com/feed`,
+    `https://medium.com/feed/${normalized}`,
+  ];
 };
 
 const fetchRss = async (url: string, platform: BlogPlatform): Promise<BlogPost[]> => {
   try {
     const response = await fetch(url, {
       headers: {
-        "User-Agent": "RajaPortfolioBlogBot/1.0",
+        "User-Agent": BROWSER_USER_AGENT,
         Accept: "application/rss+xml, application/xml, text/xml, */*",
       },
     });
 
-    if (!response.ok) {
-      console.warn(`RSS fetch failed for ${platform}: ${response.status}`);
-      return [];
-    }
+    if (!response.ok) return [];
 
     const xml = await response.text();
-    if (!xml.includes("<rss") && !xml.includes("<feed")) {
-      console.warn(`Invalid RSS response for ${platform}`);
-      return [];
-    }
+    if (!xml.includes("<rss") && !xml.includes("<feed")) return [];
 
     return parseRssItems(xml, platform);
-  } catch (error) {
-    console.warn(`RSS fetch error for ${platform}:`, error);
+  } catch {
     return [];
   }
+};
+
+const fetchMediumViaRss2Json = async (rssUrl: string, apiKey: string) => {
+  const endpoint = new URL("https://api.rss2json.com/v1/api.json");
+  endpoint.searchParams.set("rss_url", rssUrl);
+  endpoint.searchParams.set("api_key", apiKey);
+  endpoint.searchParams.set("count", "10");
+
+  const response = await fetch(endpoint.toString());
+  if (!response.ok) return [];
+
+  const data = await response.json();
+  if (data.status !== "ok" || !data.items?.length) return [];
+
+  return data.items.map((item: any, index: number) => ({
+    id: `medium-rss2json-${index}-${item.link}`,
+    title: item.title,
+    url: item.link,
+    publishedAt: item.pubDate ? new Date(item.pubDate).toISOString() : new Date(0).toISOString(),
+    excerpt: stripHtml(item.description).slice(0, 180),
+    platform: "medium" as const,
+    imageUrl: item.thumbnail || item.enclosure?.link,
+  }));
+};
+
+const fetchMediumPosts = async () => {
+  const feedUrls = buildMediumFeedUrls(MEDIUM_USERNAME, MEDIUM_RSS_URL || undefined);
+
+  for (const url of feedUrls) {
+    const posts = await fetchRss(url, "medium");
+    if (posts.length > 0) {
+      return { posts, feedUrl: url };
+    }
+  }
+
+  if (RSS2JSON_API_KEY) {
+    for (const url of feedUrls) {
+      const posts = await fetchMediumViaRss2Json(url, RSS2JSON_API_KEY);
+      if (posts.length > 0) {
+        return { posts, feedUrl: url, via: "rss2json" };
+      }
+    }
+  }
+
+  return {
+    posts: [],
+    feedUrl: feedUrls[0],
+    error: "No Medium posts found. Check MEDIUM_USERNAME and published stories.",
+  };
 };
 
 serve(async (req) => {
@@ -111,12 +173,12 @@ serve(async (req) => {
       limit = Math.min(Number(url.searchParams.get("limit") || 6), 12);
     }
 
-    const [hashnodePosts, mediumPosts] = await Promise.all([
+    const [hashnodePosts, mediumResult] = await Promise.all([
       fetchRss(HASHNODE_RSS_URL, "hashnode"),
-      fetchRss(MEDIUM_RSS_URL, "medium"),
+      fetchMediumPosts(),
     ]);
 
-    const posts = [...hashnodePosts, ...mediumPosts]
+    const posts = [...hashnodePosts, ...mediumResult.posts]
       .sort(
         (a, b) =>
           new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
@@ -129,7 +191,12 @@ serve(async (req) => {
         fetchedAt: new Date().toISOString(),
         sources: {
           hashnode: { url: HASHNODE_RSS_URL, count: hashnodePosts.length },
-          medium: { url: MEDIUM_RSS_URL, count: mediumPosts.length },
+          medium: {
+            url: mediumResult.feedUrl,
+            count: mediumResult.posts.length,
+            via: mediumResult.via || "rss",
+            error: mediumResult.error,
+          },
         },
       }),
       {
