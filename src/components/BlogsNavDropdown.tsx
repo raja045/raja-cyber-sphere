@@ -1,5 +1,5 @@
 import { formatDistanceToNow } from "date-fns";
-import { ExternalLink, BookOpen, Loader2 } from "lucide-react";
+import { ChevronDown, ExternalLink, Loader2 } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -47,17 +47,33 @@ const BlogsNavDropdown = ({ onNavigate, variant = "desktop" }: BlogsNavDropdownP
 
   const triggerClass =
     variant === "desktop"
-      ? "px-3.5 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground rounded-full hover:bg-muted/60 transition-all inline-flex items-center gap-1"
+      ? "px-3.5 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground rounded-full hover:bg-muted/60 transition-all"
       : "px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-xl transition-colors w-full text-left";
 
+  const chevronClass =
+    variant === "desktop"
+      ? "p-1.5 text-muted-foreground hover:text-foreground rounded-full hover:bg-muted/60 transition-all"
+      : "hidden";
+
+  if (variant === "mobile") {
+    return (
+      <a href="#blogs" onClick={scrollToBlogs} className={triggerClass}>
+        Blogs
+      </a>
+    );
+  }
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button className={triggerClass}>
-          <BookOpen className="h-3.5 w-3.5" />
-          Blogs
-        </button>
-      </DropdownMenuTrigger>
+    <div className="inline-flex items-center">
+      <a href="#blogs" onClick={scrollToBlogs} className={triggerClass}>
+        Blogs
+      </a>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button type="button" aria-label="Show recent blog posts" className={chevronClass}>
+            <ChevronDown className="h-3.5 w-3.5" />
+          </button>
+        </DropdownMenuTrigger>
       <DropdownMenuContent
         align={variant === "desktop" ? "center" : "end"}
         className="w-80 bg-background/95 backdrop-blur-xl border-border/60"
@@ -132,6 +148,7 @@ const BlogsNavDropdown = ({ onNavigate, variant = "desktop" }: BlogsNavDropdownP
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
+    </div>
   );
 };
 
