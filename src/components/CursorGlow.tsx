@@ -19,7 +19,7 @@ const CursorGlow = () => {
     <div
       className="fixed inset-0 pointer-events-none z-50"
       style={{
-        background: `radial-gradient(circle 300px at ${position.x}px ${position.y}px, hsl(var(--primary) / 0.15), transparent 80%)`,
+        background: `radial-gradient(circle 250px at ${position.x}px ${position.y}px, hsl(var(--primary) / 0.08), transparent 70%)`,
       }}
     />
   );

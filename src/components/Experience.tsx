@@ -1,3 +1,4 @@
+import SectionHeader from "@/components/SectionHeader";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Briefcase, Calendar } from "lucide-react";
 import { Card } from "@/components/ui/card";
@@ -17,8 +18,6 @@ interface Experience {
 }
 
 const Experience = () => {
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
-
   const experiences: Experience[] = [
     {
       company: "Florida International University — Cybersecurity & Privacy Lab",
@@ -198,28 +197,13 @@ const Experience = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-background/50 relative overflow-hidden">
-      {/* Decorative background */}
-      <div
-        className="absolute inset-0 opacity-[0.02] pointer-events-none"
-        style={{
-          backgroundImage: "radial-gradient(circle at 2px 2px, hsl(var(--primary)) 1px, transparent 0)",
-          backgroundSize: "40px 40px",
-        }}
-      />
-
+    <section className="py-16 md:py-24 relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div
-          ref={titleRef}
-          className={`text-center mb-12 md:mb-16 animate-on-scroll ${titleVisible ? "visible" : ""}`}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Work Experience</span>
-          </h2>
-          <p className="text-muted-foreground text-base md:text-lg">
-            My professional journey and contributions
-          </p>
-        </div>
+        <SectionHeader
+          number="03"
+          title="Work Experience"
+          subtitle="My professional journey and contributions"
+        />
 
         <div className="max-w-6xl mx-auto relative">
           {/* Vertical Timeline Line (mobile: left-4 / desktop: left-6) */}

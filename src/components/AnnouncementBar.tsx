@@ -11,18 +11,18 @@ const latestProjects = [
 
 const AnnouncementBar = () => {
   return (
-    <div className="bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 border-b border-border/50 overflow-hidden">
-      <div className="animate-marquee whitespace-nowrap py-3">
+    <div className="relative z-40 mt-[4.5rem] bg-muted/40 border-y border-border/40 overflow-hidden backdrop-blur-sm">
+      <div className="animate-marquee whitespace-nowrap py-2.5">
         <span className="inline-flex items-center gap-8">
           {[...latestProjects, ...latestProjects].map((project, index) => (
             <span
               key={index}
               className="inline-flex items-center gap-2 text-sm font-medium px-4"
             >
-              <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
               <span className="text-muted-foreground">{project.status}:</span>
-              <span className="gradient-text">{project.name}</span>
-              <ExternalLink className="h-3 w-3 text-primary/50" />
+              <span className="text-foreground/80">{project.name}</span>
+              <ExternalLink className="h-3 w-3 text-primary/40" />
             </span>
           ))}
         </span>

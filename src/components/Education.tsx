@@ -1,3 +1,4 @@
+import SectionHeader from "@/components/SectionHeader";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GraduationCap, Award } from "lucide-react";
@@ -33,8 +34,6 @@ const education = [
 ];
 
 const Education = () => {
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
-  
   const EducationCard = ({ edu, index }: { edu: typeof education[0]; index: number }) => {
     const { elementRef, isVisible } = useScrollAnimation();
 
@@ -44,11 +43,11 @@ const Education = () => {
           <div className={`h-2 bg-gradient-to-r ${edu.gradient}`} />
           <div className="p-6 space-y-4">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-lg bg-primary/10 cyber-glow">
+              <div className="p-3 rounded-lg bg-primary/10">
                 <GraduationCap className="h-8 w-8 text-primary" />
               </div>
               <div className="flex-1">
-                <h3 className="text-2xl font-bold mb-2 glitch-effect">{edu.degree}</h3>
+                <h3 className="text-2xl font-bold mb-2">{edu.degree}</h3>
                 <p className="text-primary font-medium mb-1">{edu.institution}</p>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground">
                   <span>{edu.period}</span>
@@ -83,16 +82,13 @@ const Education = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 px-4 md:px-6 bg-card/30">
+    <section className="py-16 md:py-24 px-4 md:px-6">
       <div className="container mx-auto max-w-6xl">
-        <div ref={titleRef} className={`text-center mb-12 md:mb-16 animate-on-scroll ${titleVisible ? 'visible' : ''}`}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Academic Foundation</span>
-          </h2>
-          <p className="text-base md:text-lg text-muted-foreground">
-            Building expertise through rigorous academic training
-          </p>
-        </div>
+        <SectionHeader
+          number="04"
+          title="Academic Foundation"
+          subtitle="Building expertise through rigorous academic training"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {education.map((edu, index) => (
