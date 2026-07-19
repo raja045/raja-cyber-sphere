@@ -1,3 +1,4 @@
+import SectionHeader from "@/components/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Mail, Linkedin, Phone, CreditCard, MessageSquare, Calendar } from "lucide-react";
@@ -25,7 +26,6 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
   const { elementRef } = useScrollAnimation();
 
   // OTP state
@@ -149,18 +149,11 @@ END:VCARD`;
   return (
     <section className="py-20 px-4">
       <div className="container mx-auto max-w-6xl">
-        {/* Header */}
-        <div ref={titleRef} className={`text-center mb-16 animate-on-scroll ${titleVisible ? 'visible' : ''}`}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-2">
-            Let's Connect
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6" />
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Ready to discuss platform engineering solutions? I'd love to hear about your
-            infrastructure challenges and explore how we can build something scalable
-            together.
-          </p>
-        </div>
+        <SectionHeader
+          number="08"
+          title="Let's Connect"
+          subtitle="Ready to discuss cybersecurity solutions? I'd love to hear about your challenges and explore how we can work together."
+        />
 
         {/* Contact Cards Grid */}
         <div ref={elementRef} className="animate-on-scroll visible mb-16">
@@ -397,7 +390,7 @@ END:VCARD`;
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Blog</p>
-                        <p className="font-medium">medium.com/@nakamotosecurity</p>
+                        <p className="font-medium">medium.com/@seeurity</p>
                       </div>
                     </div>
 

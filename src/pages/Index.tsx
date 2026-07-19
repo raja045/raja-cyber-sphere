@@ -8,10 +8,9 @@ import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
 import Volunteering from "@/components/Volunteering";
-
+import Blogs from "@/components/Blogs";
 import Contact from "@/components/Contact";
-import CursorGlow from "@/components/CursorGlow";
-import MatrixRain from "@/components/MatrixRain";
+import AmbientBackground from "@/components/AmbientBackground";
 import ScrollProgress from "@/components/ScrollProgress";
 import CircularScrollProgress from "@/components/CircularScrollProgress";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -20,33 +19,46 @@ import VisitorCounter from "@/components/VisitorCounter";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
-      <MatrixRain />
+      <AmbientBackground />
       <ScrollProgress />
       <CircularScrollProgress />
-      <CursorGlow />
       <ScrollToTop />
       <Navigation />
-      <section id="whoami">
-        <Hero />
-      </section>
-      <section id="projects">
-        <Projects />
-      </section>
-      <section id="skills">
-        <Skills />
-      </section>
-      <section id="experience">
-        <Experience />
-      </section>
-      <section id="education">
-        <Education />
-      </section>
-      <section id="volunteering">
-        <Volunteering />
-      </section>
-      <section id="contact">
-        <Contact />
-      </section>
+      <AnnouncementBar />
+
+      <main className="relative z-10">
+        <section id="whoami" className="section-surface">
+          <Hero />
+        </section>
+
+        <section id="projects" className="section-alt section-surface">
+          <Projects />
+        </section>
+
+        <section id="skills" className="section-surface">
+          <Skills />
+        </section>
+
+        <section id="experience" className="section-alt section-surface">
+          <Experience />
+        </section>
+
+        <section id="education" className="section-surface">
+          <Education />
+        </section>
+
+        <section id="volunteering" className="section-alt section-surface">
+          <Volunteering />
+        </section>
+
+        <section id="blogs" className="section-surface">
+          <Blogs />
+        </section>
+
+        <section id="contact" className="section-surface">
+          <Contact />
+        </section>
+      </main>
 
       <VisitorCounter />
 
@@ -58,7 +70,7 @@ const Index = () => {
       >
         <Button
           size="lg"
-          className="rounded-full h-14 w-14 p-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110 bg-primary hover:bg-primary/90 animate-float cyber-glow"
+          className="rounded-full h-14 w-14 p-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110 bg-primary hover:bg-primary/90 animate-float accent-glow"
         >
           <TerminalIcon className="h-6 w-6 group-hover:rotate-12 transition-transform duration-300" />
         </Button>

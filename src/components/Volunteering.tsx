@@ -1,3 +1,4 @@
+import SectionHeader from "@/components/SectionHeader";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Heart, Calendar } from "lucide-react";
 import { Card } from "@/components/ui/card";
@@ -16,8 +17,6 @@ interface VolunteerExperience {
 }
 
 const Volunteering = () => {
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
-
   const volunteerExperiences: VolunteerExperience[] = [
     {
       organization: "AIESEC in Miami",
@@ -172,28 +171,13 @@ const Volunteering = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-background/50 relative overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-[0.02] pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 2px 2px, hsl(var(--primary)) 1px, transparent 0)",
-          backgroundSize: "40px 40px",
-        }}
-      />
-
+    <section className="py-16 md:py-24 relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div
-          ref={titleRef}
-          className={`text-center mb-12 md:mb-16 animate-on-scroll ${titleVisible ? "visible" : ""}`}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Volunteering</span>
-          </h2>
-          <p className="text-muted-foreground text-base md:text-lg">
-            Giving back through leadership and community impact
-          </p>
-        </div>
+        <SectionHeader
+          number="05"
+          title="Volunteering"
+          subtitle="Giving back through leadership and community impact"
+        />
 
         <div className="max-w-6xl mx-auto relative">
           <div className="absolute left-4 md:left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/50 to-transparent" />

@@ -1,3 +1,4 @@
+import SectionHeader from "@/components/SectionHeader";
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -197,7 +198,7 @@ const Projects = () => {
         >
           <div className={`h-2 bg-gradient-to-r ${project.gradient}`} />
           <div className="p-6 space-y-4">
-            <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300 glitch-effect">
+            <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
               {project.title}
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
@@ -245,19 +246,14 @@ const Projects = () => {
 
   const selectedProjectData = selectedProject !== null ? projects.find(p => p.id === selectedProject) : null;
 
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
-
   return (
     <section className="py-16 md:py-24 px-4 md:px-6">
       <div className="container mx-auto">
-        <div ref={titleRef} className={`text-center mb-12 md:mb-16 animate-on-scroll ${titleVisible ? 'visible' : ''}`}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Featured Projects</span>
-          </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Exploring the intersection of security, technology, and innovation
-          </p>
-        </div>
+        <SectionHeader
+          number="01"
+          title="Featured Projects"
+          subtitle="Exploring the intersection of security, technology, and innovation"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {visibleProjects.map((project, index) => (

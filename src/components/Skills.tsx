@@ -1,3 +1,4 @@
+import SectionHeader from "@/components/SectionHeader";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Shield, Network, Cloud, Code, Wrench } from "lucide-react";
@@ -156,8 +157,6 @@ const skillCategories = [
 ];
 
 const Skills = () => {
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
-  
   const SkillCard = ({ category, index }: { category: typeof skillCategories[0]; index: number }) => {
     const { elementRef, isVisible } = useScrollAnimation();
     const Icon = category.icon;
@@ -195,10 +194,10 @@ const Skills = () => {
       <div ref={elementRef} className={`animate-on-scroll ${isVisible ? 'visible' : ''} stagger-${(index % 6) + 1}`}>
         <Card className="glass-card p-6 hover-lift">
           <div className="flex items-center gap-3 mb-4">
-            <div className={`p-2 rounded-lg bg-background/50 ${category.color} cyber-glow`}>
+            <div className={`p-2 rounded-lg bg-primary/10 ${category.color}`}>
               <Icon className="h-6 w-6" />
             </div>
-            <h3 className="text-xl font-bold glitch-effect">{category.title}</h3>
+            <h3 className="text-xl font-bold">{category.title}</h3>
           </div>
           <div className="flex flex-wrap gap-2">
             {category.skills.map((skill: any, skillIndex: number) => (
@@ -217,16 +216,13 @@ const Skills = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 px-4 md:px-6 bg-card/30">
+    <section className="py-16 md:py-24 px-4 md:px-6">
       <div className="container mx-auto">
-        <div ref={titleRef} className={`text-center mb-12 md:mb-16 animate-on-scroll ${titleVisible ? 'visible' : ''}`}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Technical Arsenal</span>
-          </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            A comprehensive toolkit for modern cybersecurity challenges
-          </p>
-        </div>
+        <SectionHeader
+          number="02"
+          title="Technical Arsenal"
+          subtitle="A comprehensive toolkit for modern cybersecurity challenges"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {skillCategories.map((category, index) => 
@@ -238,8 +234,9 @@ const Skills = () => {
 
         {/* Tools Section - Special Layout */}
         <div className="mt-12">
-          <h3 className="text-2xl font-bold mb-6 text-center">
-            <span className="text-primary">//</span> Tools
+          <h3 className="text-xl font-bold mb-6">
+            <span className="text-primary font-mono text-sm mr-2">//</span>
+            Tools
           </h3>
           <div className="flex flex-wrap gap-4 max-w-6xl mx-auto">
             <SkillCard category={skillCategories.find(c => c.title === "Tools")!} index={5} />
