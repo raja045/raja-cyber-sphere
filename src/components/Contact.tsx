@@ -34,6 +34,7 @@ const Contact = () => {
   const [userPhone, setUserPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
+  const [otpToken, setOtpToken] = useState<string | null>(null);
   const [verificationMessage, setVerificationMessage] = useState<string | null>(null);
   const [isVerified, setIsVerified] = useState(false);
   const API_BASE = import.meta.env.VITE_API_BASE || '';
@@ -187,6 +188,7 @@ END:VCARD`;
                 setIsPhoneDialogOpen(true);
                 setOtp("");
                 setOtpSent(false);
+                setOtpToken(null);
                 setVerificationMessage(null);
                 setIsVerified(false);
               }}
@@ -312,6 +314,7 @@ END:VCARD`;
                           const data = await res.json();
                           if (!res.ok) throw new Error(data?.error || 'Failed to send OTP');
                           setOtpSent(true);
+                          setOtpToken(data?.token ?? null);
                           setVerificationMessage('OTP sent. Please check your SMS.');
                         } catch (err: any) {
                           setVerificationMessage(err.message || 'Failed to send OTP');
@@ -333,7 +336,7 @@ END:VCARD`;
                           const res = await fetch(`${API_BASE}/api/verify-otp`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ phone: userPhone, code: otp }),
+                            body: JSON.stringify({ phone: userPhone, code: otp, token: otpToken }),
                           });
                           const data = await res.json();
                           if (!res.ok) throw new Error(data?.error || 'Invalid OTP');
