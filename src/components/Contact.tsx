@@ -150,7 +150,7 @@ END:VCARD`;
     <section className="py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         <SectionHeader
-          number="06"
+          number="08"
           title="Let's Connect"
           subtitle="Ready to discuss cybersecurity solutions? I'd love to hear about your challenges and explore how we can work together."
         />

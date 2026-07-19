@@ -8,6 +8,7 @@ import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
 import Volunteering from "@/components/Volunteering";
+import Blogs from "@/components/Blogs";
 import Contact from "@/components/Contact";
 import AmbientBackground from "@/components/AmbientBackground";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -48,6 +49,10 @@ const Index = () => {
 
         <section id="volunteering" className="section-alt section-surface">
           <Volunteering />
+        </section>
+
+        <section id="blogs" className="section-surface">
+          <Blogs />
         </section>
 
         <section id="contact" className="section-surface">

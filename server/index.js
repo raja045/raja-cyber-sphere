@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { fetchBlogPosts } = require('./blogService');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -80,6 +81,17 @@ app.post('/api/verify-otp', (req, res) => {
   return res.json({ success: true });
 });
 
+app.get('/api/blogs', async (req, res) => {
+  try {
+    const limit = Math.min(Number(req.query.limit) || 6, 12);
+    const data = await fetchBlogPosts(limit);
+    return res.json(data);
+  } catch (err) {
+    console.error('Error fetching blogs', err);
+    return res.status(500).json({ error: 'Failed to fetch blog posts', posts: [] });
+  }
+});
+
 app.listen(PORT, () => {
-  console.log(`OTP server listening on port ${PORT}`);
+  console.log(`Server listening on port ${PORT}`);
 });

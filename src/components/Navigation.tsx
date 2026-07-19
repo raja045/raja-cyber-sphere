@@ -3,6 +3,7 @@ import { useTheme } from "next-themes";
 import { Moon, Sun, Menu, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import BlogsNavDropdown from "@/components/BlogsNavDropdown";
 
 const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -21,6 +22,7 @@ const Navigation = () => {
     { label: "Skills", href: "#skills" },
     { label: "Experience", href: "#experience" },
     { label: "Education", href: "#education" },
+    { label: "Blogs", href: "#blogs", isBlogs: true },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -57,16 +59,20 @@ const Navigation = () => {
 
           {/* Desktop nav — centered pills */}
           <div className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => scrollToSection(e, item.href)}
-                className="px-3.5 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground rounded-full hover:bg-muted/60 transition-all"
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) =>
+              "isBlogs" in item && item.isBlogs ? (
+                <BlogsNavDropdown key={item.href} />
+              ) : (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => scrollToSection(e, item.href)}
+                  className="px-3.5 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground rounded-full hover:bg-muted/60 transition-all"
+                >
+                  {item.label}
+                </a>
+              )
+            )}
           </div>
 
           {/* Right actions */}
@@ -110,16 +116,24 @@ const Navigation = () => {
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] bg-background/95 backdrop-blur-xl">
                 <nav className="flex flex-col gap-2 mt-10">
-                  {navItems.map((item) => (
-                    <a
-                      key={item.href}
-                      href={item.href}
-                      onClick={(e) => scrollToSection(e, item.href)}
-                      className="px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-xl transition-colors"
-                    >
-                      {item.label}
-                    </a>
-                  ))}
+                  {navItems.map((item) =>
+                    "isBlogs" in item && item.isBlogs ? (
+                      <BlogsNavDropdown
+                        key={item.href}
+                        variant="mobile"
+                        onNavigate={() => setMobileMenuOpen(false)}
+                      />
+                    ) : (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        onClick={(e) => scrollToSection(e, item.href)}
+                        className="px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-xl transition-colors"
+                      >
+                        {item.label}
+                      </a>
+                    )
+                  )}
                   <a
                     href="/terminal"
                     target="_blank"
