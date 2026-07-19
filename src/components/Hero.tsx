@@ -108,10 +108,8 @@ const Hero = () => {
 
               {promptComplete && (
                 <div className="space-y-4">
-                  <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] text-foreground">
-                    Raja Shekar
-                    <br />
-                    <span className="gradient-text">Reddy Seelam</span>
+                  <h1 className="font-display text-[clamp(1.35rem,4.8vw,3.5rem)] font-bold leading-tight text-foreground whitespace-nowrap max-w-full">
+                    Raja Shekar <span className="gradient-text">Reddy Seelam</span>
                   </h1>
 
                   <div className="min-h-[2.5rem] flex items-center justify-center lg:justify-start">
