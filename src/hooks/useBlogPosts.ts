@@ -6,19 +6,6 @@ import type { BlogFeedResponse } from "@/types/blog";
 const API_BASE = import.meta.env.VITE_API_BASE || "";
 
 async function fetchBlogPosts(limit: number): Promise<BlogFeedResponse> {
-  // Try Supabase edge function first (production)
-  try {
-    const { data, error } = await supabase.functions.invoke("fetch-blogs", {
-      body: { limit },
-    });
-
-    if (!error && data?.posts?.length) {
-      return data as BlogFeedResponse;
-    }
-  } catch {
-    // Fall through to API proxy
-  }
-
   const endpoints = [
     `${API_BASE}/api/blogs?limit=${limit}`,
     `http://localhost:4000/api/blogs?limit=${limit}`,
@@ -36,6 +23,19 @@ async function fetchBlogPosts(limit: number): Promise<BlogFeedResponse> {
     } catch {
       // Try next endpoint
     }
+  }
+
+  // Fallback: Supabase edge function (if deployed separately)
+  try {
+    const { data, error } = await supabase.functions.invoke("fetch-blogs", {
+      body: { limit },
+    });
+
+    if (!error && data?.posts?.length) {
+      return data as BlogFeedResponse;
+    }
+  } catch {
+    // All sources failed
   }
 
   throw new Error("Failed to fetch blog posts");

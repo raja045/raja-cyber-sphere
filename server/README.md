@@ -1,91 +1,61 @@
 # Portfolio API Server (development)
 
-Express server used during local development for OTP verification and dynamic blog feeds.
+Express server for OTP verification and dynamic blog feeds.
 
 ## Endpoints
 
 - `POST /api/send-otp` — `{ phone }`
 - `POST /api/verify-otp` — `{ phone, code }`
-- `GET /api/blogs?limit=6` — fetches latest Medium + Hashnode posts
+- `GET /api/blogs?limit=6` — merged Medium + Hashnode feed
 
-## Blog feed configuration
+## Blog feed logic
 
-Medium posts are pulled from the official RSS feed:
+Posts are fetched using the same pattern as the Vercel serverless example:
 
-```
-https://medium.com/feed/@YOUR_USERNAME
-```
+| Platform | Primary | Fallback |
+|----------|---------|----------|
+| **Medium** | RSS via `rss-parser` (`medium.com/feed/@username`) | — |
+| **Hashnode** | GraphQL API (`gql.hashnode.com`) | RSS feed |
 
-### Step 1: Find your Medium username
+Both sources use `Promise.allSettled` — if one platform fails, the other still loads.
 
-Open your Medium profile. The URL looks like:
-
-```
-https://medium.com/@your-username
-```
-
-Use `your-username` (without `@`) as `MEDIUM_USERNAME`.
-
-> **Important:** `@nakamotosecurity` currently returns 404 on Medium. Update this to your real handle.
-
-### Step 2: Verify the feed works
-
-```bash
-curl -A "Mozilla/5.0" "https://medium.com/feed/@YOUR_USERNAME" | grep "<item>" | wc -l
-```
-
-If the count is greater than 0, the feed is working.
-
-### Step 3: Set environment variables
-
-Create `server/.env` (or root `.env`):
+### Environment variables
 
 ```env
-MEDIUM_USERNAME=your-username
-HASHNODE_HOST=toxsec.hashnode.dev
-
-# Optional overrides
-MEDIUM_RSS_URL=
-RSS2JSON_API_KEY=
+MEDIUM_USERNAME=seeurity
+MEDIUM_FEED=https://medium.com/feed/@seeurity
+HASHNODE_HOST=seeurity.hashnode.dev
+HASHNODE_PAT=           # optional, for Hashnode GraphQL Pro API
 ```
 
-For the frontend, also set in root `.env`:
-
-```env
-VITE_MEDIUM_USERNAME=your-username
-VITE_HASHNODE_HOST=toxsec.hashnode.dev
-```
-
-### Optional: RSS2JSON fallback
-
-If Medium blocks direct RSS fetches from your server IP, sign up at https://rss2json.com and set:
-
-```env
-RSS2JSON_API_KEY=your_api_key
-```
-
-## OTP configuration
-
-- `PORT` (optional, default 4000)
-- `TWILIO_ACCOUNT_SID` (optional)
-- `TWILIO_AUTH_TOKEN` (optional)
-- `TWILIO_FROM` (optional)
-
-## Run locally
+### Verify locally
 
 ```bash
 cd server
 npm install
 node index.js
+
+# In another terminal:
+curl http://localhost:4000/api/blogs?limit=6
 ```
 
-The frontend proxies `/api/blogs` to this server during `npm run dev`.
+### Hashnode GraphQL note
 
-## Production
+Hashnode now requires a Pro plan + Personal Access Token for GraphQL. Without `HASHNODE_PAT`, the server automatically falls back to the RSS feed at `https://{HOST}/rss.xml`.
 
-Deploy the `fetch-blogs` Supabase edge function and set the same env vars in Supabase:
+## OTP configuration
 
-- `MEDIUM_USERNAME`
-- `HASHNODE_HOST`
-- `MEDIUM_RSS_URL` (optional)
-- `RSS2JSON_API_KEY` (optional)
+- `PORT` (optional, default 4000)
+- `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM` (optional)
+
+## Production (Vercel)
+
+The site ships with a Vercel serverless route at `api/blogs.ts`. After merging and deploying:
+
+1. Add env vars in the Vercel project dashboard (optional — defaults work for `@seeurity` / `seeurity.hashnode.dev`):
+   - `MEDIUM_USERNAME` or `MEDIUM_FEED`
+   - `HASHNODE_HOST`
+   - `HASHNODE_PAT` (optional, for Hashnode GraphQL)
+2. Redeploy — the Blogs nav dropdown and `// 07 Latest Writing` section will load posts automatically.
+
+Alternatively, deploy the `fetch-blogs` Supabase edge function with the same env vars.
