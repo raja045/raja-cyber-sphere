@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Terminal as TerminalIcon } from "lucide-react";
 import Navigation from "@/components/Navigation";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
@@ -24,7 +23,6 @@ const Index = () => {
       <CircularScrollProgress />
       <ScrollToTop />
       <Navigation />
-      <AnnouncementBar />
 
       <main className="relative z-10 [&>section]:scroll-mt-24">
         <section id="whoami" className="section-surface">
