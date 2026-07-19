@@ -34,9 +34,26 @@ const Contact = () => {
   const [userPhone, setUserPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
+  const [otpSessionToken, setOtpSessionToken] = useState("");
   const [verificationMessage, setVerificationMessage] = useState<string | null>(null);
   const [isVerified, setIsVerified] = useState(false);
   const API_BASE = import.meta.env.VITE_API_BASE || '';
+
+  const parseApiResponse = async (res: Response) => {
+    const contentType = res.headers.get("content-type") || "";
+    if (!contentType.includes("application/json")) {
+      throw new Error("Verification service is unavailable. Please try again later.");
+    }
+    return res.json();
+  };
+
+  const resetOtpFlow = () => {
+    setOtp("");
+    setOtpSent(false);
+    setOtpSessionToken("");
+    setVerificationMessage(null);
+    setIsVerified(false);
+  };
 
   // Business card state
   const [isBusinessCardOpen, setIsBusinessCardOpen] = useState(false);
@@ -234,7 +251,13 @@ END:VCARD`;
         </div>
 
         {/* Phone OTP Dialog */}
-        <Dialog open={isPhoneDialogOpen} onOpenChange={setIsPhoneDialogOpen}>
+        <Dialog
+          open={isPhoneDialogOpen}
+          onOpenChange={(open) => {
+            setIsPhoneDialogOpen(open);
+            if (!open) resetOtpFlow();
+          }}
+        >
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Verify your phone</DialogTitle>
@@ -302,10 +325,15 @@ END:VCARD`;
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ phone: userPhone }),
                           });
-                          const data = await res.json();
+                          const data = await parseApiResponse(res);
                           if (!res.ok) throw new Error(data?.error || 'Failed to send OTP');
                           setOtpSent(true);
-                          setVerificationMessage('OTP sent. Please check your SMS.');
+                          setOtpSessionToken(data.sessionToken || '');
+                          setVerificationMessage(
+                            data.simulated && data.demoCode
+                              ? `Simulated OTP: ${data.demoCode}`
+                              : 'OTP sent. Please check your SMS.'
+                          );
                         } catch (err: any) {
                           setVerificationMessage(err.message || 'Failed to send OTP');
                         }
@@ -326,9 +354,13 @@ END:VCARD`;
                           const res = await fetch(`${API_BASE}/api/verify-otp`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ phone: userPhone, code: otp }),
+                            body: JSON.stringify({
+                              phone: userPhone,
+                              code: otp,
+                              sessionToken: otpSessionToken,
+                            }),
                           });
-                          const data = await res.json();
+                          const data = await parseApiResponse(res);
                           if (!res.ok) throw new Error(data?.error || 'Invalid OTP');
                           setVerificationMessage('Phone verified successfully!');
                           setIsVerified(true);
