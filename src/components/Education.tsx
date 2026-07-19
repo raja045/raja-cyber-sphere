@@ -82,7 +82,7 @@ const Education = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 px-4 md:px-6">
+    <section className="section-padding">
       <div className="container mx-auto max-w-6xl">
         <SectionHeader
           number="04"
@@ -90,7 +90,7 @@ const Education = () => {
           subtitle="Building expertise through rigorous academic training"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {education.map((edu, index) => (
             <EducationCard key={index} edu={edu} index={index} />
           ))}

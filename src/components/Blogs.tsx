@@ -68,7 +68,7 @@ const Blogs = () => {
   const posts = data?.posts ?? [];
 
   return (
-    <section className="py-16 md:py-24 px-4 md:px-6">
+    <section className="section-padding">
       <div className="container mx-auto max-w-6xl">
         <SectionHeader
           number="07"
@@ -77,12 +77,12 @@ const Blogs = () => {
         />
 
         {isLoading ? (
-          <div className="flex items-center justify-center gap-2 py-16 text-muted-foreground">
+          <div className="flex items-center justify-center gap-2 py-8 text-muted-foreground">
             <Loader2 className="h-5 w-5 animate-spin" />
             Fetching latest posts...
           </div>
         ) : isError || posts.length === 0 ? (
-          <div className="text-center py-12 space-y-4">
+          <div className="text-center py-8 space-y-3">
             <p className="text-muted-foreground">
               Could not load posts automatically. Visit my blogs directly:
             </p>
@@ -103,7 +103,7 @@ const Blogs = () => {
           </div>
         )}
 
-        <div className="flex flex-wrap gap-3 justify-center mt-10">
+        <div className="flex flex-wrap gap-3 justify-center mt-6">
           <a href={blogConfig.medium.profileUrl} target="_blank" rel="noopener noreferrer">
             <Button variant="outline" className="gap-2">
               <ExternalLink className="h-4 w-4" />

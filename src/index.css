@@ -178,15 +178,23 @@
   }
 
   .section-label {
-    @apply inline-flex items-center gap-2 text-xs font-mono font-medium uppercase tracking-[0.2em] text-primary mb-3;
+    @apply inline-flex items-center gap-2 text-xs font-mono font-medium uppercase tracking-[0.2em] text-primary mb-2;
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4;
+    @apply text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-foreground mb-2;
   }
 
   .section-subtitle {
-    @apply text-base md:text-lg text-muted-foreground max-w-2xl;
+    @apply text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed;
+  }
+
+  .section-padding {
+    @apply py-10 md:py-12 lg:py-14 px-4 md:px-6;
+  }
+
+  .section-content-gap {
+    @apply space-y-5 md:space-y-6;
   }
 
   .glass-card {

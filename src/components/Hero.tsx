@@ -85,20 +85,20 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      <div className="container relative z-10 px-4 py-16 md:py-24">
+    <section className="relative flex items-center overflow-hidden pt-20 pb-10 md:pb-14">
+      <div className="container relative z-10 px-4 py-8 md:py-10">
         <div className="max-w-6xl mx-auto">
           {/* Top badge */}
-          <div className="flex justify-center md:justify-start mb-8 animate-fade-in">
+          <div className="flex justify-center md:justify-start mb-6 animate-fade-in">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary">
               <Shield className="h-4 w-4" />
               <span>Cybersecurity Researcher · Miami, FL</span>
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-[1fr_auto] gap-8 lg:gap-10 items-center">
             {/* Left — Content */}
-            <div className="order-2 lg:order-1 space-y-6 animate-fade-in-up text-center lg:text-left">
+            <div className="order-2 lg:order-1 space-y-4 animate-fade-in-up text-center lg:text-left">
               <div className="font-mono text-sm md:text-base text-primary/80">
                 {promptText}
                 {!promptComplete && showCursor && (
@@ -107,7 +107,7 @@ const Hero = () => {
               </div>
 
               {promptComplete && (
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <h1 className="font-display text-[clamp(1.35rem,4.8vw,3.5rem)] font-bold leading-tight text-foreground whitespace-nowrap max-w-full">
                     Raja Shekar <span className="gradient-text">Reddy Seelam</span>
                   </h1>
@@ -145,7 +145,7 @@ const Hero = () => {
               </div>
 
               {/* CTA + Social */}
-              <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
                 <Button
                   size="lg"
                   onClick={scrollToProjects}

@@ -216,7 +216,7 @@ const Skills = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 px-4 md:px-6">
+    <section className="section-padding">
       <div className="container mx-auto">
         <SectionHeader
           number="02"
@@ -233,8 +233,8 @@ const Skills = () => {
         </div>
 
         {/* Tools Section - Special Layout */}
-        <div className="mt-12">
-          <h3 className="text-xl font-bold mb-6">
+        <div className="mt-8">
+          <h3 className="text-xl font-bold mb-4">
             <span className="text-primary font-mono text-sm mr-2">//</span>
             Tools
           </h3>
@@ -244,8 +244,8 @@ const Skills = () => {
         </div>
 
         {/* Certifications */}
-        <div className="mt-12 text-center animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-          <h3 className="text-2xl font-bold mb-6">Certifications</h3>
+        <div className="mt-8 text-center animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+          <h3 className="text-2xl font-bold mb-4">Certifications</h3>
           <div className="flex flex-wrap gap-6 justify-center">
             <a href="https://www.credly.com/badges/90745a3d-f6eb-417d-8f2f-e36112983ce6/public_url" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 border border-primary/50 rounded-lg py-3 px-5 hover:bg-primary/10 transition-colors cursor-pointer">
               <img src={comptiaLogo} alt="CompTIA Security+" className="w-10 h-10 object-contain" />
